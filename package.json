@@ -1,0 +1,19 @@
+{
+  "name": "sidat-satuputaru",
+  "version": "1.0.0",
+  "description": "Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak - DINPUTARU Kabupaten Demak",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "monitoring",
+    "capaian",
+    "dputr",
+    "demak",
+    "kinerja",
+    "semi-retro"
+  ],
+  "author": "DINPUTARU Kab. Demak",
+  "license": "MIT"
+}

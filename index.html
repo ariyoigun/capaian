@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIDAT - SATUPUTARU - Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak</title>
+  <meta name="description" content="Portal Publik dan Panel Internal Monitoring Capaian Kinerja, Bank Data, Target dan Realisasi DINPUTARU Kabupaten Demak.">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Local Vendor Scripts (Zero-CDN Dependent & Offline Guaranteed) -->
+  <script src="js/vendor/chart.umd.min.js"></script>
+  <script src="js/vendor/lucide.min.js"></script>
+</head>
+<body class="theme-public-orange">
+
+  <!-- 1. TOP SESSION & ROLE BAR (Compact & Clean) -->
+  <div class="top-role-bar">
+    <div id="role-switcher-container">
+      <!-- Injected by js/auth.js -->
+    </div>
+  </div>
+
+  <!-- 2. APP HEADER (Compact, Responsive, Single-Row Layout) -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-section">
+        <div class="brand-emblem">
+          <span>PUTR</span>
+        </div>
+        <div class="brand-text">
+          <h1 id="dom-app-title">
+            SIDAT - SATUPUTARU
+            <span class="badge-header-kab font-mono">KAB. DEMAK</span>
+          </h1>
+          <p id="dom-app-tagline">DINPUTARU Kab. Demak • Sistem Informasi Capaian Kinerja & Satu Data</p>
+        </div>
+      </div>
+
+      <!-- Header Action Items: Mode Switcher, Menu Laporan, Actions -->
+      <div class="header-actions-group">
+        <div class="mode-toggle-group">
+          <button class="mode-switch-btn active-mode-btn" id="btn-switch-to-public">
+            <i data-lucide="globe" class="icon-xs"></i>
+            <span>Portal Publik</span>
+          </button>
+          <button class="mode-switch-btn" id="btn-switch-to-admin">
+            <i data-lucide="shield-check" class="icon-xs"></i>
+            <span>Panel Admin</span>
+          </button>
+        </div>
+
+        <button class="header-btn-laporan" id="btn-header-laporan" title="Buka Dokumen Laporan Resmi Kedinasan">
+          <i data-lucide="printer" class="icon-xs"></i>
+          <span>Menu Laporan</span>
+        </button>
+
+        <button class="retro-btn retro-btn-sm retro-btn-primary" id="btn-global-add-indicator" data-permission="input_indikator" style="display: none;">
+          <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Indikator
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================== -->
+  <!-- 3. HALAMAN PUBLIK (PORTAL WARGA & STAKEHOLDER EKSTERNAL)               -->
+  <!-- ====================================================================== -->
+  <div id="public-portal-container" class="main-wrapper">
+    
+    <!-- Hero Banner Publik (Compact, Tidy & Modern Orange) -->
+    <div class="pub-hero-banner-compact">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <div class="pub-hero-left">
+          <div class="pub-hero-badge">
+            <i data-lucide="shield-check" class="icon-xs"></i> PORTAL SATU DATA & CAPAIAN KINERJA PEMKAB DEMAK
+          </div>
+          <h2 class="pub-hero-title mb-1" id="dom-hero-title">Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak</h2>
+          <p class="pub-hero-desc mb-0" id="dom-hero-desc">
+            Keterbukaan informasi publik dan akuntabilitas kinerja penyelenggaraan infrastruktur jalan jembatan, sumber daya air, sanitasi air minum, penataan ruang, dan bina konstruksi DINPUTARU Kabupaten Demak.
+          </p>
+        </div>
+
+        <!-- 4 Inline Compact Metric Cards -->
+        <div class="pub-hero-stats-row">
+          <div class="pub-stat-pill">
+            <span class="ps-label">Total Indikator</span>
+            <strong class="ps-val font-mono" id="pub-stat-total">9</strong>
+            <span class="ps-sub">IKU, IKD, IKP, IKK</span>
+          </div>
+          <div class="pub-stat-pill">
+            <span class="ps-label">Capaian Target</span>
+            <strong class="ps-val text-success font-mono" id="pub-stat-achieved">8 / 9</strong>
+            <span class="ps-sub">≥100% Target</span>
+          </div>
+          <div class="pub-stat-pill">
+            <span class="ps-label">Tahun Aktif</span>
+            <strong class="ps-val text-orange font-mono" id="pub-stat-year">2026</strong>
+            <span class="ps-sub">Penilaian</span>
+          </div>
+          <div class="pub-stat-pill">
+            <span class="ps-label">Periode Publik</span>
+            <strong class="ps-val font-mono" id="pub-stat-period">2020-2026</strong>
+            <span class="ps-sub">Multi-Tahun</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Public Main Navigation Tabs Bar (4 Tabs Nav) -->
+    <nav class="pub-main-nav">
+      <div class="pub-nav-tabs">
+        <button class="pub-nav-tab active" data-pub-tab="cards" onclick="PublicPortalModule.switchPubTab('cards')">
+          <i data-lucide="layout-grid" class="icon-xs"></i>
+          <span>1. Indikator & Grafik Tren</span>
+        </button>
+        <button class="pub-nav-tab" data-pub-tab="matrix" onclick="PublicPortalModule.switchPubTab('matrix')">
+          <i data-lucide="table-2" class="icon-xs"></i>
+          <span>2. Matriks Tabel Multi-Tahun (2020-2026)</span>
+        </button>
+        <button class="pub-nav-tab" data-pub-tab="laporan" id="tab-btn-pub-laporan" onclick="PublicPortalModule.switchPubTab('laporan')">
+          <i data-lucide="printer" class="icon-xs"></i>
+          <span>3. Dokumen Laporan Kinerja Resmi (Cetak / PDF)</span>
+        </button>
+        <button class="pub-nav-tab" data-pub-tab="bankdata" onclick="PublicPortalModule.switchPubTab('bankdata')">
+          <i data-lucide="folder-archive" class="icon-xs"></i>
+          <span>4. Bank Data Publik</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- TAB 1: KARTU INDIKATOR & GRAFIK TREN (Default) -->
+    <div id="pub-tab-pane-cards" class="pub-tab-pane active">
+      
+      <!-- Active Indicator Highlight Card (Detail & Line Chart) -->
+      <div id="public-indicator-highlight-box">
+        <!-- Injected dynamically by PublicPortalModule -->
+      </div>
+
+      <!-- Public Control Toolbar: Category Filter Tabs & Search Bar -->
+      <div id="public-control-toolbar">
+        <!-- Injected dynamically by PublicPortalModule -->
+      </div>
+
+      <!-- Segment Sections: IKU, IKD, IKP, IKK -->
+      <div id="public-cards-view-section">
+        
+        <!-- SEGMEN 1: INDIKATOR KINERJA UTAMA (IKU) -->
+        <section class="pub-segment-section" id="public-segment-section-iku">
+          <div class="pub-segment-header">
+            <div class="pub-segment-title-wrap">
+              <span class="pub-segment-badge-orange">SEGMEN 1</span>
+              <h3 class="pub-segment-title">Indikator Kinerja Utama (IKU)</h3>
+            </div>
+            <span class="badge badge-orange-subtle font-bold font-mono">Mandat Perjanjian Kinerja Kadinas</span>
+          </div>
+          <div class="pub-indicators-grid" id="public-segment-iku-container">
+            <!-- Injected by PublicPortalModule -->
+          </div>
+        </section>
+
+        <!-- SEGMEN 2: INDIKATOR KINERJA DAERAH (IKD) -->
+        <section class="pub-segment-section" id="public-segment-section-ikd">
+          <div class="pub-segment-header">
+            <div class="pub-segment-title-wrap">
+              <span class="pub-segment-badge-orange">SEGMEN 2</span>
+              <h3 class="pub-segment-title">Indikator Kinerja Daerah (IKD)</h3>
+            </div>
+            <span class="badge badge-orange-subtle font-bold font-mono">Mandat Sasaran RPJMD Kab. Demak</span>
+          </div>
+          <div class="pub-indicators-grid" id="public-segment-ikd-container">
+            <!-- Injected by PublicPortalModule -->
+          </div>
+        </section>
+
+        <!-- SEGMEN 3: INDIKATOR KINERJA PROGRAM (IKP) -->
+        <section class="pub-segment-section" id="public-segment-section-ikp">
+          <div class="pub-segment-header">
+            <div class="pub-segment-title-wrap">
+              <span class="pub-segment-badge-orange">SEGMEN 3</span>
+              <h3 class="pub-segment-title">Indikator Kinerja Program (IKP)</h3>
+            </div>
+            <span class="badge badge-orange-subtle font-bold font-mono">Tingkat Program Prioritas Bidang Teknis</span>
+          </div>
+          <div class="pub-indicators-grid" id="public-segment-ikp-container">
+            <!-- Injected by PublicPortalModule -->
+          </div>
+        </section>
+
+        <!-- SEGMEN 4: INDIKATOR KINERJA KEGIATAN (IKK) -->
+        <section class="pub-segment-section" id="public-segment-section-ikk">
+          <div class="pub-segment-header">
+            <div class="pub-segment-title-wrap">
+              <span class="pub-segment-badge-orange">SEGMEN 4</span>
+              <h3 class="pub-segment-title">Indikator Kinerja Kegiatan (IKK)</h3>
+            </div>
+            <span class="badge badge-orange-subtle font-bold font-mono">Tingkat Operasional Teknis & Lapangan</span>
+          </div>
+          <div class="pub-indicators-grid" id="public-segment-ikk-container">
+            <!-- Injected by PublicPortalModule -->
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: MATRIKS MULTI-TAHUN SELURUH INDIKATOR -->
+    <div id="pub-tab-pane-matrix" class="pub-tab-pane" style="display: none;">
+      <div id="public-matrix-view-section">
+        <!-- Injected by PublicPortalModule -->
+      </div>
+    </div>
+
+    <!-- TAB 3: DOKUMEN LAPORAN RESMI (AKSES PUBLIK LANGSUNG) -->
+    <div id="pub-tab-pane-laporan" class="pub-tab-pane" style="display: none;">
+      <div id="public-laporan-section">
+        <!-- Injected by PublicPortalModule / LaporanModule -->
+      </div>
+    </div>
+
+    <!-- TAB 4: BANK DATA PUBLIK -->
+    <div id="pub-tab-pane-bankdata" class="pub-tab-pane" style="display: none;">
+      <section class="pub-segment-section" id="segment-bank-data">
+        <div class="pub-segment-header">
+          <div class="pub-segment-title-wrap">
+            <span class="pub-segment-badge-orange bg-dark text-white">BANK DATA</span>
+            <h3 class="pub-segment-title">Bank Data & Dokumen Resmi DINPUTARU Demak</h3>
+          </div>
+          <span class="badge bg-light text-dark border font-mono">10 Dokumen Per Halaman</span>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="pub-toolbar-card mb-3">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-7">
+              <div class="pub-search-box">
+                <i data-lucide="search" class="icon-xs text-orange"></i>
+                <input type="text" id="public-bd-search" class="pub-search-input" placeholder="Cari nama berkas, nomor SK, kata kunci (misal: Jalan, Irigasi, Sayung, RTRW)...">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <select id="public-bd-bidang-filter" class="pub-select-orange">
+                <option value="all">Semua Bidang Pengelola</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-2 text-muted small" id="public-bank-data-info">
+            Memuat data arsip dokumen DINPUTARU Demak...
+          </div>
+        </div>
+
+        <!-- Public Bank Data List -->
+        <div id="public-bank-data-list">
+          <!-- Injected by PublicPortalModule -->
+        </div>
+
+        <!-- Pagination Controls (Default 10 data, Next, Prev, Page numbers) -->
+        <div class="d-flex justify-content-center align-items-center gap-2 mt-4" id="public-bank-data-pagination">
+          <!-- Injected by PublicPortalModule -->
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- 4. HALAMAN ADMIN (PANEL APARATUR RESMI DINPUTARU DEMAK)               -->
+  <!-- ====================================================================== -->
+  <div id="admin-panel-container" style="display: none;">
+
+    <!-- Admin Navigation Tabs Bar (Tema Putih Bersih Resmi) -->
+    <nav class="app-nav-bar" id="admin-nav-bar">
+      <div class="nav-tabs-list">
+        <button class="nav-tab-btn active" data-tab="target-realisasi" title="Menu Utama: Input Target & Realisasi">
+          <i data-lucide="table-2" class="icon-sm"></i>
+          <span>1. Input Target & Realisasi</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="dashboard" title="Dashboard Monitoring Capaian Kinerja">
+          <i data-lucide="line-chart" class="icon-sm"></i>
+          <span>2. Dashboard Monitoring</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="capaian" title="Struktur Hierarki Capaian Kinerja">
+          <i data-lucide="network" class="icon-sm"></i>
+          <span>3. Hierarki Capaian (Tree)</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="laporan" title="Menu Cetak Dokumen Laporan Kedinasan">
+          <i data-lucide="printer" class="icon-sm"></i>
+          <span>4. Menu Laporan & Cetak</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="bank-data" title="Master Data Bank Data & Dokumen">
+          <i data-lucide="folder-archive" class="icon-sm"></i>
+          <span>5. Master Bank Data</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="master-indikator" title="Master Data Indikator & Wewenang Bidang">
+          <i data-lucide="tag" class="icon-sm"></i>
+          <span>6. Master Data Indikator</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="master-data" title="Master Variabel Perhitungan & Rumus">
+          <i data-lucide="cpu" class="icon-sm"></i>
+          <span>7. Master Variabel & Rumus</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="manajemen-user" data-permission="super_admin_only" title="Manajemen Pengguna 7 Role">
+          <i data-lucide="users" class="icon-sm"></i>
+          <span>8. Manajemen Pengguna</span>
+        </button>
+        <button class="nav-tab-btn" data-tab="pengaturan-teks" data-permission="super_admin_only" title="Pengaturan Semua Teks Sistem">
+          <i data-lucide="type" class="icon-sm"></i>
+          <span>9. Pengaturan Teks Sistem</span>
+        </button>
+      </div>
+    </nav>
+
+    <main class="main-wrapper">
+
+      <!-- ==================== ADMIN TAB 1: DASHBOARD KEDINASAN MODERN ==================== -->
+      <section class="tab-pane-content" id="tab-pane-dashboard">
+        <div class="dash-filter-banner">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold mb-1">
+                <i data-lucide="activity" class="icon-sm text-primary"></i> Dashboard Monitoring Kinerja Kedinasan
+              </h3>
+              <p class="text-muted small mb-0">Latar putih resmi dengan diagram garis realisasi vs target yang dapat dipantau langsung oleh Kepala Dinas, Sekretaris, dan Kepala Bidang.</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small font-bold text-muted">Mode Grafik:</span>
+              <select id="dash-chart-mode" class="retro-select retro-select-sm" style="width: auto;">
+                <option value="target_vs_realisasi">Target vs Realisasi (Satuan Asli)</option>
+                <option value="percentage">% Capaian Kinerja vs 100% Target</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row g-2">
+            <div class="col-md-4">
+              <label class="form-label small font-bold text-muted">Filter Kategori Indikator:</label>
+              <select id="dash-category-filter" class="retro-select">
+                <!-- Injected by DashboardModule -->
+              </select>
+            </div>
+            <div class="col-md-8">
+              <label class="form-label small font-bold text-muted">Pilih Indikator Kinerja yang Dipantau:</label>
+              <select id="dash-indicator-select" class="retro-select font-bold">
+                <!-- Injected by DashboardModule -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Banner Info Indikator Terpilih -->
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 px-1">
+          <h4 class="font-bold mb-0" id="dash-indicator-banner-title">Indikator Terpilih</h4>
+          <div class="d-flex flex-wrap gap-2" id="dash-indicator-banner-meta">
+            <!-- Injected by DashboardModule -->
+          </div>
+        </div>
+
+        <!-- 4 KPI Stat Cards -->
+        <div class="dash-grid-stats" id="dash-kpi-container">
+          <!-- Injected by DashboardModule -->
+        </div>
+
+        <!-- Line Chart Card -->
+        <div class="chart-card-wrapper">
+          <div class="chart-header-row">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-primary text-white font-bold">DIAGRAM LINE</span>
+              <h4 class="font-bold mb-0">Tren Perkembangan Kinerja Multi-Tahun</h4>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-download-chart">
+                <i data-lucide="download" class="icon-xs"></i> Unduh Gambar Grafik (PNG)
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-primary" onclick="App.switchTab('capaian')">
+                <i data-lucide="book-open" class="icon-xs"></i> Detail & Formulasi
+              </button>
+            </div>
+          </div>
+
+          <div class="chart-canvas-container">
+            <canvas id="monitoringLineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Riwayat Evaluasi Tahunan -->
+        <div class="adm-card p-4">
+          <h5 class="font-bold mb-3">
+            <i data-lucide="table" class="icon-sm"></i> Matriks Nilai & Riwayat Evaluasi Tahunan
+          </h5>
+          <div class="retro-table-wrap">
+            <table class="retro-table">
+              <thead>
+                <tr>
+                  <th style="width: 100px;" class="text-center">Tahun</th>
+                  <th style="width: 160px;" class="text-end">Target</th>
+                  <th style="width: 160px;" class="text-end">Realisasi</th>
+                  <th style="width: 130px;" class="text-center">% Capaian</th>
+                  <th style="width: 180px;">Status Evaluasi</th>
+                  <th>Catatan Verifikasi & Kondisi Lapangan</th>
+                </tr>
+              </thead>
+              <tbody id="dash-table-summary-body">
+                <!-- Injected by DashboardModule -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 2: CAPAIAN KINERJA (TREE VIEW) ==================== -->
+      <section class="tab-pane-content" id="tab-pane-capaian">
+        <div class="tree-search-bar">
+          <div class="d-flex align-items-center gap-3 flex-grow-1" style="max-width: 500px;">
+            <input type="text" id="tree-search-input" class="retro-input" placeholder="Cari nama indikator, kode, atau wewenang bidang...">
+          </div>
+
+          <div class="d-flex flex-wrap align-items-center gap-2">
+            <label for="tree-group-by" class="small font-bold text-muted">Kelompokkan Tree:</label>
+            <select id="tree-group-by" class="retro-select retro-select-sm" style="width: auto;">
+              <option value="category">Berdasarkan Kategori (IKD -> IKU -> IKP -> IKK)</option>
+              <option value="bidang">Berdasarkan Bidang Penanggung Jawab</option>
+            </select>
+            <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-tree-expand-all">
+              <i data-lucide="unfold-vertical" class="icon-xs"></i> Buka Semua
+            </button>
+            <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-tree-collapse-all">
+              <i data-lucide="fold-vertical" class="icon-xs"></i> Tutup Semua
+            </button>
+          </div>
+        </div>
+
+        <div id="tree-view-container">
+          <!-- Injected by TreeModule -->
+        </div>
+
+        <div id="indicator-detail-panel">
+          <!-- Injected by TreeModule -->
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 1 (MENU UTAMA): TARGET & REALISASI MULTI-TAHUN ==================== -->
+      <section class="tab-pane-content active" id="tab-pane-target-realisasi">
+        <div class="dash-filter-banner mb-3">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold mb-1">
+                <i data-lucide="table-2" class="icon-sm text-primary"></i> Matriks Target & Realisasi Multi-Tahun
+              </h3>
+              <p class="text-muted small mb-0">Tahun 2020 sampai tahun aktif yang dapat ditambah/dihapus oleh Super Admin dan diisi oleh Koordinator Bidang.</p>
+            </div>
+            
+            <div class="d-flex flex-wrap gap-2" id="tr-admin-year-controls">
+              <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-add-year">
+                <i data-lucide="calendar-plus" class="icon-xs"></i> Tambah Tahun Baru
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-manage-visibility" title="Atur tahun apa saja yang ditampilkan di Portal Publik">
+                <i data-lucide="eye" class="icon-xs"></i> Atur Tampilan Tahun Publik
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-danger" id="btn-delete-year">
+                <i data-lucide="calendar-minus" class="icon-xs"></i> Hapus Tahun
+              </button>
+            </div>
+          </div>
+
+          <div class="row g-2 align-items-center">
+            <div class="col-md-3">
+              <input type="text" id="tr-search-input" class="retro-input" placeholder="Cari indikator atau kode...">
+            </div>
+            <div class="col-md-3">
+              <select id="tr-year-filter" class="retro-select">
+                <!-- Injected by TargetRealisasiModule -->
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select id="tr-cat-filter" class="retro-select">
+                <!-- Injected by TargetRealisasiModule -->
+              </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+              <select id="tr-bidang-filter" class="retro-select flex-grow-1">
+                <!-- Injected by TargetRealisasiModule -->
+              </select>
+              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-export-csv" title="Ekspor data ke file CSV">
+                <i data-lucide="file-spreadsheet" class="icon-xs"></i> CSV
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="tr-matrix-container">
+          <!-- Injected by TargetRealisasiModule -->
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 4: BANK DATA ==================== -->
+      <section class="tab-pane-content" id="tab-pane-bank-data">
+        <div class="dash-filter-banner mb-3">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold mb-1">
+                <i data-lucide="folder-archive" class="icon-sm text-primary"></i> Bank Data & Bukti Fisik Dukung Capaian
+              </h3>
+              <p class="text-muted small mb-0">Koordinator Bidang dan Super Admin dapat Menambah, Mengedit, dan Menghapus arsip dokumen bank data.</p>
+            </div>
+            <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-upload-doc" data-permission="manage_bank_data">
+              <i data-lucide="upload-cloud" class="icon-xs"></i> Tambah Dokumen Bank Data
+            </button>
+          </div>
+
+          <div class="row g-2">
+            <div class="col-md-4">
+              <input type="text" id="bd-search-input" class="retro-input" placeholder="Cari dokumen, tag, atau indikator terkait...">
+            </div>
+            <div class="col-md-3">
+              <select id="bd-bidang-filter" class="retro-select">
+                <!-- Injected by BankDataModule -->
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select id="bd-cat-filter" class="retro-select">
+                <option value="all">Semua Kategori Dokumen</option>
+                <option value="Laporan Teknis">Laporan Teknis & Survei Lapangan</option>
+                <option value="Data Base / Spasial">Database / Geospasial / E-PAKSI</option>
+                <option value="Laporan Akuntabilitas">Laporan Akuntabilitas (SAKIP / LKjIP)</option>
+                <option value="Regulasi & Kebijakan">Regulasi & Kebijakan (Perda/Perbup/SK)</option>
+                <option value="Sertifikasi & Legalitas">Sertifikasi & Legalitas Kompetensi</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select id="bd-year-filter" class="retro-select">
+                <!-- Injected by BankDataModule -->
+              </select>
+            </div>
+          </div>
+          <div class="mt-2 text-muted small" id="bd-info-container"></div>
+        </div>
+
+        <div class="bank-data-grid" id="bank-data-container">
+          <!-- Injected by BankDataModule -->
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center gap-2 mt-4" id="bd-pagination-container">
+          <!-- Injected by BankDataModule -->
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 5: MENU LAPORAN & CETAK DOKUMEN ==================== -->
+      <section class="tab-pane-content" id="tab-pane-laporan">
+        <div class="dash-filter-banner mb-3" id="lap-control-panel">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold mb-1">
+                <i data-lucide="printer" class="icon-sm text-primary"></i> Menu Cetak Laporan Resmi Kedinasan
+              </h3>
+              <p class="text-muted small mb-0">Format resmi berstandar Pemkab Demak dengan Kop Surat dan Pengesahan Kepala Dinas DINPUTARU.</p>
+            </div>
+            <button class="adm-btn adm-btn-primary" id="btn-print-official-report">
+              <i data-lucide="printer" class="icon-xs"></i> Cetak Dokumen / Simpan PDF
+            </button>
+          </div>
+
+          <!-- Opsi Pilihan Tipe Laporan -->
+          <div class="p-3 bg-white border rounded mb-3">
+            <label class="form-label font-bold mb-2">Pilih Format Laporan yang Ingin Dicetak:</label>
+            <div class="d-flex flex-wrap gap-4">
+              <label class="d-flex align-items-center gap-2 cursor-pointer font-bold">
+                <input type="radio" name="lap-report-type" value="per_indicator" checked>
+                <span>1. Cetak Per Indikator Dari Tahun ke Tahun (Riwayat Multi-Tahun)</span>
+              </label>
+              <label class="d-flex align-items-center gap-2 cursor-pointer font-bold">
+                <input type="radio" name="lap-report-type" value="all_indicators_by_year">
+                <span>2. Cetak Rekapitulasi Semua Indikator di Tahun Tertentu</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="lap-control-indicator-wrap" class="mb-2">
+            <label class="form-label small font-bold text-muted">Pilih Indikator yang Dicetak:</label>
+            <select id="lap-indicator-select" class="retro-select font-bold">
+              <!-- Injected by LaporanModule -->
+            </select>
+          </div>
+
+          <div id="lap-control-year-wrap" class="mb-2" style="display: none;">
+            <label class="form-label small font-bold text-muted">Pilih Tahun Anggaran yang Direkapitulasi:</label>
+            <select id="lap-year-select" class="retro-select font-bold">
+              <!-- Injected by LaporanModule -->
+            </select>
+          </div>
+
+          <div id="lap-control-filters-wrap" class="row g-2 mt-1" style="display: none;">
+            <div class="col-md-6">
+              <select id="lap-cat-filter" class="retro-select">
+                <!-- Injected by LaporanModule -->
+              </select>
+            </div>
+            <div class="col-md-6">
+              <select id="lap-bidang-filter" class="retro-select">
+                <!-- Injected by LaporanModule -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview Lembar Cetak Laporan Resmi -->
+        <div id="laporan-preview-sheet">
+          <!-- Injected by LaporanModule -->
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 6: MANAJEMEN PENGGUNA (SUPER ADMIN) ==================== -->
+      <section class="tab-pane-content" id="tab-pane-manajemen-user">
+        <div class="dash-filter-banner mb-3">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold mb-1">
+                <i data-lucide="users" class="icon-sm text-primary"></i> Manajemen Pengguna & Hak Akses (Super Admin)
+              </h3>
+              <p class="text-muted small mb-0">Super Admin memiliki kewenangan penuh untuk Tambah, Hapus, Edit, dan Simpan User di sistem ini.</p>
+            </div>
+            <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-add-new-user">
+              <i data-lucide="user-plus" class="icon-xs"></i> Tambah User Baru
+            </button>
+          </div>
+
+          <div class="row g-2">
+            <div class="col-md-6">
+              <input type="text" id="user-mgmt-search" class="retro-input" placeholder="Cari nama pegawai, NIP, username, atau email...">
+            </div>
+            <div class="col-md-6">
+              <select id="user-mgmt-role-filter" class="retro-select">
+                <option value="all">Semua Role / Jabatan</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="retro-table-wrap">
+          <table class="retro-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;" class="text-center">No</th>
+                <th style="min-width: 240px;">Nama Pegawai & NIP</th>
+                <th style="width: 180px;">Username & Email</th>
+                <th style="width: 180px;">Role / Jabatan</th>
+                <th style="width: 180px;">Unit Kerja / Bidang</th>
+                <th style="width: 100px;" class="text-center">Status</th>
+                <th style="width: 100px;" class="text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="user-mgmt-table-body">
+              <!-- Injected by UserManagementModule -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 7: MASTER DATA & VARIABEL ==================== -->
+      <section class="tab-pane-content" id="tab-pane-master-data">
+        <div class="master-subtabs-nav">
+          <button class="master-subtab-btn active" data-subtab="variables">
+            <i data-lucide="cpu" class="icon-xs"></i>
+            <span>1. Data Dasar Variabel Perhitungan</span>
+          </button>
+          <button class="master-subtab-btn" data-subtab="categories">
+            <i data-lucide="layers" class="icon-xs"></i>
+            <span>2. Master Kategori Indikator</span>
+          </button>
+          <button class="master-subtab-btn" data-subtab="bidang">
+            <i data-lucide="building-2" class="icon-xs"></i>
+            <span>3. Master Bidang & Unit Kerja</span>
+          </button>
+          <button class="master-subtab-btn" data-subtab="years">
+            <i data-lucide="calendar" class="icon-xs"></i>
+            <span>4. Master Tahun Anggaran</span>
+          </button>
+          <button class="master-subtab-btn" data-subtab="roles">
+            <i data-lucide="shield-check" class="icon-xs"></i>
+            <span>5. Matriks Role Pengguna (7 Roles)</span>
+          </button>
+        </div>
+
+        <div id="master-content-container">
+          <!-- Injected by MasterDataModule -->
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 8: MASTER DATA INDIKATOR ==================== -->
+      <section class="tab-pane-content" id="tab-pane-master-indikator">
+        <div class="dash-filter-banner mb-3">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold mb-1">
+                <i data-lucide="tag" class="icon-sm text-primary"></i> Master Data Indikator Kinerja DINPUTARU
+              </h3>
+              <p class="text-muted small mb-0">Kelola master indikator kinerja (IKU, IKD, IKP, IKK), penetapan wewenang bidang, pembina, seksi teknis, formulasi, satuan, dan polaritas.</p>
+            </div>
+            <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-mi-add-indicator" data-permission="input_indikator">
+              <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Master Indikator
+            </button>
+          </div>
+
+          <div id="master-indikator-summary-cards"></div>
+
+          <div class="row g-2">
+            <div class="col-md-5">
+              <input type="text" id="mi-search-input" class="glass-input" placeholder="Cari nama indikator, kode, formulasi, wewenang bidang...">
+            </div>
+            <div class="col-md-3">
+              <select id="mi-cat-filter" class="glass-select">
+                <!-- Injected by MasterIndikatorModule -->
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select id="mi-bidang-filter" class="glass-select">
+                <!-- Injected by MasterIndikatorModule -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-modern-wrap">
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th style="width: 45px;" class="text-center">No</th>
+                <th style="min-width: 250px;">Kode & Nama Indikator Kinerja</th>
+                <th style="width: 140px;">Kategori</th>
+                <th style="min-width: 200px;">Wewenang & Pelaksana</th>
+                <th style="width: 130px;">Satuan & Sifat</th>
+                <th style="width: 150px;">Target & Realisasi Terkini</th>
+                <th style="width: 110px;" class="text-center">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="master-indikator-table-body">
+              <!-- Injected by MasterIndikatorModule -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==================== ADMIN TAB 9: PENGATURAN TEKS SISTEM (SUPER ADMIN) ==================== -->
+      <section class="tab-pane-content" id="tab-pane-pengaturan-teks">
+        <div id="settings-content-container">
+          <!-- Injected by SystemSettingsModule -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- 5. UNIVERSAL MODAL OVERLAY -->
+  <div class="retro-modal-overlay" id="global-modal-overlay">
+    <div class="retro-modal-dialog">
+      <div class="retro-modal-header">
+        <h4 class="retro-modal-title" id="global-modal-title">Judul Dialog</h4>
+        <button class="retro-btn-icon" onclick="App.closeModal()">✕</button>
+      </div>
+      <div id="global-modal-content">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. TOAST NOTIFICATIONS CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- 7. FOOTER INSTANSI & HAK CIPTA -->
+  <footer class="text-center py-3 text-muted small border-top bg-white mt-4">
+    <div class="container">
+      <span id="dom-footer-text">© 2026 DINPUTARU Kabupaten Demak. Hak Cipta Dilindungi.</span>
+    </div>
+  </footer>
+
+  <!-- 8. APPLICATION LOGIC SCRIPTS -->
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/public.js"></script>
+  <script src="js/tree.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/target-realisasi.js"></script>
+  <script src="js/bank-data.js"></script>
+  <script src="js/master-indikator.js"></script>
+  <script src="js/laporan.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/master-data.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
