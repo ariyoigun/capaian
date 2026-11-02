@@ -1,6 +1,7 @@
 /**
  * SIDAT - SATUPUTARU - Authentication, Session & Math CAPTCHA Controller
- * Halaman & Modal Login Resmi Kedinasan dengan CAPTCHA Perhitungan Sederhana (+, -, ×, ÷)
+ * Halaman & Modal Login Resmi Kedinasan DINPUTARU Kab. Demak
+ * Dengan CAPTCHA Perhitungan Sederhana (+, -, ×, ÷), Akun Teks Bersih, dan Tampilan Center
  */
 
 const Auth = {
@@ -24,7 +25,6 @@ const Auth = {
     if (!container) return;
 
     const currentUser = window.store.getCurrentUser();
-    const users = window.store.getUsers();
 
     if (!currentUser) {
       // Guest / Public Mode
@@ -50,8 +50,8 @@ const Auth = {
       `;
     } else {
       // Logged in user mode
-      const roleObj = window.store.data.roles.find(r => r.id === currentUser.role) || { name: currentUser.role };
-      const bidangObj = window.store.getBidang().find(b => b.id === currentUser.bidangId) || { name: 'DINPUTARU' };
+      const roleObj = window.store.data.roles?.find(r => r.id === currentUser.role) || { name: currentUser.roleLabel || currentUser.role };
+      const bidangObj = window.store.getBidang().find(b => b.id === currentUser.bidangId) || { name: 'DINPUTARU Kab. Demak' };
 
       container.innerHTML = `
         <div class="role-bar-inner">
@@ -68,18 +68,6 @@ const Auth = {
           </div>
 
           <div class="d-flex align-items-center gap-2">
-            <!-- Quick Role Switcher for Demo / Testing convenience -->
-            <div class="role-switcher-select-wrap d-none d-md-flex align-items-center gap-1">
-              <span class="small font-bold text-muted">Simulasi Akun:</span>
-              <select id="quick-demo-user-select" class="adm-select" style="width: auto; padding: 4px 8px; font-size: 0.82rem;">
-                ${users.map(u => `
-                  <option value="${u.id}" ${u.id === currentUser.id ? 'selected' : ''}>
-                    ${u.name} (${u.roleLabel})
-                  </option>
-                `).join('')}
-              </select>
-            </div>
-
             <button class="adm-btn adm-btn-sm adm-btn-outline" onclick="Auth.logout()" title="Keluar dari sesi login">
               <i data-lucide="log-out" class="icon-xs"></i> Logout
             </button>
@@ -92,49 +80,67 @@ const Auth = {
   },
 
   bindEvents() {
-    // Quick role switch event
-    document.addEventListener('change', (e) => {
-      if (e.target && e.target.id === 'quick-demo-user-select') {
-        const userId = e.target.value;
-        window.store.loginAs(userId);
-        const user = window.store.getCurrentUser();
-        App.showToast(`Beralih login sebagai: <strong>${user.name}</strong> (${user.roleLabel})`, 'info');
-        this.updatePermissions();
+    // Escape key closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const overlay = document.getElementById('global-modal-overlay');
+        if (overlay && overlay.classList.contains('show')) {
+          App.closeModal();
+        }
       }
     });
   },
 
   /* ----------------- MATH CAPTCHA GENERATOR (+, -, ×, ÷) ----------------- */
-  generateCaptcha() {
+  async generateCaptcha() {
+    // 1. Try to fetch fresh captcha from backend API
+    try {
+      const res = await fetch('/api/captcha');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.captchaId && data.question) {
+          this.currentCaptcha = {
+            id: data.captchaId,
+            question: data.question
+          };
+          this.updateCaptchaDOM(data.question, data.captchaId);
+          return this.currentCaptcha;
+        }
+      }
+    } catch (e) {
+      console.warn('API captcha fetch failed, falling back to local generator:', e);
+    }
+
+    // 2. Local Fallback Generator
     const operators = ['+', '-', '×', '÷'];
     const op = operators[Math.floor(Math.random() * operators.length)];
     let num1, num2, answer, questionText;
 
     switch (op) {
       case '+': {
-        num1 = Math.floor(Math.random() * 20) + 1;
-        num2 = Math.floor(Math.random() * 20) + 1;
+        num1 = Math.floor(Math.random() * 15) + 1;
+        num2 = Math.floor(Math.random() * 15) + 1;
         answer = num1 + num2;
         questionText = `${num1} + ${num2} = ?`;
         break;
       }
       case '-': {
-        num1 = Math.floor(Math.random() * 25) + 10;
+        num1 = Math.floor(Math.random() * 20) + 10;
         num2 = Math.floor(Math.random() * (num1 - 2)) + 1;
         answer = num1 - num2;
         questionText = `${num1} - ${num2} = ?`;
         break;
       }
       case '×': {
-        num1 = Math.floor(Math.random() * 8) + 2;
-        num2 = Math.floor(Math.random() * 8) + 2;
+        num1 = Math.floor(Math.random() * 7) + 2;
+        num2 = Math.floor(Math.random() * 7) + 2;
         answer = num1 * num2;
         questionText = `${num1} × ${num2} = ?`;
         break;
       }
       case '÷': {
-        const divisor = Math.floor(Math.random() * 7) + 2;
-        const quotient = Math.floor(Math.random() * 8) + 2;
+        const divisor = Math.floor(Math.random() * 5) + 2;
+        const quotient = Math.floor(Math.random() * 6) + 2;
         num1 = divisor * quotient;
         num2 = divisor;
         answer = quotient;
@@ -142,10 +148,10 @@ const Auth = {
         break;
       }
       default: {
-        num1 = 6;
-        num2 = 4;
+        num1 = 5;
+        num2 = 5;
         answer = 10;
-        questionText = `6 + 4 = ?`;
+        questionText = `5 + 5 = ?`;
       }
     }
 
@@ -156,53 +162,53 @@ const Auth = {
       answer: answer
     };
 
-    // Update DOM if modal is open
+    this.updateCaptchaDOM(questionText, captchaId);
+    return this.currentCaptcha;
+  },
+
+  updateCaptchaDOM(question, id) {
     const displayEl = document.getElementById('captcha-equation-text');
     const inputEl = document.getElementById('login-captcha');
     const idInput = document.getElementById('login-captcha-id');
 
-    if (displayEl) displayEl.textContent = questionText;
+    if (displayEl) displayEl.textContent = question;
     if (inputEl) inputEl.value = '';
-    if (idInput) idInput.value = captchaId;
-
-    return this.currentCaptcha;
+    if (idInput) idInput.value = id;
   },
 
+  /* ----------------- BUKA MODAL LOGIN CENTERED ----------------- */
   openLoginModal() {
-    const users = window.store.getUsers();
-    const captcha = this.generateCaptcha();
-
     const modalContent = `
-      <div class="login-modal-container">
+      <div class="login-modal-container text-center">
         
-        <!-- Header Modal -->
-        <div class="login-header-emblem text-center mb-4">
-          <div class="brand-emblem mx-auto mb-2" style="width: 58px; height: 58px; font-size: 1.25rem;">
-            PUPR
+        <!-- Header Emblem & Judul -->
+        <div class="login-header-emblem mb-3">
+          <div class="brand-emblem mx-auto mb-2" style="width: 56px; height: 56px; font-size: 1.2rem; background: #ea580c; color: #ffffff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);">
+            PUTR
           </div>
           <h4 class="font-bold text-dark mb-1">Masuk Panel Administrator & Aparatur</h4>
-          <p class="small text-muted mb-0">Sistem Informasi Capaian Kinerja & Satu Data DINPUTARU Kabupaten Demak</p>
+          <p class="small text-muted mb-0">Sistem Informasi Capaian Kinerja & Satu Data DINPUTARU Kab. Demak</p>
         </div>
 
         <!-- Alert Container for Errors -->
-        <div id="login-error-alert" class="alert alert-danger py-2 px-3 small font-bold mb-3" style="display: none;"></div>
+        <div id="login-error-alert" class="alert alert-danger py-2 px-3 small font-bold mb-3 text-start" style="display: none;"></div>
 
         <!-- FORM LOGIN UTAMA -->
-        <div class="login-form-card mb-4">
+        <div class="login-form-card mb-3 text-start">
           <div class="mb-3">
             <label class="form-label font-bold small text-dark d-flex align-items-center gap-1">
-              <i data-lucide="user" class="icon-xs text-muted"></i>
-              <span>Username atau Email Kedinasan:</span>
+              <i data-lucide="user" class="icon-xs text-orange"></i>
+              <span>Username / Email Kedinasan:</span>
             </label>
             <input type="text" id="login-username" class="login-input-field font-mono" placeholder="Masukkan username (contoh: superadmin)" autocomplete="username">
           </div>
 
           <div class="mb-3">
             <label class="form-label font-bold small text-dark d-flex align-items-center gap-1">
-              <i data-lucide="key" class="icon-xs text-muted"></i>
+              <i data-lucide="key" class="icon-xs text-orange"></i>
               <span>Password:</span>
             </label>
-            <input type="password" id="login-password" class="login-input-field font-mono" placeholder="Masukkan password (default: password123)" autocomplete="current-password">
+            <input type="password" id="login-password" class="login-input-field font-mono" placeholder="Masukkan password (contoh: password123)" autocomplete="current-password">
           </div>
 
           <!-- CAPTCHA PERHITUNGAN SEDERHANA (+, -, ×, ÷) -->
@@ -210,7 +216,7 @@ const Auth = {
             <div class="d-flex align-items-center justify-content-between mb-2">
               <label class="form-label font-bold small text-dark mb-0 d-flex align-items-center gap-1">
                 <i data-lucide="calculator" class="icon-xs text-orange"></i>
-                <span>Verifikasi Keamanan (Hitung Sederhana):</span>
+                <span>Verifikasi Perhitungan:</span>
               </label>
               <button type="button" class="btn-refresh-captcha" onclick="Auth.generateCaptcha()" title="Ganti soal perhitungan">
                 <i data-lucide="rotate-ccw" class="icon-xs"></i>
@@ -218,81 +224,79 @@ const Auth = {
               </button>
             </div>
 
-            <div class="captcha-equation-row d-flex align-items-center gap-3">
-              <div class="captcha-equation-badge" id="captcha-display-box">
-                <span id="captcha-equation-text" class="font-mono font-bold">${captcha.question}</span>
+            <div class="captcha-equation-row d-flex align-items-center gap-2">
+              <div class="captcha-equation-badge" id="captcha-display-box" style="background: #ffffff; border: 2px solid #ea580c; border-radius: 8px; padding: 8px 16px;">
+                <span id="captcha-equation-text" class="font-mono font-bold text-orange-dark fs-6">Memuat soal...</span>
               </div>
               <div class="flex-grow-1">
-                <input type="number" id="login-captcha" class="login-input-field font-mono text-center font-bold" placeholder="Tulis hasil angka..." autocomplete="off">
-                <input type="hidden" id="login-captcha-id" value="${captcha.id}">
+                <input type="number" id="login-captcha" class="login-input-field font-mono text-center font-bold" placeholder="Hasil angka..." autocomplete="off">
+                <input type="hidden" id="login-captcha-id" value="">
               </div>
             </div>
-            <span class="small text-muted d-block mt-1" style="font-size: 0.76rem;">
-              Selesaikan operasi hitung di atas (tambah, kurang, kali, atau bagi) untuk melanjutkan login.
+            <span class="small text-muted d-block mt-1" style="font-size: 0.75rem;">
+              Hitung operasi di atas untuk verifikasi keamanan.
             </span>
           </div>
 
-          <button class="login-submit-btn w-100 mt-2" onclick="Auth.submitLogin()">
+          <button id="btn-submit-login" class="login-submit-btn w-100" onclick="Auth.submitLogin()">
             <i data-lucide="log-in" class="icon-xs"></i>
             <span>Masuk ke Panel Admin</span>
           </button>
         </div>
 
-        <!-- QUICK LOGIN DEMO AKUN (7 ROLES) UNTUK PENGUJIAN -->
-        <div class="quick-demo-accounts-box">
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="small font-bold text-muted font-mono">
-              <i data-lucide="users" class="icon-xs text-primary"></i> PILIHAN CEPAT DEMO ROLE (KLIK UNTUK ISI & MASUK):
-            </span>
+        <!-- DAFTAR PENGGUNA & PASSWORD DALAM BENTUK TEKS (SESUAI PERMINTAAN USER) -->
+        <div class="login-credentials-text-box p-3 bg-light border rounded text-start mb-3" style="background-color: #f8fafc; border-color: #e2e8f0;">
+          <div class="d-flex align-items-center gap-1 mb-2">
+            <i data-lucide="key-round" class="icon-xs text-orange"></i>
+            <strong class="small text-dark">Informasi Akun Pegawai (Username & Password):</strong>
           </div>
-
-          <div class="row g-2">
-            ${users.map(u => `
-              <div class="col-md-6">
-                <button type="button" class="quick-role-card-btn text-start w-100" onclick="Auth.prefillAndLogin('${u.username}', 'password123')">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <strong class="text-dark small">${u.roleLabel}</strong>
-                    <span class="badge-adm-slate small font-mono">${u.username}</span>
-                  </div>
-                  <div class="small text-muted mt-1" style="font-size: 0.75rem;">${u.name}</div>
-                </button>
-              </div>
-            `).join('')}
+          <div class="text-muted small" style="font-size: 0.8rem; line-height: 1.6;">
+            <div>• <strong>Super Admin:</strong> username: <code class="font-bold text-dark">superadmin</code> | password: <code class="font-bold text-dark">password123</code></div>
+            <div>• <strong>Kepala Dinas:</strong> username: <code class="font-bold text-dark">kadin</code> | password: <code class="font-bold text-dark">password123</code></div>
+            <div>• <strong>Sekretaris:</strong> username: <code class="font-bold text-dark">sekdin</code> | password: <code class="font-bold text-dark">password123</code></div>
+            <div>• <strong>Kabid Bina Marga:</strong> username: <code class="font-bold text-dark">kabid_bm</code> | password: <code class="font-bold text-dark">password123</code></div>
+            <div>• <strong>Koordinator Teknis:</strong> username: <code class="font-bold text-dark">koor_bm</code> | password: <code class="font-bold text-dark">password123</code></div>
+            <div>• <strong>Kasubag Program:</strong> username: <code class="font-bold text-dark">kasubag_program</code> | password: <code class="font-bold text-dark">password123</code></div>
           </div>
         </div>
 
-      </div>
+        <div class="d-flex justify-content-center">
+          <button class="adm-btn adm-btn-sm adm-btn-outline" onclick="App.closeModal()">
+            <i data-lucide="arrow-left" class="icon-xs"></i> Kembali ke Portal Publik
+          </button>
+        </div>
 
-      <div class="login-modal-footer d-flex justify-content-end mt-3 pt-3 border-top">
-        <button class="adm-btn adm-btn-outline" onclick="App.closeModal()">Tutup</button>
       </div>
     `;
 
     App.openModal('Autentikasi Pegawai DINPUTARU Demak', modalContent);
+
+    // Apply compact centered modal class
+    const dialog = document.querySelector('.retro-modal-dialog');
+    if (dialog) dialog.classList.add('login-dialog-compact');
+
+    // Generate Captcha
+    this.generateCaptcha();
+
     if (window.lucide) window.lucide.createIcons();
 
-    // Auto-focus username input
+    // Bind Enter key submissions
     setTimeout(() => {
       const uIn = document.getElementById('login-username');
-      if (uIn) uIn.focus();
+      const pIn = document.getElementById('login-password');
+      const cIn = document.getElementById('login-captcha');
+
+      if (uIn) {
+        uIn.focus();
+        uIn.addEventListener('keydown', (e) => { if (e.key === 'Enter') pIn && pIn.focus(); });
+      }
+      if (pIn) {
+        pIn.addEventListener('keydown', (e) => { if (e.key === 'Enter') cIn && cIn.focus(); });
+      }
+      if (cIn) {
+        cIn.addEventListener('keydown', (e) => { if (e.key === 'Enter') this.submitLogin(); });
+      }
     }, 150);
-  },
-
-  prefillAndLogin(username, password) {
-    const uIn = document.getElementById('login-username');
-    const pIn = document.getElementById('login-password');
-    const cIn = document.getElementById('login-captcha');
-
-    if (uIn) uIn.value = username;
-    if (pIn) pIn.value = password;
-    if (cIn && this.currentCaptcha) {
-      cIn.value = this.currentCaptcha.answer;
-    }
-
-    // Auto submit login
-    setTimeout(() => {
-      this.submitLogin();
-    }, 100);
   },
 
   async submitLogin() {
@@ -300,6 +304,8 @@ const Auth = {
     const usernameInput = document.getElementById('login-username');
     const passwordInput = document.getElementById('login-password');
     const captchaInput = document.getElementById('login-captcha');
+    const captchaIdInput = document.getElementById('login-captcha-id');
+    const submitBtn = document.getElementById('btn-submit-login');
 
     if (errorAlert) {
       errorAlert.style.display = 'none';
@@ -311,6 +317,7 @@ const Auth = {
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
     const captchaVal = captchaInput.value.trim();
+    const captchaId = captchaIdInput ? captchaIdInput.value : (this.currentCaptcha?.id || '');
 
     // 1. Validasi Input Kosong
     if (!username || !password) {
@@ -325,15 +332,25 @@ const Auth = {
     }
 
     const parsedCaptcha = parseInt(captchaVal, 10);
-    if (isNaN(parsedCaptcha) || !this.currentCaptcha || parsedCaptcha !== this.currentCaptcha.answer) {
-      this.showLoginError('Hasil perhitungan Captcha salah! Soal baru telah dibuat, silakan coba lagi.');
-      this.generateCaptcha();
-      if (window.lucide) window.lucide.createIcons();
+    if (isNaN(parsedCaptcha)) {
+      this.showLoginError('Hasil perhitungan Captcha harus berupa angka!');
       return;
     }
 
-    // 3. Autentikasi Pengguna
-    // Coba ke endpoint REST API Backend terlebih dahulu
+    // If local captcha is used, verify answer locally first
+    if (this.currentCaptcha && this.currentCaptcha.answer !== undefined && parsedCaptcha !== this.currentCaptcha.answer) {
+      this.showLoginError('Hasil perhitungan Captcha salah! Silakan hitung kembali soal yang diberikan.');
+      this.generateCaptcha();
+      return;
+    }
+
+    // Disable button during submit
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Memverifikasi...`;
+    }
+
+    // 3. Autentikasi Pengguna ke REST API Backend
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -341,7 +358,7 @@ const Auth = {
         body: JSON.stringify({
           username,
           password,
-          captchaId: this.currentCaptcha.id,
+          captchaId,
           captchaAnswer: parsedCaptcha
         })
       });
@@ -358,23 +375,26 @@ const Auth = {
         this.updatePermissions();
         return;
       } else {
-        this.showLoginError(data.message || 'Username atau Password salah!');
+        this.showLoginError(data.message || 'Username atau Password salah! Periksa kembali.');
         this.generateCaptcha();
-        if (window.lucide) window.lucide.createIcons();
-        return;
       }
     } catch (apiErr) {
-      // Fallback offline / local store
-      console.log('API login fallback to local store validation');
+      console.warn('Backend API login error, falling back to local store validation:', apiErr);
       const res = window.store.login(username, password);
-      if (res.success) {
+      if (res && res.success) {
         App.closeModal();
         App.showToast(`Selamat datang, <strong>${res.user.name}</strong> (${res.user.roleLabel})!`, 'success');
         App.switchMode('admin');
         this.updatePermissions();
+        return;
       } else {
-        this.showLoginError(res.message);
+        this.showLoginError(res.message || 'Username atau Password salah!');
         this.generateCaptcha();
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<i data-lucide="log-in" class="icon-xs"></i> <span>Masuk ke Panel Admin</span>`;
         if (window.lucide) window.lucide.createIcons();
       }
     }
@@ -383,7 +403,7 @@ const Auth = {
   showLoginError(msg) {
     const errorAlert = document.getElementById('login-error-alert');
     if (errorAlert) {
-      errorAlert.innerHTML = `<i data-lucide="alert-circle" class="icon-xs me-1"></i> ${msg}`;
+      errorAlert.innerHTML = `<i data-lucide="alert-circle" class="icon-xs me-1 text-danger"></i> ${msg}`;
       errorAlert.style.display = 'block';
       if (window.lucide) window.lucide.createIcons();
     } else {

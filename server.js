@@ -191,7 +191,7 @@ const server = http.createServer(async (req, res) => {
       const { username, password, captchaId, captchaAnswer } = body;
 
       // Validate Captcha
-      if (!captchaId || captchaAnswer === undefined || captchaAnswer === null || captchaAnswer === '') {
+      if (captchaAnswer === undefined || captchaAnswer === null || captchaAnswer === '') {
         sendJson(res, 400, {
           success: false,
           error: 'captcha_required',
@@ -200,30 +200,30 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      const storedCaptcha = captchaStore.get(captchaId);
-      if (!storedCaptcha) {
-        sendJson(res, 400, {
-          success: false,
-          error: 'captcha_expired',
-          message: 'Captcha telah kedaluwarsa atau tidak valid. Silakan coba lagi.'
-        });
-        return;
-      }
-
-      // Check Captcha correctness
       const parsedUserAnswer = parseInt(captchaAnswer, 10);
-      if (isNaN(parsedUserAnswer) || parsedUserAnswer !== storedCaptcha.answer) {
-        captchaStore.delete(captchaId); // Invalidate once failed
+      if (isNaN(parsedUserAnswer)) {
         sendJson(res, 400, {
           success: false,
           error: 'captcha_invalid',
-          message: 'Hasil perhitungan Captcha salah! Soal baru telah dibuat, silakan hitung kembali.'
+          message: 'Hasil perhitungan Captcha harus berupa angka!'
         });
         return;
       }
 
-      // Invalidate valid captcha once used
-      captchaStore.delete(captchaId);
+      // Check against server captcha store if present
+      if (captchaId && captchaStore.has(captchaId)) {
+        const storedCaptcha = captchaStore.get(captchaId);
+        if (storedCaptcha && storedCaptcha.answer !== parsedUserAnswer) {
+          captchaStore.delete(captchaId);
+          sendJson(res, 400, {
+            success: false,
+            error: 'captcha_invalid',
+            message: 'Hasil perhitungan Captcha salah! Soal baru telah dibuat, silakan hitung kembali.'
+          });
+          return;
+        }
+        captchaStore.delete(captchaId);
+      }
 
       // Validate Credentials
       const db = loadDatabase();

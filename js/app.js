@@ -227,9 +227,11 @@ const App = {
     const modalOverlay = document.getElementById('global-modal-overlay');
     const modalTitle = document.getElementById('global-modal-title');
     const modalContent = document.getElementById('global-modal-content');
+    const dialog = document.querySelector('.retro-modal-dialog');
 
     if (!modalOverlay || !modalTitle || !modalContent) return;
 
+    if (dialog) dialog.classList.remove('login-dialog-compact');
     modalTitle.innerHTML = title;
     modalContent.innerHTML = bodyHtml;
     modalOverlay.classList.add('show');
@@ -240,6 +242,8 @@ const App = {
 
   closeModal() {
     const modalOverlay = document.getElementById('global-modal-overlay');
+    const dialog = document.querySelector('.retro-modal-dialog');
+    if (dialog) dialog.classList.remove('login-dialog-compact');
     if (modalOverlay) {
       modalOverlay.classList.remove('show');
       document.body.classList.remove('modal-open');

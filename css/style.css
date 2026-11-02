@@ -3271,3 +3271,43 @@ canvas#publicIndicatorLineChart,
     max-width: 100% !important;
   }
 }
+
+
+/* ==========================================================================
+   4. CENTERED LOGIN MODAL & CREDENTIALS STYLING
+   ========================================================================== */
+
+.retro-modal-dialog.login-dialog-compact {
+  max-width: 480px !important;
+  margin: auto !important;
+  border: 1px solid #fed7aa !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(234, 88, 12, 0.15) !important;
+  overflow: hidden;
+}
+
+.login-modal-container {
+  padding: 8px 4px !important;
+}
+
+.login-form-card {
+  padding: 20px !important;
+  background: #ffffff !important;
+  border: 1px solid #fed7aa !important;
+  border-radius: 12px !important;
+}
+
+.login-credentials-text-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+}
+
+.login-credentials-text-box code {
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-family: var(--font-mono);
+}
