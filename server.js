@@ -120,7 +120,8 @@ function generateMathCaptcha() {
 
   return {
     captchaId,
-    question: questionText
+    question: questionText,
+    equation: questionText
   };
 }
 
@@ -542,6 +543,119 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 10. Admin: Categories Endpoints (CRUD)
+  if (req.method === 'GET' && pathname === '/api/admin/categories') {
+    const db = loadDatabase();
+    sendJson(res, 200, { success: true, categories: db.categories || [] });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/admin/categories') {
+    try {
+      const body = await parseJsonBody(req);
+      const { id, code, segmentNumber, name, desc, badgeColor } = body;
+      if (!code || !name) {
+        sendJson(res, 400, { success: false, message: 'Kode dan nama kategori wajib diisi.' });
+        return;
+      }
+
+      const db = loadDatabase();
+      if (!db.categories) db.categories = [];
+
+      const catId = id || code.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      const categoryObj = {
+        id: catId,
+        code: code.toUpperCase().trim(),
+        segmentNumber: parseInt(segmentNumber, 10) || (db.categories.length + 1),
+        name: name.trim(),
+        desc: desc ? desc.trim() : '',
+        badgeColor: badgeColor || '#fbbf24'
+      };
+
+      const existingIdx = db.categories.findIndex(c => c.id === catId);
+      if (existingIdx >= 0) {
+        db.categories[existingIdx] = { ...db.categories[existingIdx], ...categoryObj };
+      } else {
+        db.categories.push(categoryObj);
+      }
+
+      // Sort categories by segmentNumber
+      db.categories.sort((a, b) => (a.segmentNumber || 99) - (b.segmentNumber || 99));
+
+      saveDatabase(db);
+      sendJson(res, 200, {
+        success: true,
+        message: `Kategori [${categoryObj.code}] berhasil disimpan!`,
+        category: categoryObj,
+        categories: db.categories
+      });
+      return;
+    } catch (err) {
+      sendJson(res, 500, { success: false, message: 'Gagal menyimpan kategori indikator.' });
+      return;
+    }
+  }
+
+  if (req.method === 'DELETE' && pathname.startsWith('/api/admin/categories/')) {
+    const catId = pathname.split('/').pop();
+    const db = loadDatabase();
+
+    if (!db.categories || !db.categories.find(c => c.id === catId)) {
+      sendJson(res, 404, { success: false, message: 'Kategori tidak ditemukan.' });
+      return;
+    }
+
+    const inUseCount = (db.indicators || []).filter(i => i.categoryId === catId).length;
+    if (inUseCount > 0) {
+      sendJson(res, 400, {
+        success: false,
+        message: `Kategori tidak dapat dihapus karena masih digunakan oleh ${inUseCount} indikator!`
+      });
+      return;
+    }
+
+    db.categories = db.categories.filter(c => c.id !== catId);
+    saveDatabase(db);
+    sendJson(res, 200, {
+      success: true,
+      message: 'Kategori berhasil dihapus dari sistem.',
+      categories: db.categories
+    });
+    return;
+  }
+
+  // 11. Admin: System Settings & All-Text Customizer
+  if (req.method === 'GET' && pathname === '/api/admin/settings') {
+    const db = loadDatabase();
+    sendJson(res, 200, { success: true, systemInfo: db.systemInfo || {} });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/admin/settings') {
+    try {
+      const body = await parseJsonBody(req);
+      const db = loadDatabase();
+      if (!db.systemInfo) db.systemInfo = {};
+
+      db.systemInfo = {
+        ...db.systemInfo,
+        ...body,
+        lastUpdated: new Date().toISOString()
+      };
+
+      saveDatabase(db);
+      sendJson(res, 200, {
+        success: true,
+        message: 'Seluruh teks sistem berhasil diperbarui dan disimpan!',
+        systemInfo: db.systemInfo
+      });
+      return;
+    } catch (err) {
+      sendJson(res, 500, { success: false, message: 'Gagal memperbarui pengaturan teks sistem.' });
+      return;
+    }
+  }
+
   /* =======================================================================
    * STATIC FILE SERVING
    * ======================================================================= */
@@ -572,10 +686,14 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(` SIDAT - SATUPUTARU - DINPUTARU KABUPATEN DEMAK (v3.0)`);
-  console.log(` Front End Publik & Back End Panel Admin`);
-  console.log(` Server running at: http://localhost:${PORT}`);
-  console.log(`=======================================================`);
-});
+if (require.main === module) {
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`=======================================================`);
+    console.log(` SIDAT - SATUPUTARU - DINPUTARU KABUPATEN DEMAK (v3.0)`);
+    console.log(` Front End Publik & Back End Panel Admin`);
+    console.log(` Server running at: http://localhost:${PORT}`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = server;

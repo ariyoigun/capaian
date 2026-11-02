@@ -244,22 +244,6 @@ const Auth = {
           </button>
         </div>
 
-        <!-- DAFTAR PENGGUNA & PASSWORD DALAM BENTUK TEKS (SESUAI PERMINTAAN USER) -->
-        <div class="login-credentials-text-box p-3 bg-light border rounded text-start mb-3" style="background-color: #f8fafc; border-color: #e2e8f0;">
-          <div class="d-flex align-items-center gap-1 mb-2">
-            <i data-lucide="key-round" class="icon-xs text-orange"></i>
-            <strong class="small text-dark">Informasi Akun Pegawai (Username & Password):</strong>
-          </div>
-          <div class="text-muted small" style="font-size: 0.8rem; line-height: 1.6;">
-            <div>• <strong>Super Admin:</strong> username: <code class="font-bold text-dark">superadmin</code> | password: <code class="font-bold text-dark">password123</code></div>
-            <div>• <strong>Kepala Dinas:</strong> username: <code class="font-bold text-dark">kadin</code> | password: <code class="font-bold text-dark">password123</code></div>
-            <div>• <strong>Sekretaris:</strong> username: <code class="font-bold text-dark">sekdin</code> | password: <code class="font-bold text-dark">password123</code></div>
-            <div>• <strong>Kabid Bina Marga:</strong> username: <code class="font-bold text-dark">kabid_bm</code> | password: <code class="font-bold text-dark">password123</code></div>
-            <div>• <strong>Koordinator Teknis:</strong> username: <code class="font-bold text-dark">koor_bm</code> | password: <code class="font-bold text-dark">password123</code></div>
-            <div>• <strong>Kasubag Program:</strong> username: <code class="font-bold text-dark">kasubag_program</code> | password: <code class="font-bold text-dark">password123</code></div>
-          </div>
-        </div>
-
         <div class="d-flex justify-content-center">
           <button class="adm-btn adm-btn-sm adm-btn-outline" onclick="App.closeModal()">
             <i data-lucide="arrow-left" class="icon-xs"></i> Kembali ke Portal Publik

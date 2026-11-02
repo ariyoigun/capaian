@@ -102,3 +102,4 @@ DB_NAME=sidat_satuputaru
 
 ## 🔄 Mekanisme Fallback Otomatis
 Jika server database SQL belum diaktifkan atau konfigurasi `.env` belum diisi, aplikasi akan secara otomatis menggunakan penyimpanan lokal [`data/database.json`](file:///c:/Users/DINPUTARU/Documents/AntiG/Capaian/data/database.json) tanpa menimbulkan gangguan atau error pada sistem.
+

@@ -82,54 +82,26 @@ const MasterIndikatorModule = {
     const latestYear = years[years.length - 1];
     const canEdit = window.store.canInputIndicatorsAndTargets();
 
-    // Summary counters
+    // Summary counters (Dinamis membaca semua kategori terdaftar)
     if (summaryContainer) {
-      let ikuCount = 0, ikdCount = 0, ikpCount = 0, ikkCount = 0;
-      indicators.forEach(i => {
-        if (i.categoryId === 'iku') ikuCount++;
-        else if (i.categoryId === 'ikd') ikdCount++;
-        else if (i.categoryId === 'ikp') ikpCount++;
-        else if (i.categoryId === 'ikk') ikkCount++;
-      });
-
       summaryContainer.innerHTML = `
-        <div class="row g-3 mb-3">
-          <div class="col-md-3 col-sm-6">
-            <div class="glass-card p-3 d-flex align-items-center justify-content-between">
-              <div>
-                <span class="small font-bold text-muted text-uppercase">Indikator Kinerja Utama</span>
-                <h3 class="font-bold text-primary mt-1 mb-0">${ikuCount}</h3>
+        <div class="row g-2 mb-3">
+          ${categories.map(c => {
+            const count = indicators.filter(i => i.categoryId === c.id).length;
+            return `
+              <div class="col-md-3 col-sm-6">
+                <div class="glass-card p-3 d-flex align-items-center justify-content-between" style="border-left: 4px solid ${c.badgeColor || '#ea580c'};">
+                  <div>
+                    <span class="small font-bold text-muted text-uppercase" style="font-size: 0.72rem;">${c.name}</span>
+                    <h4 class="font-bold text-dark mt-1 mb-0">${count} <span class="small text-muted font-normal" style="font-size: 0.75rem;">Indikator</span></h4>
+                  </div>
+                  <span class="badge font-mono font-bold" style="background-color: ${c.badgeColor || '#fbbf24'}; color: #0f172a; border: 1px solid rgba(0,0,0,0.15);">
+                    ${c.code}
+                  </span>
+                </div>
               </div>
-              <span class="badge-glass badge-glass-blue font-bold font-mono">IKU</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="glass-card p-3 d-flex align-items-center justify-content-between">
-              <div>
-                <span class="small font-bold text-muted text-uppercase">Indikator Kinerja Daerah</span>
-                <h3 class="font-bold text-amber mt-1 mb-0">${ikdCount}</h3>
-              </div>
-              <span class="badge-glass badge-glass-amber font-bold font-mono">IKD</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="glass-card p-3 d-flex align-items-center justify-content-between">
-              <div>
-                <span class="small font-bold text-muted text-uppercase">Indikator Program</span>
-                <h3 class="font-bold text-emerald mt-1 mb-0">${ikpCount}</h3>
-              </div>
-              <span class="badge-glass badge-glass-emerald font-bold font-mono">IKP</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="glass-card p-3 d-flex align-items-center justify-content-between">
-              <div>
-                <span class="small font-bold text-muted text-uppercase">Indikator Kegiatan</span>
-                <h3 class="font-bold text-rose mt-1 mb-0">${ikkCount}</h3>
-              </div>
-              <span class="badge-glass badge-glass-rose font-bold font-mono">IKK</span>
-            </div>
-          </div>
+            `;
+          }).join('')}
         </div>
       `;
     }
@@ -159,23 +131,18 @@ const MasterIndikatorModule = {
     }
 
     container.innerHTML = filtered.map((ind, idx) => {
-      const cat = categories.find(c => c.id === ind.categoryId) || { code: ind.categoryId, name: ind.categoryId };
+      const cat = categories.find(c => c.id === ind.categoryId) || { code: ind.categoryId, name: ind.categoryId, badgeColor: '#fed7aa' };
       const bidang = bidangList.find(b => b.id === ind.bidangId) || { name: 'DINPUTARU' };
       const rec = ind.records?.[latestYear] || { target: 0, realisasi: 0 };
       const pct = window.store.calculateCapaian(rec.target, rec.realisasi, ind.polarization);
       const status = window.store.getStatus(pct);
-
-      let catBadgeClass = 'badge-glass-blue';
-      if (ind.categoryId === 'ikd') catBadgeClass = 'badge-glass-amber';
-      else if (ind.categoryId === 'ikp') catBadgeClass = 'badge-glass-emerald';
-      else if (ind.categoryId === 'ikk') catBadgeClass = 'badge-glass-rose';
 
       return `
         <tr>
           <td class="text-center font-mono small text-muted">${idx + 1}</td>
           <td>
             <div class="d-flex align-items-center gap-2 mb-1">
-              <span class="badge-glass ${catBadgeClass} font-mono font-bold">${ind.code}</span>
+              <span class="badge font-mono font-bold" style="background-color: ${cat.badgeColor || '#fed7aa'}; color: #0f172a; border: 1px solid rgba(0,0,0,0.15);">${ind.code}</span>
               <strong class="text-dark">${ind.name}</strong>
             </div>
             <div class="small text-muted text-truncate" style="max-width: 380px;">
@@ -183,8 +150,8 @@ const MasterIndikatorModule = {
             </div>
           </td>
           <td>
-            <span class="badge-glass ${catBadgeClass} font-bold">${cat.code}</span>
-            <div class="small text-muted mt-1">${cat.name}</div>
+            <span class="badge font-bold" style="background-color: ${cat.badgeColor || '#fed7aa'}; color: #0f172a; border: 1px solid rgba(0,0,0,0.15);">${cat.code}</span>
+            <div class="small text-muted mt-1" style="font-size: 0.78rem;">${cat.name}</div>
           </td>
           <td>
             <div class="font-bold text-dark small">

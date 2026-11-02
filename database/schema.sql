@@ -123,3 +123,4 @@ CREATE INDEX idx_tr_indicator_year ON target_realisasi(indicator_id, year);
 CREATE INDEX idx_ind_cat ON indicators(category_id);
 CREATE INDEX idx_ind_bidang ON indicators(bidang_id);
 CREATE INDEX idx_doc_bidang_year ON documents(bidang_id, year);
+

@@ -998,29 +998,7 @@ h1, h2, h3, h4, h5, h6 {
   to { transform: translateX(0); opacity: 1; }
 }
 
-/* ----------------- PRINT MEDIA OPTIMIZATION ----------------- */
-
-@media print {
-  .top-session-bar,
-  .app-main-header,
-  .internal-nav-bar,
-  .mode-pill-container,
-  .glass-btn,
-  .toast-container,
-  #lap-control-panel {
-    display: none !important;
-  }
-  body {
-    background: #ffffff !important;
-    background-image: none !important;
-  }
-  .official-paper {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-}
+/* ----------------- RESPONSIVE ADJUSTMENTS ----------------- */
 
 @media (max-width: 768px) {
   .brand-text h1 { font-size: 1.15rem; }
@@ -3237,38 +3215,175 @@ canvas#publicIndicatorLineChart,
   color: #475569;
 }
 
-/* Print Overrides */
+/* ==========================================================================
+   OFFICIAL DOCUMENT PRINT STYLING (A4 PORTRAIT LKjIP / SAKIP DINPUTARU)
+   ========================================================================== */
+@page {
+  size: A4 portrait;
+  margin: 10mm 12mm 12mm 12mm;
+}
+
 @media print {
-  body {
+  /* Reset page & canvas container */
+  html, body {
     background: #ffffff !important;
     background-image: none !important;
+    color: #0f172a !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 10.5pt !important;
   }
-  .app-header,
+
+  /* 1. HIDE ALL UI CHROME, HEADERS, NAVIGATIONS & UNRELATED TABS */
   .top-role-bar,
-  .pub-main-nav,
+  .top-session-bar,
+  .app-header,
+  .app-main-header,
+  .header-actions-group,
+  .mode-toggle-group,
   .pub-hero-banner-compact,
+  .pub-hero-banner,
+  .pub-main-nav,
   .pub-laporan-header-box,
   .pub-laporan-controls-bar,
+  #pub-tab-pane-cards,
+  #pub-tab-pane-matrix,
+  #pub-tab-pane-bankdata,
   #admin-nav-bar,
+  #admin-subnav-bar,
+  .dash-filter-banner,
+  #lap-control-panel,
+  #tab-pane-target-realisasi,
+  #tab-pane-dashboard,
+  #tab-pane-capaian,
+  #tab-pane-bank-data,
+  #tab-pane-master-indikator,
+  #tab-pane-master-data,
+  #tab-pane-manajemen-user,
+  #tab-pane-pengaturan-teks,
   #toast-container,
-  footer {
+  .toast-container,
+  #global-modal-overlay,
+  .retro-modal-overlay,
+  footer,
+  button,
+  .adm-btn,
+  .pub-btn-orange,
+  .glass-btn {
     display: none !important;
+    visibility: hidden !important;
   }
+
+  /* 2. FORCE REPORT CONTAINERS TO BE VISIBLE & UNBOUNDED */
+  #public-portal-container,
+  #admin-panel-container,
+  #pub-tab-pane-laporan,
+  #tab-pane-laporan,
+  #public-laporan-section,
+  #public-laporan-preview-sheet,
+  #laporan-preview-sheet,
   .main-wrapper,
   .pub-laporan-wrapper,
   .pub-preview-wrapper {
+    display: block !important;
+    visibility: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  /* 3. OFFICIAL PAPER SHEET STYLING FOR A4 PRINT */
+  .official-paper {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
     background: #ffffff !important;
-    box-shadow: none !important;
+    color: #000000 !important;
     border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
-  .official-paper {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+
+  .official-kop {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding-bottom: 8px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .brand-emblem-kop {
+    border: 2px solid #000000 !important;
+    background: #f8fafc !important;
+    color: #ea580c !important;
+    print-color-adjust: exact !important;
+  }
+
+  .kop-divider {
+    border-bottom: 3px double #000000 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .official-doc-title h4 {
+    font-size: 13pt !important;
+    color: #000000 !important;
+  }
+
+  .official-section-box {
+    border: 1px solid #94a3b8 !important;
+    background: #ffffff !important;
+    margin-bottom: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .official-table {
+    border-collapse: collapse !important;
     width: 100% !important;
-    max-width: 100% !important;
+  }
+
+  .official-table th {
+    background-color: #f1f5f9 !important;
+    color: #000000 !important;
+    border: 1px solid #475569 !important;
+    font-size: 9pt !important;
+    print-color-adjust: exact !important;
+  }
+
+  .official-table td {
+    border: 1px solid #94a3b8 !important;
+    font-size: 8.5pt !important;
+    padding: 4px 6px !important;
+  }
+
+  .official-signature-block {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-top: 24px !important;
+    padding-top: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .sig-left, .sig-right {
+    width: 45% !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 }
 

@@ -394,34 +394,49 @@ const MasterDataModule = {
   },
 
   openAddCategoryModal() {
+    const nextSegment = window.store.getCategories().length + 1;
     const modalContent = `
       <div class="retro-modal-body">
-        <div class="mb-3">
-          <label class="form-label font-bold">Kode Kategori Singkat:</label>
-          <input type="text" id="cat-code" class="retro-input font-bold" placeholder="Contoh: IKD, IKU, IKP, IKK">
+        <div class="row g-2 mb-3">
+          <div class="col-md-6">
+            <label class="form-label font-bold small">Kode Kategori Singkat:</label>
+            <input type="text" id="cat-code" class="retro-input font-bold" placeholder="Contoh: IKU, IKD, IKP, IKK, IKS">
+            <span class="small text-muted" style="font-size: 0.75rem;">Singkatan tingkatan indikator (kapital)</span>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label font-bold small">Urutan Hierarki / Segmen (1, 2, 3..):</label>
+            <input type="number" id="cat-segment" class="retro-input font-mono font-bold" min="1" max="20" value="${nextSegment}">
+            <span class="small text-muted" style="font-size: 0.75rem;">Tingkatan hierarki perencanaan daerah</span>
+          </div>
         </div>
+
         <div class="mb-3">
-          <label class="form-label font-bold">Nama Lengkap Kategori:</label>
-          <input type="text" id="cat-name" class="retro-input" placeholder="Contoh: Indikator Kinerja Sasaran Daerah">
+          <label class="form-label font-bold small">Nama Lengkap Kategori:</label>
+          <input type="text" id="cat-name" class="retro-input" placeholder="Contoh: Indikator Kinerja Sasaran Strategis Daerah">
         </div>
+
         <div class="mb-3">
-          <label class="form-label font-bold">Deskripsi / Ruang Lingkup:</label>
-          <textarea id="cat-desc" class="retro-input" rows="2" placeholder="Jelaskan mandat atau peruntukan tingkatan indikator ini..."></textarea>
+          <label class="form-label font-bold small">Deskripsi / Ruang Lingkup Mandat:</label>
+          <textarea id="cat-desc" class="retro-input" rows="2" placeholder="Jelaskan mandat atau peruntukan tingkatan indikator ini dalam RPJMD / Renstra..."></textarea>
         </div>
+
         <div class="mb-3">
-          <label class="form-label font-bold">Warna Aksen Badge Retro:</label>
-          <input type="color" id="cat-color" class="form-control form-control-color border-retro" value="#fbbf24">
+          <label class="form-label font-bold small">Warna Aksen Badge Kategori:</label>
+          <div class="d-flex align-items-center gap-3">
+            <input type="color" id="cat-color" class="form-control form-control-color border-retro" value="#f97316" style="width: 50px; height: 38px;">
+            <span class="small text-muted">Pilih warna penanda visual untuk kartu & badge dokumen</span>
+          </div>
         </div>
       </div>
       <div class="retro-modal-footer">
         <button class="retro-btn retro-btn-outline" onclick="App.closeModal()">Batal</button>
         <button class="retro-btn retro-btn-primary" onclick="MasterDataModule.submitSaveCategory()">
-          <i data-lucide="check" class="icon-xs"></i> Simpan Kategori
+          <i data-lucide="check" class="icon-xs"></i> Simpan Kategori Baru
         </button>
       </div>
     `;
 
-    App.openModal('Tambah Kategori Indikator Baru', modalContent);
+    App.openModal('Tambah Master Kategori Indikator Baru', modalContent);
   },
 
   openEditCategoryModal(catId) {
@@ -431,21 +446,34 @@ const MasterDataModule = {
     const modalContent = `
       <div class="retro-modal-body">
         <input type="hidden" id="cat-edit-id" value="${cat.id}">
-        <div class="mb-3">
-          <label class="form-label font-bold">Kode Kategori:</label>
-          <input type="text" id="cat-code" class="retro-input font-bold" value="${cat.code}">
+        
+        <div class="row g-2 mb-3">
+          <div class="col-md-6">
+            <label class="form-label font-bold small">Kode Kategori:</label>
+            <input type="text" id="cat-code" class="retro-input font-bold" value="${cat.code}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label font-bold small">Urutan Hierarki / Segmen:</label>
+            <input type="number" id="cat-segment" class="retro-input font-mono font-bold" min="1" max="20" value="${cat.segmentNumber || 1}">
+          </div>
         </div>
+
         <div class="mb-3">
-          <label class="form-label font-bold">Nama Lengkap Kategori:</label>
+          <label class="form-label font-bold small">Nama Lengkap Kategori:</label>
           <input type="text" id="cat-name" class="retro-input" value="${cat.name}">
         </div>
+
         <div class="mb-3">
-          <label class="form-label font-bold">Deskripsi / Ruang Lingkup:</label>
+          <label class="form-label font-bold small">Deskripsi / Ruang Lingkup Mandat:</label>
           <textarea id="cat-desc" class="retro-input" rows="2">${cat.desc || ''}</textarea>
         </div>
+
         <div class="mb-3">
-          <label class="form-label font-bold">Warna Aksen Badge:</label>
-          <input type="color" id="cat-color" class="form-control form-control-color border-retro" value="${cat.badgeColor || '#fbbf24'}">
+          <label class="form-label font-bold small">Warna Aksen Badge:</label>
+          <div class="d-flex align-items-center gap-3">
+            <input type="color" id="cat-color" class="form-control form-control-color border-retro" value="${cat.badgeColor || '#fbbf24'}" style="width: 50px; height: 38px;">
+            <span class="small text-muted">Pilih warna aksen identitas kategori</span>
+          </div>
         </div>
       </div>
       <div class="retro-modal-footer">
@@ -456,12 +484,83 @@ const MasterDataModule = {
       </div>
     `;
 
-    App.openModal(`Edit Kategori: ${cat.code}`, modalContent);
+    App.openModal(`Edit Kategori Indikator: [${cat.code}]`, modalContent);
+  },
+
+  openCategoryManagerModal() {
+    const categories = window.store.getCategories();
+    const indicators = window.store.getIndicators();
+    const canEdit = window.store.canEditMaster();
+
+    const bodyHtml = `
+      <div class="retro-modal-body">
+        <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+          <span class="small text-muted">Daftar kategori hierarki indikator kinerja yang terdaftar:</span>
+          ${canEdit ? `
+            <button class="adm-btn adm-btn-sm adm-btn-primary" onclick="MasterDataModule.openAddCategoryModal()">
+              <i data-lucide="plus" class="icon-xs"></i> Tambah Kategori Baru
+            </button>
+          ` : ''}
+        </div>
+
+        <div class="retro-table-wrap">
+          <table class="retro-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;" class="text-center">Segmen</th>
+                <th style="width: 90px;">Kode</th>
+                <th>Nama Kategori & Deskripsi</th>
+                <th style="width: 100px;" class="text-center">Indikator</th>
+                ${canEdit ? '<th style="width: 110px;" class="text-center">Aksi</th>' : ''}
+              </tr>
+            </thead>
+            <tbody>
+              ${categories.map(c => {
+                const count = indicators.filter(i => i.categoryId === c.id).length;
+                return `
+                  <tr>
+                    <td class="text-center font-mono font-bold">${c.segmentNumber || '-'}</td>
+                    <td>
+                      <span class="badge font-mono font-bold" style="background-color: ${c.badgeColor || '#fbbf24'}; color: #0f172a; border: 1px solid #1e293b;">
+                        ${c.code}
+                      </span>
+                    </td>
+                    <td>
+                      <strong class="d-block text-dark">${c.name}</strong>
+                      <span class="small text-muted">${c.desc || '-'}</span>
+                    </td>
+                    <td class="text-center font-mono font-bold">${count}</td>
+                    ${canEdit ? `
+                      <td class="text-center">
+                        <div class="d-flex justify-content-center gap-1">
+                          <button class="adm-btn adm-btn-xs adm-btn-outline" onclick="MasterDataModule.openEditCategoryModal('${c.id}')" title="Edit Kategori">
+                            <i data-lucide="edit" class="icon-xs"></i>
+                          </button>
+                          <button class="adm-btn adm-btn-xs adm-btn-danger" onclick="MasterDataModule.deleteCategory('${c.id}')" title="Hapus Kategori">
+                            <i data-lucide="trash-2" class="icon-xs"></i>
+                          </button>
+                        </div>
+                      </td>
+                    ` : ''}
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="retro-modal-footer">
+        <button class="retro-btn retro-btn-outline" onclick="App.closeModal()">Tutup</button>
+      </div>
+    `;
+
+    App.openModal('Kelola Master Kategori Indikator', bodyHtml);
   },
 
   submitSaveCategory() {
     const id = document.getElementById('cat-edit-id')?.value;
     const code = document.getElementById('cat-code')?.value.trim();
+    const segmentNumber = parseInt(document.getElementById('cat-segment')?.value, 10) || (window.store.getCategories().length + 1);
     const name = document.getElementById('cat-name')?.value.trim();
     const desc = document.getElementById('cat-desc')?.value.trim();
     const badgeColor = document.getElementById('cat-color')?.value;
@@ -473,7 +572,8 @@ const MasterDataModule = {
 
     const catObj = {
       id: id || code.toLowerCase().replace(/[^a-z0-9]/g, '_'),
-      code,
+      code: code.toUpperCase(),
+      segmentNumber,
       name,
       desc,
       badgeColor
@@ -481,16 +581,38 @@ const MasterDataModule = {
 
     window.store.saveCategory(catObj);
     App.closeModal();
+
+    // Re-render and synchronize all UI modules across the entire app
     this.renderSubTab();
-    TreeModule.render();
-    DashboardModule.populateSelectors();
-    TargetRealisasiModule.populateFilters();
-    App.showToast(`Kategori [${code}] berhasil disimpan!`, 'success');
+    if (window.MasterIndikatorModule) {
+      window.MasterIndikatorModule.populateFilters();
+      window.MasterIndikatorModule.render();
+    }
+    if (window.TargetRealisasiModule) {
+      window.TargetRealisasiModule.populateFilters();
+      window.TargetRealisasiModule.render();
+    }
+    if (window.DashboardModule) {
+      window.DashboardModule.populateSelectors();
+    }
+    if (window.LaporanModule) {
+      window.LaporanModule.populateSelectors();
+      window.LaporanModule.renderPreview();
+    }
+    if (window.TreeModule) {
+      window.TreeModule.render();
+    }
+    if (window.PublicPortalModule) {
+      window.PublicPortalModule.renderCards();
+      window.PublicPortalModule.renderMatrix();
+    }
+
+    App.showToast(`Kategori [${catObj.code}] berhasil disimpan & disinkronkan!`, 'success');
   },
 
   deleteCategory(catId) {
     if (!window.store.canEditMaster()) {
-      App.showToast('Hanya Super Admin yang berwenang menghapus kategori master!', 'warning');
+      App.showToast('Hanya Super Admin atau Aparatur Berwenang yang dapat menghapus kategori master!', 'warning');
       return;
     }
 
@@ -500,10 +622,16 @@ const MasterDataModule = {
       return;
     }
 
-    if (confirm('Apakah Anda yakin ingin menghapus kategori ini?')) {
+    if (confirm('Apakah Anda yakin ingin menghapus kategori ini dari sistem?')) {
       window.store.deleteCategory(catId);
       this.renderSubTab();
-      TreeModule.render();
+      if (window.MasterIndikatorModule) {
+        window.MasterIndikatorModule.populateFilters();
+        window.MasterIndikatorModule.render();
+      }
+      if (window.TreeModule) window.TreeModule.render();
+      if (window.LaporanModule) window.LaporanModule.populateSelectors();
+      App.closeModal();
       App.showToast('Kategori berhasil dihapus.', 'info');
     }
   },

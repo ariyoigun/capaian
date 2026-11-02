@@ -109,9 +109,98 @@ const LaporanModule = {
     const btnPrint = document.getElementById('btn-print-official-report');
     if (btnPrint) {
       btnPrint.addEventListener('click', () => {
-        window.print();
+        this.printReport();
       });
     }
+
+    const btnOpenWin = document.getElementById('btn-open-print-win');
+    if (btnOpenWin) {
+      btnOpenWin.addEventListener('click', () => {
+        this.openPrintWindow();
+      });
+    }
+  },
+
+  /* ----------------- SEAMLESS DOCUMENT PRINTING HANDLERS ----------------- */
+  printReport() {
+    // 1. Ensure any open modal is closed so body overflow:hidden is removed
+    if (window.App && typeof window.App.closeModal === 'function') {
+      window.App.closeModal();
+    }
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.overflow = 'visible';
+    document.body.style.overflow = 'visible';
+
+    // 2. Refresh active preview sheet
+    this.renderPreview();
+
+    // 3. Trigger print with slight delay for DOM reflow
+    setTimeout(() => {
+      try {
+        window.print();
+      } catch (err) {
+        console.warn('Inline print blocked, launching dedicated print window:', err);
+        this.openPrintWindow();
+      }
+    }, 150);
+  },
+
+  openPrintWindow() {
+    const activeHtml = this.reportType === 'per_indicator'
+      ? this.generateReportPerIndicatorHtml()
+      : this.generateReportAllIndicatorsByYearHtml();
+
+    const info = window.store.getSystemInfo();
+    const printWin = window.open('', '_blank', 'width=980,height=850,menubar=no,toolbar=no,location=no,status=no');
+    if (!printWin) {
+      alert('Pop-up jendela cetak diblokir oleh peramban. Silakan klik tombol "Cetak Dokumen" langsung atau izinkan pop-up.');
+      return;
+    }
+
+    printWin.document.write(`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Cetak Dokumen Resmi - ${info.appName || 'SIDAT - SATUPUTARU'}</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    @page { size: A4 portrait; margin: 10mm 12mm 12mm 12mm; }
+    body { background: #f8fafc; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    .official-paper { box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important; border: 1px solid #cbd5e1 !important; max-width: 900px !important; margin: 0 auto !important; background: #ffffff !important; padding: 36px 42px !important; }
+    .print-sticky-toolbar {
+      position: sticky; top: 0; z-index: 9999;
+      background: #ffffff; padding: 12px 20px; border: 1px solid #fed7aa; border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12); margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    @media print {
+      .print-sticky-toolbar { display: none !important; }
+      body { background: #ffffff !important; padding: 0 !important; }
+      .official-paper { box-shadow: none !important; border: none !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-sticky-toolbar">
+    <div style="font-weight: bold; color: #ea580c; font-size: 0.95rem;">
+      📄 Pratinjau Dokumen Cetak Kedinasan DINPUTARU Demak
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button onclick="window.print()" style="background:#ea580c; color:#ffffff; border:none; padding:8px 18px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:0.9rem;">
+        🖨️ Cetak / Simpan PDF
+      </button>
+      <button onclick="window.close()" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:8px 14px; font-weight:bold; border-radius:6px; cursor:pointer; font-size:0.9rem;">
+        Tutup
+      </button>
+    </div>
+  </div>
+  ${activeHtml}
+  <script>
+    setTimeout(() => { window.print(); }, 400);
+  </script>
+</body>
+</html>`);
+    printWin.document.close();
   },
 
   updateControlVisibility() {
@@ -190,9 +279,14 @@ const LaporanModule = {
             </div>
 
             <!-- Tombol Cetak / PDF -->
-            <button class="pub-btn-orange font-bold px-4 py-2" onclick="window.print()">
-              <i data-lucide="printer" class="icon-xs"></i> Cetak Dokumen / Simpan PDF
-            </button>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="pub-btn-orange font-bold px-3 py-2" onclick="LaporanModule.printReport()" title="Cetak langsung ke printer atau simpan sebagai PDF">
+                <i data-lucide="printer" class="icon-xs"></i> Cetak Dokumen / Simpan PDF
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-outline font-bold px-3 py-2" onclick="LaporanModule.openPrintWindow()" title="Buka lembar dokumen di jendela cetak mandiri">
+                <i data-lucide="external-link" class="icon-xs"></i> Jendela Cetak Mandiri
+              </button>
+            </div>
           </div>
         </div>
 
@@ -334,26 +428,38 @@ const LaporanModule = {
       `;
     }).join('');
 
+    const info = window.store.getSystemInfo();
+    const emblemText = (info.appName || 'DINPUTARU').split('-')[0].trim();
+    const kop1 = info.kopBaris1 || 'PEMERINTAH KABUPATEN DEMAK';
+    const kop2 = info.kopBaris2 || 'DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU)';
+    const kop3 = info.kopAlamat || (info.officeAddress ? `${info.officeAddress} • Telepon: ${info.contactPhone || '(0291) 685123'} • Email: ${info.contactEmail || 'dinputaru@demakkab.go.id'}` : 'Jalan Kyai Jebat No. 892 Demak, Jawa Tengah 59511 • Telepon: (0291) 685123 • Email: dinputaru@demakkab.go.id');
+    const docTitle = info.docTitlePerIndicator || 'LAPORAN EVALUASI PERKEMBANGAN CAPAIAN INDIKATOR KINERJA';
+    const docCity = info.docCity || 'Demak';
+    const kadinTitle = info.kadinJabatan || 'KEPALA DINAS PEKERJAAN UMUM DAN PENATAAN RUANG<br>KABUPATEN DEMAK';
+    const kadinName = info.kadinName || 'Drs. H. AHMAD SUGIHARTO, S.T., M.Si.';
+    const kadinPangkat = info.kadinPangkat || 'Pembina Utama Muda (IV/c)';
+    const kadinNip = info.kadinNip || '19680315 199403 1 007';
+
     return `
       <div class="official-paper">
         <!-- KOP SURAT RESMI PEMERINTAH KABUPATEN DEMAK -->
         <div class="official-kop">
           <div class="kop-emblem">
             <div class="brand-emblem-kop">
-              <span class="kop-badge-text">DINPUTARU</span>
+              <span class="kop-badge-text">${emblemText}</span>
             </div>
           </div>
           <div class="kop-text">
-            <h2>PEMERINTAH KABUPATEN DEMAK</h2>
-            <h3>DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU)</h3>
-            <p>Jalan Kyai Jebat No. 892 Demak, Jawa Tengah 59511 • Telepon: (0291) 685123 • Email: dinputaru@demakkab.go.id</p>
+            <h2>${kop1}</h2>
+            <h3>${kop2}</h3>
+            <p>${kop3}</p>
           </div>
         </div>
         <div class="kop-divider"></div>
 
         <!-- JUDUL DOKUMEN -->
         <div class="official-doc-title">
-          <h4>LAPORAN EVALUASI PERKEMBANGAN CAPAIAN INDIKATOR KINERJA</h4>
+          <h4>${docTitle}</h4>
           <span class="doc-meta-sub">Periode Evaluasi Multi-Tahun: Tahun Anggaran ${visibleYears[0]} s/d ${activeYear}</span>
         </div>
 
@@ -445,11 +551,11 @@ const LaporanModule = {
           </div>
 
           <div class="sig-right">
-            <p class="small text-muted mb-1">Demak, ${currentDate}</p>
-            <p class="sig-title">Mengetahui & Mengesahkan,<br><strong>KEPALA DINAS PEKERJAAN UMUM DAN PENATAAN RUANG<br>KABUPATEN DEMAK</strong></p>
+            <p class="small text-muted mb-1">${docCity}, ${currentDate}</p>
+            <p class="sig-title">Mengetahui & Mengesahkan,<br><strong>${kadinTitle}</strong></p>
             <div class="sig-space"></div>
-            <p class="sig-name"><u>Drs. H. AHMAD SUGIHARTO, S.T., M.Si.</u></p>
-            <p class="sig-nip">Pembina Utama Muda (IV/c)<br>NIP. 19680315 199403 1 007</p>
+            <p class="sig-name"><u>${kadinName}</u></p>
+            <p class="sig-nip">${kadinPangkat}<br>NIP. ${kadinNip}</p>
           </div>
         </div>
       </div>
@@ -553,26 +659,42 @@ const LaporanModule = {
       `;
     }).join('');
 
+    const info = window.store.getSystemInfo();
+    const emblemText = (info.appName || 'DINPUTARU').split('-')[0].trim();
+    const kop1 = info.kopBaris1 || 'PEMERINTAH KABUPATEN DEMAK';
+    const kop2 = info.kopBaris2 || 'DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU)';
+    const kop3 = info.kopAlamat || (info.officeAddress ? `${info.officeAddress} • Telepon: ${info.contactPhone || '(0291) 685123'} • Email: ${info.contactEmail || 'dinputaru@demakkab.go.id'}` : 'Jalan Kyai Jebat No. 892 Demak, Jawa Tengah 59511 • Telepon: (0291) 685123 • Email: dinputaru@demakkab.go.id');
+    const docTitle = info.docTitleRekapTahunan || 'REKAPITULASI CAPAIAN KINERJA INFRASTRUKTUR DAN PENATAAN RUANG';
+    const docCity = info.docCity || 'Demak';
+    const kadinTitle = info.kadinJabatan || 'KEPALA DINAS PEKERJAAN UMUM DAN PENATAAN RUANG<br>KABUPATEN DEMAK';
+    const kadinName = info.kadinName || 'Drs. H. AHMAD SUGIHARTO, S.T., M.Si.';
+    const kadinPangkat = info.kadinPangkat || 'Pembina Utama Muda (IV/c)';
+    const kadinNip = info.kadinNip || '19680315 199403 1 007';
+    const sekdinTitle = info.sekdinJabatan || 'Sekretaris DINPUTARU Kab. Demak,';
+    const sekdinName = info.sekdinName || 'AMIRUL MUKMININ, S.T., M.Si.';
+    const sekdinPangkat = info.sekdinPangkat || 'Pembina (IV/a)';
+    const sekdinNip = info.sekdinNip || '19750422 200212 1 003';
+
     return `
       <div class="official-paper">
         <!-- KOP SURAT RESMI -->
         <div class="official-kop">
           <div class="kop-emblem">
             <div class="brand-emblem-kop">
-              <span class="kop-badge-text">DINPUTARU</span>
+              <span class="kop-badge-text">${emblemText}</span>
             </div>
           </div>
           <div class="kop-text">
-            <h2>PEMERINTAH KABUPATEN DEMAK</h2>
-            <h3>DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU)</h3>
-            <p>Jalan Kyai Jebat No. 892 Demak, Jawa Tengah 59511 • Telepon: (0291) 685123 • Email: dinputaru@demakkab.go.id</p>
+            <h2>${kop1}</h2>
+            <h3>${kop2}</h3>
+            <p>${kop3}</p>
           </div>
         </div>
         <div class="kop-divider"></div>
 
         <!-- JUDUL DOKUMEN -->
         <div class="official-doc-title">
-          <h4>REKAPITULASI CAPAIAN KINERJA INFRASTRUKTUR DAN PENATAAN RUANG</h4>
+          <h4>${docTitle}</h4>
           <span class="doc-meta-sub">TAHUN ANGGARAN ${yr}</span>
         </div>
 
@@ -613,18 +735,18 @@ const LaporanModule = {
         <div class="official-signature-block mt-4">
           <div class="sig-left">
             <p class="small text-muted mb-1">Diverifikasi & Divalidasi oleh:</p>
-            <p class="sig-title">Sekretaris DINPUTARU Kab. Demak,</p>
+            <p class="sig-title">${sekdinTitle}</p>
             <div class="sig-space"></div>
-            <p class="sig-name"><u>NURUL HIDAYATI, S.T., M.M.</u></p>
-            <p class="sig-nip">Pembina (IV/a)<br>NIP. 19720510 199803 2 003</p>
+            <p class="sig-name"><u>${sekdinName}</u></p>
+            <p class="sig-nip">${sekdinPangkat}<br>NIP. ${sekdinNip}</p>
           </div>
 
           <div class="sig-right">
-            <p class="small text-muted mb-1">Demak, ${currentDate}</p>
-            <p class="sig-title">Mengesahkan,<br><strong>KEPALA DINAS PEKERJAAN UMUM DAN PENATAAN RUANG<br>KABUPATEN DEMAK</strong></p>
+            <p class="small text-muted mb-1">${docCity}, ${currentDate}</p>
+            <p class="sig-title">Mengesahkan,<br><strong>${kadinTitle}</strong></p>
             <div class="sig-space"></div>
-            <p class="sig-name"><u>Drs. H. AHMAD SUGIHARTO, S.T., M.Si.</u></p>
-            <p class="sig-nip">Pembina Utama Muda (IV/c)<br>NIP. 19680315 199403 1 007</p>
+            <p class="sig-name"><u>${kadinName}</u></p>
+            <p class="sig-nip">${kadinPangkat}<br>NIP. ${kadinNip}</p>
           </div>
         </div>
       </div>

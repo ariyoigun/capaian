@@ -38,8 +38,11 @@ const App = {
     if (window.lucide) window.lucide.createIcons();
 
     // Subscribe to store updates
-    window.store.subscribe(() => {
+    window.store.subscribe((data) => {
       this.updateGlobalHeaderStats();
+      if (window.SystemSettingsModule && data.systemInfo) {
+        window.SystemSettingsModule.applyTextsToDOM(data.systemInfo);
+      }
     });
 
     this.updateGlobalHeaderStats();

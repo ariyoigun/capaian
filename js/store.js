@@ -897,7 +897,8 @@ class SimondemakStore {
   }
 
   canEditMaster() {
-    return this.currentUser && this.currentUser.role === 'super_admin';
+    if (!this.currentUser) return false;
+    return ['super_admin', 'kasubag_program_keuangan', 'sekretaris'].includes(this.currentUser.role);
   }
 
   // Koordinator Bidang and Super Admin can input indicator data, target & realisasi
@@ -1271,19 +1272,35 @@ class SimondemakStore {
   }
 
   saveCategory(cat) {
+    if (!this.data.categories) this.data.categories = [];
     const idx = this.data.categories.findIndex(c => c.id === cat.id);
     if (idx >= 0) {
       this.data.categories[idx] = { ...this.data.categories[idx], ...cat };
     } else {
-      if (!cat.id) cat.id = 'CAT-' + Date.now();
+      if (!cat.id) cat.id = (cat.code || 'CAT').toLowerCase().replace(/[^a-z0-9]/g, '_');
       this.data.categories.push(cat);
     }
+    this.data.categories.sort((a, b) => (a.segmentNumber || 99) - (b.segmentNumber || 99));
     this.saveData();
+
+    if (typeof fetch !== 'undefined') {
+      fetch('/api/admin/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cat)
+      }).catch(err => console.debug('Offline sync fallback', err));
+    }
   }
 
   deleteCategory(id) {
     this.data.categories = this.data.categories.filter(c => c.id !== id);
     this.saveData();
+
+    if (typeof fetch !== 'undefined') {
+      fetch(`/api/admin/categories/${id}`, {
+        method: 'DELETE'
+      }).catch(err => console.debug('Offline sync fallback', err));
+    }
   }
 
   getBidang() {
@@ -1302,6 +1319,14 @@ class SimondemakStore {
   updateSystemInfo(newInfo) {
     this.data.systemInfo = { ...this.data.systemInfo, ...newInfo, lastUpdated: new Date().toISOString() };
     this.saveData();
+
+    if (typeof fetch !== 'undefined') {
+      fetch('/api/admin/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.data.systemInfo)
+      }).catch(err => console.debug('Offline sync fallback', err));
+    }
     return this.data.systemInfo;
   }
 }

@@ -72,7 +72,7 @@
     <div class="pub-hero-banner-compact">
       <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
         <div class="pub-hero-left">
-          <div class="pub-hero-badge">
+          <div class="pub-hero-badge" id="dom-hero-badge">
             <i data-lucide="shield-check" class="icon-xs"></i> PORTAL SATU DATA & CAPAIAN KINERJA PEMKAB DEMAK
           </div>
           <h2 class="pub-hero-title mb-1" id="dom-hero-title">Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak</h2>
@@ -112,19 +112,19 @@
       <div class="pub-nav-tabs">
         <button class="pub-nav-tab active" data-pub-tab="cards" onclick="PublicPortalModule.switchPubTab('cards')">
           <i data-lucide="layout-grid" class="icon-xs"></i>
-          <span>1. Indikator & Grafik Tren</span>
+          <span id="dom-pub-tab-1-text">1. Indikator & Grafik Tren</span>
         </button>
         <button class="pub-nav-tab" data-pub-tab="matrix" onclick="PublicPortalModule.switchPubTab('matrix')">
           <i data-lucide="table-2" class="icon-xs"></i>
-          <span>2. Matriks Tabel Multi-Tahun (2020-2026)</span>
+          <span id="dom-pub-tab-2-text">2. Matriks Tabel Multi-Tahun (2020-2026)</span>
         </button>
         <button class="pub-nav-tab" data-pub-tab="laporan" id="tab-btn-pub-laporan" onclick="PublicPortalModule.switchPubTab('laporan')">
           <i data-lucide="printer" class="icon-xs"></i>
-          <span>3. Dokumen Laporan Kinerja Resmi (Cetak / PDF)</span>
+          <span id="dom-pub-tab-3-text">3. Dokumen Laporan Kinerja Resmi (Cetak / PDF)</span>
         </button>
         <button class="pub-nav-tab" data-pub-tab="bankdata" onclick="PublicPortalModule.switchPubTab('bankdata')">
           <i data-lucide="folder-archive" class="icon-xs"></i>
-          <span>4. Bank Data Publik</span>
+          <span id="dom-pub-tab-4-text">4. Bank Data Publik</span>
         </button>
       </div>
     </nav>
@@ -554,9 +554,14 @@
               </h3>
               <p class="text-muted small mb-0">Format resmi berstandar Pemkab Demak dengan Kop Surat dan Pengesahan Kepala Dinas DINPUTARU.</p>
             </div>
-            <button class="adm-btn adm-btn-primary" id="btn-print-official-report">
-              <i data-lucide="printer" class="icon-xs"></i> Cetak Dokumen / Simpan PDF
-            </button>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="adm-btn adm-btn-primary" id="btn-print-official-report" title="Cetak langsung menggunakan dialog peramban">
+                <i data-lucide="printer" class="icon-xs"></i> Cetak Dokumen / Simpan PDF
+              </button>
+              <button class="adm-btn adm-btn-outline" id="btn-open-print-win" title="Buka jendela cetak mandiri terisolasi">
+                <i data-lucide="external-link" class="icon-xs"></i> Jendela Cetak Mandiri
+              </button>
+            </div>
           </div>
 
           <!-- Opsi Pilihan Tipe Laporan -->
@@ -693,11 +698,19 @@
               <h3 class="font-bold mb-1">
                 <i data-lucide="tag" class="icon-sm text-primary"></i> Master Data Indikator Kinerja DINPUTARU
               </h3>
-              <p class="text-muted small mb-0">Kelola master indikator kinerja (IKU, IKD, IKP, IKK), penetapan wewenang bidang, pembina, seksi teknis, formulasi, satuan, dan polaritas.</p>
+              <p class="text-muted small mb-0">Kelola master indikator kinerja (IKU, IKD, IKP, IKK, dll.), penetapan wewenang bidang, pembina, seksi teknis, formulasi, satuan, dan kategori hierarki.</p>
             </div>
-            <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-mi-add-indicator" data-permission="input_indikator">
-              <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Master Indikator
-            </button>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="adm-btn adm-btn-sm adm-btn-outline" onclick="MasterDataModule.openCategoryManagerModal()" title="Lihat & Kelola Daftar Kategori Indikator">
+                <i data-lucide="layers" class="icon-xs"></i> Kelola Kategori
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-outline" onclick="MasterDataModule.openAddCategoryModal()" title="Tambah Kategori Indikator Baru Langsung" style="border-color: #ea580c; color: #ea580c;">
+                <i data-lucide="plus" class="icon-xs"></i> + Kategori Baru
+              </button>
+              <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-mi-add-indicator" data-permission="input_indikator">
+                <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Master Indikator
+              </button>
+            </div>
           </div>
 
           <div id="master-indikator-summary-cards"></div>
