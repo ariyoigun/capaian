@@ -327,6 +327,7 @@ const server = http.createServer(async (req, res) => {
       systemInfo: db.systemInfo || {},
       categories: db.categories || [],
       bidang: db.bidang || [],
+      years: allYears,
       visibleYears,
       activeYear,
       indicators: publicIndicators,

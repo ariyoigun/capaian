@@ -231,28 +231,26 @@ const PublicPortalModule = {
     }
   },
 
-  /* ----------------- RENDER SEGMEN KARTU INDIKATOR (IKU, IKD, IKP, IKK) ----------------- */
+  /* ----------------- RENDER SEGMEN KARTU INDIKATOR (6 KATEGORI DARI EXCEL) ----------------- */
   renderIndicatorSegments() {
+    const parentContainer = document.getElementById('public-cards-view-section');
+    if (!parentContainer) return;
+
     const categories = window.store.getCategories().sort((a, b) => (a.segmentNumber || 9) - (b.segmentNumber || 9));
     const indicators = window.store.getIndicators();
-    const visibleYears = window.store.getVisibleYears ? window.store.getVisibleYears() : [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+    const visibleYears = window.store.getVisibleYears ? window.store.getVisibleYears() : [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
     const activeYear = window.store.getActiveYear ? window.store.getActiveYear() : 2026;
 
-    categories.forEach(cat => {
-      const sectionEl = document.getElementById(`public-segment-section-${cat.id}`);
-      const container = document.getElementById(`public-segment-${cat.id}-container`);
-      if (!container) return;
+    let html = '';
 
+    categories.forEach(cat => {
       // Filter category tab
       if (this.selectedCategoryTab !== 'all' && this.selectedCategoryTab !== cat.id) {
-        if (sectionEl) sectionEl.style.display = 'none';
         return;
-      } else {
-        if (sectionEl) sectionEl.style.display = 'block';
       }
 
       // Filter by search term
-      let catIndicators = indicators.filter(i => i.categoryId === cat.id);
+      let catIndicators = indicators.filter(i => (i.categoryId === cat.id || i.category === cat.code || i.category === cat.id));
       if (this.publicSearchTerm) {
         catIndicators = catIndicators.filter(i => 
           i.name.toLowerCase().includes(this.publicSearchTerm) ||
@@ -261,16 +259,11 @@ const PublicPortalModule = {
         );
       }
 
-      if (catIndicators.length === 0) {
-        container.innerHTML = `
-          <div class="p-3 bg-white rounded border-orange text-center small text-muted">
-            Tidak ada indikator yang sesuai dengan kriteria pencarian pada kategori ${cat.name}.
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = catIndicators.map(ind => {
+      const cardsHtml = catIndicators.length === 0 ? `
+        <div class="p-3 bg-white rounded border-orange text-center small text-muted w-100">
+          Tidak ada indikator yang sesuai dengan kriteria pencarian pada kategori ${cat.name}.
+        </div>
+      ` : catIndicators.map(ind => {
         const isSelected = ind.id === this.selectedPublicIndicatorId;
         const rec = ind.records?.[activeYear] || { target: 0, realisasi: 0 };
         const pct = window.store.calculateCapaian(rec.target, rec.realisasi, ind.polarization);
@@ -282,10 +275,11 @@ const PublicPortalModule = {
           const r = ind.records?.[yr] || { target: 0, realisasi: 0 };
           const p = window.store.calculateCapaian(r.target, r.realisasi, ind.polarization);
           const isAct = yr === activeYear;
+          const rDisplay = (r.realisasi !== null && r.realisasi !== undefined) ? r.realisasi : '-';
           return `
-            <div class="pub-year-mini-stat ${isAct ? 'active-year' : ''}" title="Tahun ${yr}: Target ${r.target} ${ind.unit}, Realisasi ${r.realisasi} ${ind.unit} (${p}%)">
+            <div class="pub-year-mini-stat ${isAct ? 'active-year' : ''}" title="Tahun ${yr}: Target ${r.target} ${ind.unit}, Realisasi ${rDisplay} ${ind.unit} (${p}%)">
               <span class="ym-yr font-mono">${yr}</span>
-              <span class="ym-val font-mono ${p >= 100 ? 'text-success' : 'text-orange'}">${r.realisasi}</span>
+              <span class="ym-val font-mono ${p >= 100 ? 'text-success' : 'text-orange'}">${rDisplay}</span>
             </div>
           `;
         }).join('');
@@ -295,7 +289,7 @@ const PublicPortalModule = {
                onclick="PublicPortalModule.selectIndicator('${ind.id}')">
             
             <div class="pub-card-top d-flex align-items-center justify-content-between mb-2">
-              <span class="badge-orange-primary font-mono font-bold">
+              <span class="badge-orange-primary font-mono font-bold" style="background: ${cat.badgeColor || '#ea580c'}; color: #fff;">
                 ${ind.code}
               </span>
               <span class="pub-status-badge ${status.class}">
@@ -329,7 +323,7 @@ const PublicPortalModule = {
                 <div class="col-6">
                   <div class="p-2 bg-orange-subtle rounded border-orange">
                     <span class="small text-orange-dark d-block font-mono font-bold">Realisasi ${activeYear}</span>
-                    <strong class="font-mono fs-6 text-orange font-bold">${rec.realisasi} ${ind.unit}</strong>
+                    <strong class="font-mono fs-6 text-orange font-bold">${rec.realisasi !== null && rec.realisasi !== undefined ? rec.realisasi : '-'} ${ind.unit}</strong>
                   </div>
                 </div>
               </div>
@@ -354,8 +348,24 @@ const PublicPortalModule = {
           </div>
         `;
       }).join('');
+
+      html += `
+        <section class="pub-segment-section" id="public-segment-section-${cat.id}">
+          <div class="pub-segment-header">
+            <div class="pub-segment-title-wrap">
+              <span class="pub-segment-badge-orange" style="background: ${cat.badgeColor || '#ea580c'};">SEGMEN ${cat.segmentNumber || 1}</span>
+              <h3 class="pub-segment-title">${cat.name} (${cat.code})</h3>
+            </div>
+            <span class="badge badge-orange-subtle font-bold font-mono">${cat.desc || ''}</span>
+          </div>
+          <div class="pub-indicators-grid" id="public-segment-${cat.id}-container">
+            ${cardsHtml}
+          </div>
+        </section>
+      `;
     });
 
+    parentContainer.innerHTML = html;
     if (window.lucide) window.lucide.createIcons();
   },
 
@@ -376,7 +386,14 @@ const PublicPortalModule = {
     const box = document.getElementById('public-indicator-highlight-box');
     if (!box) return;
 
-    const ind = window.store.getIndicatorById(this.selectedPublicIndicatorId);
+    let ind = window.store.getIndicatorById(this.selectedPublicIndicatorId);
+    if (!ind) {
+      const allInds = window.store.getIndicators();
+      if (allInds.length > 0) {
+        ind = allInds[0];
+        this.selectedPublicIndicatorId = ind.id;
+      }
+    }
     if (!ind) {
       box.innerHTML = `<div class="pub-highlight-card-orange p-4 text-center text-muted">Pilih salah satu indikator untuk melihat analisis target dan grafik tren capaian.</div>`;
       return;

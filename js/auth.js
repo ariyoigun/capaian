@@ -21,57 +21,38 @@ const Auth = {
   },
 
   renderSessionBar() {
-    const container = document.getElementById('role-switcher-container');
-    if (!container) return;
+    const headerAuthContainer = document.getElementById('header-user-auth');
+    const legacyContainer = document.getElementById('role-switcher-container');
+    if (legacyContainer) legacyContainer.innerHTML = '';
+
+    if (!headerAuthContainer) return;
 
     const currentUser = window.store.getCurrentUser();
 
     if (!currentUser) {
-      // Guest / Public Mode
-      container.innerHTML = `
-        <div class="role-bar-inner">
-          <div class="role-bar-info">
-            <span class="role-pill-label bg-orange text-white">PORTAL PUBLIK:</span>
-            <div class="role-badge-current">
-              <i data-lucide="globe" class="icon-sm text-orange"></i>
-              <span class="font-bold">Akses Publik Masyarakat & Stakeholder</span>
-            </div>
-            <span class="role-desc-text d-none d-lg-inline">
-              Memantau target dan capaian indikator kinerja infrastruktur DINPUTARU dari tahun 2020 sampai tahun aktif.
-            </span>
-          </div>
-
-          <div class="d-flex align-items-center gap-2">
-            <button class="pub-login-trigger-btn" onclick="Auth.openLoginModal()">
-              <i data-lucide="lock" class="icon-xs"></i> Masuk Panel Admin / Aparatur
-            </button>
-          </div>
-        </div>
+      // Guest / Public Mode: clean "Masuk Admin" button right in the header
+      headerAuthContainer.innerHTML = `
+        <button class="header-btn-login" onclick="Auth.openLoginModal()" title="Masuk ke Panel Admin Aparatur">
+          <i data-lucide="lock" class="icon-xs"></i>
+          <span>Masuk Admin</span>
+        </button>
       `;
     } else {
-      // Logged in user mode
+      // Logged in user: user name pill + role badge + logout button
       const roleObj = window.store.data.roles?.find(r => r.id === currentUser.role) || { name: currentUser.roleLabel || currentUser.role };
-      const bidangObj = window.store.getBidang().find(b => b.id === currentUser.bidangId) || { name: 'DINPUTARU Kab. Demak' };
+      const bidangObj = window.store.getBidang().find(b => b.id === currentUser.bidangId) || { name: 'DINPUTARU' };
+      const shortName = currentUser.name.split(',')[0].replace(/^(Drs\.|Ir\.|Dr\.|H\.)\s*/, '');
 
-      container.innerHTML = `
-        <div class="role-bar-inner">
-          <div class="role-bar-info">
-            <span class="role-pill-label bg-slate text-white">PANEL ADMIN DINPUTARU:</span>
-            <div class="role-badge-current">
-              <i data-lucide="user-check" class="icon-sm text-emerald"></i>
-              <span class="font-bold">${currentUser.name}</span>
-              <span class="badge-adm-slate ms-1 font-bold">${roleObj.name}</span>
-            </div>
-            <span class="role-desc-text d-none d-lg-inline font-mono small text-muted">
-              ${bidangObj.name} • NIP. ${currentUser.nip || '-'}
-            </span>
-          </div>
-
-          <div class="d-flex align-items-center gap-2">
-            <button class="adm-btn adm-btn-sm adm-btn-outline" onclick="Auth.logout()" title="Keluar dari sesi login">
-              <i data-lucide="log-out" class="icon-xs"></i> Logout
-            </button>
-          </div>
+      headerAuthContainer.innerHTML = `
+        <div class="header-auth-badge" title="Login: ${currentUser.name} (${roleObj.name}) - ${bidangObj.name}">
+          <span class="hab-user">
+            <i data-lucide="user-check" class="icon-xs text-emerald"></i>
+            <span class="hab-name">${shortName}</span>
+          </span>
+          <span class="hab-role">${roleObj.name}</span>
+          <button class="hab-logout-btn" onclick="Auth.logout()" title="Keluar / Logout">
+            <i data-lucide="log-out" class="icon-xs"></i>
+          </button>
         </div>
       `;
     }

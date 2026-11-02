@@ -15,12 +15,8 @@
 </head>
 <body class="theme-public-orange">
 
-  <!-- 1. TOP SESSION & ROLE BAR (Compact & Clean) -->
-  <div class="top-role-bar">
-    <div id="role-switcher-container">
-      <!-- Injected by js/auth.js -->
-    </div>
-  </div>
+  <!-- 1. TOP SESSION & ROLE BAR (HIDDEN - Direct start with SIDAT - SATUPUTARU) -->
+  <div id="role-switcher-container" style="display: none;"></div>
 
   <!-- 2. APP HEADER (Compact, Responsive, Single-Row Layout) -->
   <header class="app-header">
@@ -38,7 +34,7 @@
         </div>
       </div>
 
-      <!-- Header Action Items: Mode Switcher, Menu Laporan, Actions -->
+      <!-- Header Action Items: Mode Switcher, Menu Laporan, Actions, Auth Button -->
       <div class="header-actions-group">
         <div class="mode-toggle-group">
           <button class="mode-switch-btn active-mode-btn" id="btn-switch-to-public">
@@ -55,6 +51,9 @@
           <i data-lucide="printer" class="icon-xs"></i>
           <span>Menu Laporan</span>
         </button>
+
+        <!-- Dynamic User Auth Slot: Masuk Admin (Guest) or User Badge + Logout -->
+        <div id="header-user-auth" class="header-user-auth-slot"></div>
 
         <button class="retro-btn retro-btn-sm retro-btn-primary" id="btn-global-add-indicator" data-permission="input_indikator" style="display: none;">
           <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Indikator
@@ -85,8 +84,8 @@
         <div class="pub-hero-stats-row">
           <div class="pub-stat-pill">
             <span class="ps-label">Total Indikator</span>
-            <strong class="ps-val font-mono" id="pub-stat-total">9</strong>
-            <span class="ps-sub">IKU, IKD, IKP, IKK</span>
+            <strong class="ps-val font-mono" id="pub-stat-total">55</strong>
+            <span class="ps-sub">6 Kategori Indikator</span>
           </div>
           <div class="pub-stat-pill">
             <span class="ps-label">Capaian Target</span>
@@ -142,65 +141,9 @@
         <!-- Injected dynamically by PublicPortalModule -->
       </div>
 
-      <!-- Segment Sections: IKU, IKD, IKP, IKK -->
+      <!-- Segment Sections: Dynamically rendered for all categories from Excel -->
       <div id="public-cards-view-section">
-        
-        <!-- SEGMEN 1: INDIKATOR KINERJA UTAMA (IKU) -->
-        <section class="pub-segment-section" id="public-segment-section-iku">
-          <div class="pub-segment-header">
-            <div class="pub-segment-title-wrap">
-              <span class="pub-segment-badge-orange">SEGMEN 1</span>
-              <h3 class="pub-segment-title">Indikator Kinerja Utama (IKU)</h3>
-            </div>
-            <span class="badge badge-orange-subtle font-bold font-mono">Mandat Perjanjian Kinerja Kadinas</span>
-          </div>
-          <div class="pub-indicators-grid" id="public-segment-iku-container">
-            <!-- Injected by PublicPortalModule -->
-          </div>
-        </section>
-
-        <!-- SEGMEN 2: INDIKATOR KINERJA DAERAH (IKD) -->
-        <section class="pub-segment-section" id="public-segment-section-ikd">
-          <div class="pub-segment-header">
-            <div class="pub-segment-title-wrap">
-              <span class="pub-segment-badge-orange">SEGMEN 2</span>
-              <h3 class="pub-segment-title">Indikator Kinerja Daerah (IKD)</h3>
-            </div>
-            <span class="badge badge-orange-subtle font-bold font-mono">Mandat Sasaran RPJMD Kab. Demak</span>
-          </div>
-          <div class="pub-indicators-grid" id="public-segment-ikd-container">
-            <!-- Injected by PublicPortalModule -->
-          </div>
-        </section>
-
-        <!-- SEGMEN 3: INDIKATOR KINERJA PROGRAM (IKP) -->
-        <section class="pub-segment-section" id="public-segment-section-ikp">
-          <div class="pub-segment-header">
-            <div class="pub-segment-title-wrap">
-              <span class="pub-segment-badge-orange">SEGMEN 3</span>
-              <h3 class="pub-segment-title">Indikator Kinerja Program (IKP)</h3>
-            </div>
-            <span class="badge badge-orange-subtle font-bold font-mono">Tingkat Program Prioritas Bidang Teknis</span>
-          </div>
-          <div class="pub-indicators-grid" id="public-segment-ikp-container">
-            <!-- Injected by PublicPortalModule -->
-          </div>
-        </section>
-
-        <!-- SEGMEN 4: INDIKATOR KINERJA KEGIATAN (IKK) -->
-        <section class="pub-segment-section" id="public-segment-section-ikk">
-          <div class="pub-segment-header">
-            <div class="pub-segment-title-wrap">
-              <span class="pub-segment-badge-orange">SEGMEN 4</span>
-              <h3 class="pub-segment-title">Indikator Kinerja Kegiatan (IKK)</h3>
-            </div>
-            <span class="badge badge-orange-subtle font-bold font-mono">Tingkat Operasional Teknis & Lapangan</span>
-          </div>
-          <div class="pub-indicators-grid" id="public-segment-ikk-container">
-            <!-- Injected by PublicPortalModule -->
-          </div>
-        </section>
-
+        <!-- Injected dynamically by PublicPortalModule.renderIndicatorSegments() -->
       </div>
     </div>
 

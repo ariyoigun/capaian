@@ -3,7 +3,7 @@
  * Dinas Pekerjaan Umum dan Penataan Ruang Kab. Demak
  */
 
-const STORAGE_KEY = 'sidat_satuputaru_v1';
+const STORAGE_KEY = 'sidat_satuputaru_v2';
 
 // 7 Official Roles Requested by User
 const DEFAULT_ROLES = [
@@ -135,123 +135,219 @@ const DEFAULT_USERS = [
 ];
 
 const DEFAULT_CATEGORIES = [
-  { id: 'iku', code: 'IKU', segmentNumber: 1, name: 'Indikator Kinerja Utama', desc: 'Indikator strategis perjanjian kinerja Kepala DINPUTARU Kab. Demak', badgeColor: '#38bdf8' },
-  { id: 'ikd', code: 'IKD', segmentNumber: 2, name: 'Indikator Kinerja Daerah', desc: 'Indikator makro daerah Pemkab Demak yang diampu DINPUTARU (RPJMD)', badgeColor: '#fbbf24' },
-  { id: 'ikp', code: 'IKP', segmentNumber: 3, name: 'Indikator Kinerja Program', desc: 'Indikator capaian pada level program prioritas bidang-bidang teknis', badgeColor: '#34d399' },
-  { id: 'ikk', code: 'IKK', segmentNumber: 4, name: 'Indikator Kinerja Kegiatan', desc: 'Indikator operasional capaian kegiatan fisik dan non-fisik sub-koordinator', badgeColor: '#f472b6' }
+  {
+    "id": "iku_daerah",
+    "code": "IKU DAERAH",
+    "segmentNumber": 1,
+    "name": "Indikator Kinerja Utama Daerah",
+    "desc": "Indikator makro strategis prioritas pembangunan Pemerintah Kabupaten Demak yang diampu DINPUTARU",
+    "badgeColor": "#0284c7"
+  },
+  {
+    "id": "ikd",
+    "code": "IKD",
+    "segmentNumber": 2,
+    "name": "Indikator Kinerja Daerah",
+    "desc": "Indikator penyelenggaraan urusan ke-PU-an dan penataan ruang daerah (RPJMD Kabupaten Demak)",
+    "badgeColor": "#d97706"
+  },
+  {
+    "id": "iku_pd",
+    "code": "IKU PD",
+    "segmentNumber": 3,
+    "name": "Indikator Kinerja Utama Perangkat Daerah",
+    "desc": "Perjanjian kinerja strategis Kepala DINPUTARU Kabupaten Demak dalam Renstra 2021-2026",
+    "badgeColor": "#059669"
+  },
+  {
+    "id": "ikk",
+    "code": "IKK",
+    "segmentNumber": 4,
+    "name": "Indikator Kinerja Kunci",
+    "desc": "Indikator Evaluasi Penyelenggaraan Pemerintahan Daerah (LPPD) bidang Pekerjaan Umum dan Penataan Ruang",
+    "badgeColor": "#db2777"
+  },
+  {
+    "id": "program",
+    "code": "PROGRAM",
+    "segmentNumber": 5,
+    "name": "Indikator Kinerja Program",
+    "desc": "Indikator hasil (outcome) program prioritas bidang-bidang teknis DINPUTARU Kabupaten Demak",
+    "badgeColor": "#7c3aed"
+  },
+  {
+    "id": "tujuan_sasaran",
+    "code": "TUJUAN-SASARAN",
+    "segmentNumber": 6,
+    "name": "Indikator Tujuan & Sasaran Renstra",
+    "desc": "Indikator capaian tujuan dan sasaran strategis Renstra DINPUTARU Kabupaten Demak",
+    "badgeColor": "#ea580c"
+  }
 ];
 
-const DEFAULT_YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+const DEFAULT_YEARS = [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030];
 
 // Master Variabel Perhitungan
 const DEFAULT_VARIABLES = [
   {
-    id: 'VAR_BM_01',
-    name: 'Panjang Jalan Kabupaten Kondisi Baik & Sedang (Mantap)',
-    code: 'P_MANTAP',
-    unit: 'Km',
-    bidang: 'bina_marga',
-    source: 'Survei Kondisi Jalan (SKJ) DINPUTARU Demak',
-    values: { '2020': 418.5, '2021': 432.1, '2022': 451.8, '2023': 472.4, '2024': 489.6, '2025': 505.0, '2026': 520.0 }
+    "id": "VAR_JALAN_01",
+    "code": "PJ_MANTAP",
+    "name": "Panjang Jalan Kondisi Mantap (Baik + Sedang)",
+    "category": "Bina Marga",
+    "unit": "Km",
+    "values": {
+      "2020": 365.4,
+      "2021": 370.2,
+      "2022": 375.8,
+      "2023": 380.1,
+      "2024": 384.5,
+      "2025": 390,
+      "2026": 395.2,
+      "2027": 402,
+      "2028": 410.5,
+      "2029": 418,
+      "2030": 425
+    }
   },
   {
-    id: 'VAR_BM_02',
-    name: 'Total Panjang Jalan Kewenangan Kabupaten Demak',
-    code: 'P_TOTAL_JALAN',
-    unit: 'Km',
-    bidang: 'bina_marga',
-    source: 'Keputusan Bupati Demak tentang Status Ruas Jalan',
-    values: { '2020': 565.2, '2021': 565.2, '2022': 565.2, '2023': 565.2, '2024': 565.2, '2025': 565.2, '2026': 565.2 }
+    "id": "VAR_JALAN_02",
+    "code": "PJ_TOTAL",
+    "name": "Total Panjang Jalan Kewenangan Kabupaten Demak",
+    "category": "Bina Marga",
+    "unit": "Km",
+    "values": {
+      "2020": 462.5,
+      "2021": 462.5,
+      "2022": 462.5,
+      "2023": 462.5,
+      "2024": 462.5,
+      "2025": 462.5,
+      "2026": 462.5,
+      "2027": 462.5,
+      "2028": 462.5,
+      "2029": 462.5,
+      "2030": 462.5
+    }
   },
   {
-    id: 'VAR_SDA_01',
-    name: 'Luas Lahan Irigasi Kewenangan Kab dalam Kondisi Baik & Berfungsi',
-    code: 'L_IRIGASI_BAIK',
-    unit: 'Ha',
-    bidang: 'sda',
-    source: 'Inventarisasi E-PAKSI DINPUTARU Kab. Demak',
-    values: { '2020': 22400, '2021': 23150, '2022': 24020, '2023': 24850, '2024': 25600, '2025': 26200, '2026': 26800 }
+    "id": "VAR_IRIGASI_01",
+    "code": "LUAS_IRIGASI_BAIK",
+    "name": "Luas Baku Sawah Terlayani Irigasi Berfungsi Baik",
+    "category": "Sumber Daya Air",
+    "unit": "Ha",
+    "values": {
+      "2020": 28450,
+      "2021": 29100,
+      "2022": 29800,
+      "2023": 30500,
+      "2024": 31200,
+      "2025": 31800,
+      "2026": 32400,
+      "2027": 33000,
+      "2028": 33600,
+      "2029": 34200,
+      "2030": 34800
+    }
   },
   {
-    id: 'VAR_SDA_02',
-    name: 'Total Luas Daerah Irigasi Kewenangan Kabupaten Demak',
-    code: 'L_IRIGASI_TOTAL',
-    unit: 'Ha',
-    bidang: 'sda',
-    source: 'Buku Data Daerah Irigasi Kab. Demak',
-    values: { '2020': 31200, '2021': 31200, '2022': 31200, '2023': 31200, '2024': 31200, '2025': 31200, '2026': 31200 }
+    "id": "VAR_IRIGASI_02",
+    "code": "LUAS_IRIGASI_TOTAL",
+    "name": "Total Luas Baku Sawah Daerah Irigasi Kewenangan Kabupaten",
+    "category": "Sumber Daya Air",
+    "unit": "Ha",
+    "values": {
+      "2020": 38200,
+      "2021": 38200,
+      "2022": 38200,
+      "2023": 38200,
+      "2024": 38200,
+      "2025": 38200,
+      "2026": 38200,
+      "2027": 38200,
+      "2028": 38200,
+      "2029": 38200,
+      "2030": 38200
+    }
   },
   {
-    id: 'VAR_SDA_03',
-    name: 'Luas Kawasan Rawan Banjir & Rob yang Tertangani Tanggul/Pompa',
-    code: 'L_ROB_TERTANGANI',
-    unit: 'Ha',
-    bidang: 'sda',
-    source: 'Laporan Penanganan Genangan Sayung, Bonang, Karangtengah',
-    values: { '2020': 1850, '2021': 2100, '2022': 2450, '2023': 2780, '2024': 3120, '2025': 3450, '2026': 3800 }
+    "id": "VAR_AIR_01",
+    "code": "RT_AIR_MINUM",
+    "name": "Jumlah Rumah Tangga Akses Air Minum Layak & Aman",
+    "category": "Cipta Karya",
+    "unit": "KK",
+    "values": {
+      "2020": 285400,
+      "2021": 292100,
+      "2022": 299500,
+      "2023": 308200,
+      "2024": 318000,
+      "2025": 325000,
+      "2026": 332000,
+      "2027": 339000,
+      "2028": 346000,
+      "2029": 353000,
+      "2030": 360000
+    }
   },
   {
-    id: 'VAR_SDA_04',
-    name: 'Total Luas Kawasan Rawan Banjir & Rob Pasang di Wilayah Pesisir',
-    code: 'L_ROB_TOTAL',
-    unit: 'Ha',
-    bidang: 'sda',
-    source: 'Peta Rawan Bencana Banjir & Pasang Air Laut BPBD & DINPUTARU',
-    values: { '2020': 4800, '2021': 4800, '2022': 4800, '2023': 4800, '2024': 4800, '2025': 4800, '2026': 4800 }
+    "id": "VAR_AIR_02",
+    "code": "RT_TOTAL",
+    "name": "Total Rumah Tangga Kabupaten Demak",
+    "category": "Cipta Karya",
+    "unit": "KK",
+    "values": {
+      "2020": 355000,
+      "2021": 358000,
+      "2022": 362000,
+      "2023": 365000,
+      "2024": 368000,
+      "2025": 371000,
+      "2026": 374000,
+      "2027": 377000,
+      "2028": 380000,
+      "2029": 383000,
+      "2030": 386000
+    }
   },
   {
-    id: 'VAR_CK_01',
-    name: 'Jumlah KK Terlayani Akses Air Minum Layak dan Aman',
-    code: 'KK_AIR_MINUM',
-    unit: 'KK',
-    bidang: 'cipta_karya',
-    source: 'Sistem Informasi Air Minum SPAM DINPUTARU Demak',
-    values: { '2020': 282400, '2021': 291100, '2022': 301400, '2023': 312800, '2024': 323500, '2025': 334000, '2026': 344500 }
+    "id": "VAR_DRAINASE_01",
+    "code": "PJ_DRAINASE_BAIK",
+    "name": "Panjang Saluran Drainase Perkotaan Kondisi Baik",
+    "category": "Cipta Karya",
+    "unit": "Km",
+    "values": {
+      "2020": 120.5,
+      "2021": 125.8,
+      "2022": 132,
+      "2023": 139.5,
+      "2024": 146,
+      "2025": 152,
+      "2026": 158,
+      "2027": 164.5,
+      "2028": 171,
+      "2029": 178,
+      "2030": 185
+    }
   },
   {
-    id: 'VAR_CK_02',
-    name: 'Jumlah Total KK di Seluruh Kabupaten Demak',
-    code: 'KK_TOTAL_DEMAK',
-    unit: 'KK',
-    bidang: 'cipta_karya',
-    source: 'Data Agregat Kependudukan Dinas Dukcapil Demak',
-    values: { '2020': 358200, '2021': 361500, '2022': 365100, '2023': 368900, '2024': 372400, '2025': 376000, '2026': 379500 }
-  },
-  {
-    id: 'VAR_CK_03',
-    name: 'Jumlah KK Memiliki Akses Jamban Sehat & Sanitasi Layak',
-    code: 'KK_SANITASI',
-    unit: 'KK',
-    bidang: 'cipta_karya',
-    source: 'Data DAK Sanitasi & Pokja PKP Kab. Demak',
-    values: { '2020': 275800, '2021': 286200, '2022': 298500, '2023': 311200, '2024': 322800, '2025': 334500, '2026': 345000 }
-  },
-  {
-    id: 'VAR_TR_01',
-    name: 'Jumlah Permohonan KKPR/Kesesuaian Ruang Terlayani Tepat Waktu',
-    code: 'KKPR_TEPAT',
-    unit: 'Berkas',
-    bidang: 'tata_ruang',
-    source: 'Layanan SIMBG & OSS Tata Ruang DINPUTARU Demak',
-    values: { '2020': 412, '2021': 520, '2022': 685, '2023': 794, '2024': 880, '2025': 940, '2026': 1000 }
-  },
-  {
-    id: 'VAR_TR_02',
-    name: 'Total Permohonan KKPR / Rekomendasi Tata Ruang yang Masuk',
-    code: 'KKPR_TOTAL',
-    unit: 'Berkas',
-    bidang: 'tata_ruang',
-    source: 'Buku Registrasi Pelayanan Penataan Ruang',
-    values: { '2020': 450, '2021': 560, '2022': 720, '2023': 825, '2024': 905, '2025': 965, '2026': 1025 }
-  },
-  {
-    id: 'VAR_BK_01',
-    name: 'Jumlah Tenaga Kerja Konstruksi Terampil yang Tersertifikasi (SKK)',
-    code: 'TKK_SERTIFIKAT',
-    unit: 'Orang',
-    bidang: 'bina_konstruksi',
-    source: 'Sipjaki & Pelatihan Sertifikasi DINPUTARU Demak',
-    values: { '2020': 185, '2021': 240, '2022': 365, '2023': 490, '2024': 610, '2025': 750, '2026': 900 }
+    "id": "VAR_RUANG_01",
+    "code": "IZIN_SESUAI_RTRW",
+    "name": "Jumlah Izin KKPR Terbit Sesuai Pola Ruang RTRW",
+    "category": "Penataan Ruang",
+    "unit": "Dokumen",
+    "values": {
+      "2020": 420,
+      "2021": 465,
+      "2022": 510,
+      "2023": 560,
+      "2024": 615,
+      "2025": 680,
+      "2026": 740,
+      "2027": 800,
+      "2028": 860,
+      "2029": 920,
+      "2030": 980
+    }
   }
 ];
 
@@ -768,10 +864,13 @@ class SimondemakStore {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed.users && parsed.indicators) {
+        if (parsed.users && parsed.indicators && parsed.indicators.length >= 50 && parsed.categories && parsed.categories.some(c => c.id === 'iku_daerah')) {
           if (!parsed.visibleYears) parsed.visibleYears = parsed.years || DEFAULT_YEARS;
           if (!parsed.activeYear) parsed.activeYear = 2026;
           return parsed;
+        } else {
+          console.log('LocalStorage has legacy dataset, resetting to v2 full database from Excel...');
+          localStorage.removeItem(STORAGE_KEY);
         }
       }
     } catch (e) {

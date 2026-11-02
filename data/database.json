@@ -188,36 +188,52 @@
   ],
   "categories": [
     {
-      "id": "iku",
-      "code": "IKU",
+      "id": "iku_daerah",
+      "code": "IKU DAERAH",
       "segmentNumber": 1,
-      "name": "Indikator Kinerja Utama",
-      "desc": "Indikator strategis perjanjian kinerja Kepala DINPUTARU Kab. Demak",
-      "badgeColor": "#38bdf8"
+      "name": "Indikator Kinerja Utama Daerah",
+      "desc": "Indikator makro strategis prioritas pembangunan Pemerintah Kabupaten Demak yang diampu DINPUTARU",
+      "badgeColor": "#0284c7"
     },
     {
       "id": "ikd",
       "code": "IKD",
       "segmentNumber": 2,
       "name": "Indikator Kinerja Daerah",
-      "desc": "Indikator makro daerah Pemkab Demak yang diampu DINPUTARU (RPJMD)",
-      "badgeColor": "#fbbf24"
+      "desc": "Indikator penyelenggaraan urusan ke-PU-an dan penataan ruang daerah (RPJMD Kabupaten Demak)",
+      "badgeColor": "#d97706"
     },
     {
-      "id": "ikp",
-      "code": "IKP",
+      "id": "iku_pd",
+      "code": "IKU PD",
       "segmentNumber": 3,
-      "name": "Indikator Kinerja Program",
-      "desc": "Indikator capaian pada level program prioritas bidang-bidang teknis",
-      "badgeColor": "#34d399"
+      "name": "Indikator Kinerja Utama Perangkat Daerah",
+      "desc": "Perjanjian kinerja strategis Kepala DINPUTARU Kabupaten Demak dalam Renstra 2021-2026",
+      "badgeColor": "#059669"
     },
     {
       "id": "ikk",
       "code": "IKK",
       "segmentNumber": 4,
-      "name": "Indikator Kinerja Kegiatan",
-      "desc": "Indikator operasional capaian kegiatan fisik dan non-fisik sub-koordinator",
-      "badgeColor": "#f472b6"
+      "name": "Indikator Kinerja Kunci",
+      "desc": "Indikator Evaluasi Penyelenggaraan Pemerintahan Daerah (LPPD) bidang Pekerjaan Umum dan Penataan Ruang",
+      "badgeColor": "#db2777"
+    },
+    {
+      "id": "program",
+      "code": "PROGRAM",
+      "segmentNumber": 5,
+      "name": "Indikator Kinerja Program",
+      "desc": "Indikator hasil (outcome) program prioritas bidang-bidang teknis DINPUTARU Kabupaten Demak",
+      "badgeColor": "#7c3aed"
+    },
+    {
+      "id": "tujuan_sasaran",
+      "code": "TUJUAN-SASARAN",
+      "segmentNumber": 6,
+      "name": "Indikator Tujuan & Sasaran Renstra",
+      "desc": "Indikator capaian tujuan dan sasaran strategis Renstra DINPUTARU Kabupaten Demak",
+      "badgeColor": "#ea580c"
     }
   ],
   "years": [
@@ -227,726 +243,4189 @@
     2023,
     2024,
     2025,
-    2026
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
   ],
   "variables": [
     {
-      "id": "VAR_BM_01",
-      "name": "Panjang Jalan Kabupaten Kondisi Baik & Sedang (Mantap)",
-      "code": "P_MANTAP",
+      "id": "VAR_JALAN_01",
+      "code": "PJ_MANTAP",
+      "name": "Panjang Jalan Kondisi Mantap (Baik + Sedang)",
+      "category": "Bina Marga",
       "unit": "Km",
-      "bidang": "bina_marga",
-      "source": "Survei Kondisi Jalan (SKJ) DINPUTARU Demak",
       "values": {
-        "2020": 418.5,
-        "2021": 432.1,
-        "2022": 451.8,
-        "2023": 472.4,
-        "2024": 489.6,
-        "2025": 505,
-        "2026": 520
+        "2020": 365.4,
+        "2021": 370.2,
+        "2022": 375.8,
+        "2023": 380.1,
+        "2024": 384.5,
+        "2025": 390,
+        "2026": 395.2,
+        "2027": 402,
+        "2028": 410.5,
+        "2029": 418,
+        "2030": 425
       }
     },
     {
-      "id": "VAR_BM_02",
+      "id": "VAR_JALAN_02",
+      "code": "PJ_TOTAL",
       "name": "Total Panjang Jalan Kewenangan Kabupaten Demak",
-      "code": "P_TOTAL_JALAN",
+      "category": "Bina Marga",
       "unit": "Km",
-      "bidang": "bina_marga",
-      "source": "Keputusan Bupati Demak tentang Status Ruas Jalan",
       "values": {
-        "2020": 565.2,
-        "2021": 565.2,
-        "2022": 565.2,
-        "2023": 565.2,
-        "2024": 565.2,
-        "2025": 565.2,
-        "2026": 565.2
+        "2020": 462.5,
+        "2021": 462.5,
+        "2022": 462.5,
+        "2023": 462.5,
+        "2024": 462.5,
+        "2025": 462.5,
+        "2026": 462.5,
+        "2027": 462.5,
+        "2028": 462.5,
+        "2029": 462.5,
+        "2030": 462.5
       }
     },
     {
-      "id": "VAR_SDA_01",
-      "name": "Luas Lahan Irigasi Kewenangan Kab dalam Kondisi Baik & Berfungsi",
-      "code": "L_IRIGASI_BAIK",
+      "id": "VAR_IRIGASI_01",
+      "code": "LUAS_IRIGASI_BAIK",
+      "name": "Luas Baku Sawah Terlayani Irigasi Berfungsi Baik",
+      "category": "Sumber Daya Air",
       "unit": "Ha",
-      "bidang": "sda",
-      "source": "Inventarisasi E-PAKSI DINPUTARU Kab. Demak",
       "values": {
-        "2020": 22400,
-        "2021": 23150,
-        "2022": 24020,
-        "2023": 24850,
-        "2024": 25600,
-        "2025": 26200,
-        "2026": 26800
-      }
-    },
-    {
-      "id": "VAR_SDA_02",
-      "name": "Total Luas Daerah Irigasi Kewenangan Kabupaten Demak",
-      "code": "L_IRIGASI_TOTAL",
-      "unit": "Ha",
-      "bidang": "sda",
-      "source": "Buku Data Daerah Irigasi Kab. Demak",
-      "values": {
-        "2020": 31200,
-        "2021": 31200,
-        "2022": 31200,
-        "2023": 31200,
+        "2020": 28450,
+        "2021": 29100,
+        "2022": 29800,
+        "2023": 30500,
         "2024": 31200,
-        "2025": 31200,
-        "2026": 31200
+        "2025": 31800,
+        "2026": 32400,
+        "2027": 33000,
+        "2028": 33600,
+        "2029": 34200,
+        "2030": 34800
       }
     },
     {
-      "id": "VAR_SDA_03",
-      "name": "Luas Kawasan Rawan Banjir & Rob yang Tertangani Tanggul/Pompa",
-      "code": "L_ROB_TERTANGANI",
+      "id": "VAR_IRIGASI_02",
+      "code": "LUAS_IRIGASI_TOTAL",
+      "name": "Total Luas Baku Sawah Daerah Irigasi Kewenangan Kabupaten",
+      "category": "Sumber Daya Air",
       "unit": "Ha",
-      "bidang": "sda",
-      "source": "Laporan Penanganan Genangan Sayung, Bonang, Karangtengah",
       "values": {
-        "2020": 1850,
-        "2021": 2100,
-        "2022": 2450,
-        "2023": 2780,
-        "2024": 3120,
-        "2025": 3450,
-        "2026": 3800
+        "2020": 38200,
+        "2021": 38200,
+        "2022": 38200,
+        "2023": 38200,
+        "2024": 38200,
+        "2025": 38200,
+        "2026": 38200,
+        "2027": 38200,
+        "2028": 38200,
+        "2029": 38200,
+        "2030": 38200
       }
     },
     {
-      "id": "VAR_SDA_04",
-      "name": "Total Luas Kawasan Rawan Banjir & Rob Pasang di Wilayah Pesisir",
-      "code": "L_ROB_TOTAL",
-      "unit": "Ha",
-      "bidang": "sda",
-      "source": "Peta Rawan Bencana Banjir & Pasang Air Laut BPBD & DINPUTARU",
-      "values": {
-        "2020": 4800,
-        "2021": 4800,
-        "2022": 4800,
-        "2023": 4800,
-        "2024": 4800,
-        "2025": 4800,
-        "2026": 4800
-      }
-    },
-    {
-      "id": "VAR_CK_01",
-      "name": "Jumlah KK Terlayani Akses Air Minum Layak dan Aman",
-      "code": "KK_AIR_MINUM",
+      "id": "VAR_AIR_01",
+      "code": "RT_AIR_MINUM",
+      "name": "Jumlah Rumah Tangga Akses Air Minum Layak & Aman",
+      "category": "Cipta Karya",
       "unit": "KK",
-      "bidang": "cipta_karya",
-      "source": "Sistem Informasi Air Minum SPAM DINPUTARU Demak",
       "values": {
-        "2020": 282400,
-        "2021": 291100,
-        "2022": 301400,
-        "2023": 312800,
-        "2024": 323500,
-        "2025": 334000,
-        "2026": 344500
+        "2020": 285400,
+        "2021": 292100,
+        "2022": 299500,
+        "2023": 308200,
+        "2024": 318000,
+        "2025": 325000,
+        "2026": 332000,
+        "2027": 339000,
+        "2028": 346000,
+        "2029": 353000,
+        "2030": 360000
       }
     },
     {
-      "id": "VAR_CK_02",
-      "name": "Jumlah Total KK di Seluruh Kabupaten Demak",
-      "code": "KK_TOTAL_DEMAK",
+      "id": "VAR_AIR_02",
+      "code": "RT_TOTAL",
+      "name": "Total Rumah Tangga Kabupaten Demak",
+      "category": "Cipta Karya",
       "unit": "KK",
-      "bidang": "cipta_karya",
-      "source": "Data Agregat Kependudukan Dinas Dukcapil Demak",
       "values": {
-        "2020": 358200,
-        "2021": 361500,
-        "2022": 365100,
-        "2023": 368900,
-        "2024": 372400,
-        "2025": 376000,
-        "2026": 379500
+        "2020": 355000,
+        "2021": 358000,
+        "2022": 362000,
+        "2023": 365000,
+        "2024": 368000,
+        "2025": 371000,
+        "2026": 374000,
+        "2027": 377000,
+        "2028": 380000,
+        "2029": 383000,
+        "2030": 386000
       }
     },
     {
-      "id": "VAR_CK_03",
-      "name": "Jumlah KK Memiliki Akses Jamban Sehat & Sanitasi Layak",
-      "code": "KK_SANITASI",
-      "unit": "KK",
-      "bidang": "cipta_karya",
-      "source": "Data DAK Sanitasi & Pokja PKP Kab. Demak",
+      "id": "VAR_DRAINASE_01",
+      "code": "PJ_DRAINASE_BAIK",
+      "name": "Panjang Saluran Drainase Perkotaan Kondisi Baik",
+      "category": "Cipta Karya",
+      "unit": "Km",
       "values": {
-        "2020": 275800,
-        "2021": 286200,
-        "2022": 298500,
-        "2023": 311200,
-        "2024": 322800,
-        "2025": 334500,
-        "2026": 345000
+        "2020": 120.5,
+        "2021": 125.8,
+        "2022": 132,
+        "2023": 139.5,
+        "2024": 146,
+        "2025": 152,
+        "2026": 158,
+        "2027": 164.5,
+        "2028": 171,
+        "2029": 178,
+        "2030": 185
       }
     },
     {
-      "id": "VAR_TR_01",
-      "name": "Jumlah Permohonan KKPR/Kesesuaian Ruang Terlayani Tepat Waktu",
-      "code": "KKPR_TEPAT",
-      "unit": "Berkas",
-      "bidang": "tata_ruang",
-      "source": "Layanan SIMBG & OSS Tata Ruang DINPUTARU Demak",
+      "id": "VAR_RUANG_01",
+      "code": "IZIN_SESUAI_RTRW",
+      "name": "Jumlah Izin KKPR Terbit Sesuai Pola Ruang RTRW",
+      "category": "Penataan Ruang",
+      "unit": "Dokumen",
       "values": {
-        "2020": 412,
-        "2021": 520,
-        "2022": 685,
-        "2023": 794,
-        "2024": 880,
-        "2025": 940,
-        "2026": 1000
-      }
-    },
-    {
-      "id": "VAR_TR_02",
-      "name": "Total Permohonan KKPR / Rekomendasi Tata Ruang yang Masuk",
-      "code": "KKPR_TOTAL",
-      "unit": "Berkas",
-      "bidang": "tata_ruang",
-      "source": "Buku Registrasi Pelayanan Penataan Ruang",
-      "values": {
-        "2020": 450,
-        "2021": 560,
-        "2022": 720,
-        "2023": 825,
-        "2024": 905,
-        "2025": 965,
-        "2026": 1025
-      }
-    },
-    {
-      "id": "VAR_BK_01",
-      "name": "Jumlah Tenaga Kerja Konstruksi Terampil yang Tersertifikasi (SKK)",
-      "code": "TKK_SERTIFIKAT",
-      "unit": "Orang",
-      "bidang": "bina_konstruksi",
-      "source": "Sipjaki & Pelatihan Sertifikasi DINPUTARU Demak",
-      "values": {
-        "2020": 185,
-        "2021": 240,
-        "2022": 365,
-        "2023": 490,
-        "2024": 610,
-        "2025": 750,
-        "2026": 900
+        "2020": 420,
+        "2021": 465,
+        "2022": 510,
+        "2023": 560,
+        "2024": 615,
+        "2025": 680,
+        "2026": 740,
+        "2027": 800,
+        "2028": 860,
+        "2029": 920,
+        "2030": 980
       }
     }
   ],
   "indicators": [
     {
-      "id": "IND-IKU-01",
-      "code": "IKU-01",
-      "name": "Persentase Infrastruktur Pekerjaan Umum dalam Kondisi Baik",
-      "categoryId": "iku",
-      "bidangId": "sekretariat",
-      "wewenangBidang": "Sekretariat Dinas (Pengampu Komposit Lintas Bidang)",
-      "pejabatPenanggungJawab": "Sekretaris Dinas & Tim Penyusun LAKIP/Renstra",
-      "seksiPelaksana": "Subbagian Program dan Keuangan",
-      "unit": "%",
+      "id": "IND-IKU-KAB-01",
+      "code": "IKU-KAB-01",
+      "name": "Indeks Layanan Infrastruktur Daerah",
+      "categoryId": "iku_daerah",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Angka",
       "polarization": "maximize",
-      "definition": "Indikator komposit rata-rata capaian infrastruktur ke-PU-an (kemantapan jalan, jaringan irigasi, drainase perkotaan, dan sarana sanitasi) dalam kondisi fisik handal dan beroperasi dengan baik.",
-      "formula": "Rata-rata tertimbang (% Jalan Mantap + % Irigasi Baik + % Sanitasi Layak) / 3",
-      "formulaExpr": "(IKD_01 + IKD_02 + IKP_CK_01) / 3",
-      "formulaVars": [
-        "VAR_BM_01",
-        "VAR_SDA_01",
-        "VAR_CK_03"
-      ],
-      "source": "Laporan Kinerja Instansi Pemerintah (LKjIP) DINPUTARU Kab. Demak",
+      "definition": "Indikator komposit makro yang mengukur tingkat ketersediaan, kualitas, keandalan, dan keterjangkauan pelayanan infrastruktur dasar ke-PU-an di Kabupaten Demak yang mencakup kemantapan jalan, kinerja irigasi, akses air minum aman, dan sanitasi layak.",
+      "formula": "(Indeks Jalan Mantap + Indeks Irigasi + Indeks Air Minum + Indeks Sanitasi) / 4",
+      "source": "Dokumen RPJMD Kabupaten Demak & Renstra DINPUTARU Kabupaten Demak",
       "records": {
         "2020": {
-          "target": 74,
-          "realisasi": 75.28,
-          "notes": "Target IKU Perjanjian Kinerja Kepala DINPUTARU tercapai"
+          "target": 27,
+          "realisasi": 27,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         },
         "2021": {
-          "target": 76,
-          "realisasi": 77.28,
-          "notes": "Meningkat seiring pemulihan anggaran infrastruktur"
+          "target": 27.71,
+          "realisasi": 27.71,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         },
         "2022": {
-          "target": 78.5,
-          "realisasi": 80.05,
-          "notes": "Sinergi antar-bidang teknis DINPUTARU meningkat"
+          "target": 28.42,
+          "realisasi": 28.42,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         },
         "2023": {
-          "target": 81,
-          "realisasi": 82.88,
-          "notes": "Kategori kinerja SAKIP: SANGAT BAIK (A)"
+          "target": 29.13,
+          "realisasi": 29.13,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         },
         "2024": {
-          "target": 83.5,
-          "realisasi": 85.1,
-          "notes": "Pencapaian fisik infrastruktur strategis"
+          "target": 34.83,
+          "realisasi": 34.83,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         },
         "2025": {
-          "target": 86,
-          "realisasi": 87.38,
-          "notes": "Target pemeliharaan terintegrasi"
+          "target": 35.55,
+          "realisasi": 38.649,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         },
         "2026": {
-          "target": 88.5,
-          "realisasi": 89.56,
-          "notes": "Target akhir Renstra DINPUTARU"
+          "target": 37.25,
+          "realisasi": 38.649,
+          "notes": "Realisasi TW I & TW II berjalan terverifikasi"
+        },
+        "2027": {
+          "target": 40.3,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
+        },
+        "2028": {
+          "target": 42.67,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
+        },
+        "2029": {
+          "target": 44.05,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
+        },
+        "2030": {
+          "target": 46.76,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen RPJMD & Renstra"
         }
-      }
-    },
-    {
-      "id": "IND-IKU-02",
-      "code": "IKU-02",
-      "name": "Rasio Kesesuaian Pemanfaatan Ruang terhadap RTRW Kab. Demak",
-      "categoryId": "iku",
-      "bidangId": "tata_ruang",
-      "wewenangBidang": "Bidang Tata Ruang",
-      "pejabatPenanggungJawab": "Kepala Bidang Tata Ruang",
-      "seksiPelaksana": "Seksi Pengaturan & Pembinaan Tata Ruang (KKPR/OSS)",
-      "unit": "%",
-      "polarization": "maximize",
-      "definition": "Persentase kegiatan pemanfaatan ruang dan izin KKPR (Kesesuaian Kegiatan Pemanfaatan Ruang) yang sesuai dengan Peraturan Daerah Rencana Tata Ruang Wilayah (RTRW) dan RDTR Kabupaten Demak.",
-      "formula": "(Jumlah Permohonan KKPR Sesuai Ketentuan / Total Permohonan Masuk) × 100%",
-      "formulaExpr": "(KKPR_TEPAT / KKPR_TOTAL) * 100",
-      "formulaVars": [
-        "VAR_TR_01",
-        "VAR_TR_02"
-      ],
-      "source": "Sistem Informasi Penataan Ruang & Pengawasan Pemanfaatan Ruang DINPUTARU Kab. Demak",
-      "records": {
-        "2020": {
-          "target": 88,
-          "realisasi": 91.56,
-          "notes": "Integrasi sistem OSS dengan RTRW Kabupaten"
-        },
-        "2021": {
-          "target": 90,
-          "realisasi": 92.86,
-          "notes": "Sosialisasi penetapan Perda RTRW revisi"
-        },
-        "2022": {
-          "target": 92,
-          "realisasi": 95.14,
-          "notes": "Penyusunan RDTR Kawasan Industri & Perkotaan Sayung"
-        },
-        "2023": {
-          "target": 94,
-          "realisasi": 96.24,
-          "notes": "Pencegahan alih fungsi lahan sawah dilindungi (LSD)"
-        },
-        "2024": {
-          "target": 95.5,
-          "realisasi": 97.24,
-          "notes": "Layanan konsultasi klinik tata ruang DINPUTARU aktif"
-        },
-        "2025": {
-          "target": 96.5,
-          "realisasi": 97.41,
-          "notes": "Digitalisasi peta zonasi interaktif GIS"
-        },
-        "2026": {
-          "target": 98,
-          "realisasi": 97.56,
-          "notes": "Pengawasan terpadu pelanggaran tata ruang"
-        }
-      }
+      },
+      "notes": "Indikator Kinerja Utama Makro Kepala Daerah Kabupaten Demak"
     },
     {
       "id": "IND-IKD-01",
       "code": "IKD-01",
-      "name": "Persentase Tingkat Kemantapan Jalan Kabupaten",
+      "name": "Akses Rumah Tangga Perkotaan terhadap Air Siap Minum Perpipaan",
       "categoryId": "ikd",
-      "bidangId": "bina_marga",
-      "wewenangBidang": "Bidang Bina Marga",
-      "pejabatPenanggungJawab": "Kepala Bidang Bina Marga",
-      "seksiPelaksana": "Seksi Preservasi & Pembangunan Jalan Jembatan",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
       "unit": "%",
       "polarization": "maximize",
-      "definition": "Perbandingan antara panjang ruas jalan kabupaten dalam kondisi baik dan sedang terhadap total seluruh panjang jaringan jalan kabupaten di wilayah Kabupaten Demak.",
-      "formula": "(Panjang Jalan Kondisi Baik + Sedang) / Total Panjang Jalan Kabupaten × 100%",
-      "formulaExpr": "(P_MANTAP / P_TOTAL_JALAN) * 100",
-      "formulaVars": [
-        "VAR_BM_01",
-        "VAR_BM_02"
-      ],
-      "source": "Hasil Survei Kondisi Jalan (SKJ) Bidang Bina Marga DINPUTARU Kab. Demak & IRMS Kementerian PUPR",
+      "definition": "Persentase rumah tangga di kawasan perkotaan Kabupaten Demak yang telah terlayani sambungan langsung air siap minum melalui jaringan perpipaan berstandar mutu air minum nasional.",
+      "formula": "(Jumlah RT Perkotaan Terlayani Air Siap Minum Perpipaan / Total Rumah Tangga Kawasan Perkotaan) x 100%",
+      "source": "PDAM Tirta Kalijaga Demak & Buku Laporan SPAM DINPUTARU",
       "records": {
         "2020": {
-          "target": 73.5,
-          "realisasi": 74.05,
-          "notes": "Fokus pemeliharaan rutin koridor Mranggen-Onggorawe"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2021": {
-          "target": 75,
-          "realisasi": 76.45,
-          "notes": "Peningkatan jalan beton dan rigid pavement di Sayung"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2022": {
-          "target": 78,
-          "realisasi": 79.94,
-          "notes": "Optimalisasi DAK Fisik & Bantuan Keuangan Provinsi"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2023": {
-          "target": 81.5,
-          "realisasi": 83.58,
-          "notes": "Penanganan jalur logistik pertanian Karanganyar & Wedung"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2024": {
-          "target": 84.5,
-          "realisasi": 86.62,
-          "notes": "Realisasi semester II melampaui target Renstra"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2025": {
-          "target": 87,
-          "realisasi": 89.35,
-          "notes": "Prognosa penuntasan ruas lingkar luar Demak"
+          "target": 0.5,
+          "realisasi": 44.69,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2026": {
-          "target": 90,
-          "realisasi": 92,
-          "notes": "Target akhir periode RPJMD"
+          "target": 1,
+          "realisasi": 44.69,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 2,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
+          "target": 3,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2029": {
+          "target": 4,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2030": {
+          "target": 5,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         }
-      }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
     },
     {
       "id": "IND-IKD-02",
       "code": "IKD-02",
-      "name": "Persentase Luas Irigasi Kabupaten dalam Kondisi Baik dan Berfungsi",
+      "name": "Indeks Kinerja Sistem Irigasi Kewenangan Kabupaten",
       "categoryId": "ikd",
-      "bidangId": "sda",
-      "wewenangBidang": "Bidang Sumber Daya Air",
-      "pejabatPenanggungJawab": "Kepala Bidang Sumber Daya Air",
-      "seksiPelaksana": "Seksi Operasi dan Pemeliharaan Jaringan Irigasi",
-      "unit": "%",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "Angka",
       "polarization": "maximize",
-      "definition": "Rasio luas areal persawahan yang dilayani oleh jaringan irigasi kewenangan Kabupaten Demak dalam kondisi fisik baik/sedang dan mengalirkan air dengan optimal terhadap total luas areal irigasi kabupaten.",
-      "formula": "(Luas Daerah Irigasi Kondisi Baik / Total Luas Daerah Irigasi Kabupaten) × 100%",
-      "formulaExpr": "(L_IRIGASI_BAIK / L_IRIGASI_TOTAL) * 100",
-      "formulaVars": [
-        "VAR_SDA_01",
-        "VAR_SDA_02"
-      ],
-      "source": "Inventarisasi E-PAKSI & Survei Indeks Kinerja Sistem Irigasi (IKSI) Bidang SDA DINPUTARU",
+      "definition": "Indeks kinerja sistem irigasi kewenangan Kabupaten Demak berbasis aplikasi E-PAKSI yang mengevaluasi prasarana fisik, produktivitas tanam, sarana penunjang, organisasi personalia, dokumentasi, dan kelembagaan P3A.",
+      "formula": "∑ (Skor Komponen Evaluasi x Bobot Komponen) [Sesuai Permen PUPR No. 12/PRT/M/2015]",
+      "source": "Aplikasi E-PAKSI Kementerian PUPR & Survei IKSI Bidang SDA DINPUTARU",
       "records": {
         "2020": {
-          "target": 70,
-          "realisasi": 71.79,
-          "notes": "Normalisasi saluran sekunder Karangawen & Guntur"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2021": {
-          "target": 72.5,
-          "realisasi": 74.2,
-          "notes": "Rehabilitasi pintu air dan talud irigasi DI Cabean"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2022": {
-          "target": 75,
-          "realisasi": 76.99,
-          "notes": "Pemberdayaan P3A dalam pemeliharaan berkala"
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2023": {
-          "target": 78,
-          "realisasi": 79.65,
-          "notes": "Peningkatan efisiensi saluran tersier lumbung pangan Demak"
+          "target": 54.46,
+          "realisasi": 54.46,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2024": {
-          "target": 80.5,
-          "realisasi": 82.05,
-          "notes": "Program modernisasi irigasi presisi"
+          "target": 59.27,
+          "realisasi": 59.27,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2025": {
-          "target": 83,
-          "realisasi": 83.97,
-          "notes": "Pencegahan sedimentasi saluran primer"
+          "target": 60.52,
+          "realisasi": 60.26,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2026": {
-          "target": 85.5,
-          "realisasi": 85.9,
-          "notes": "Target kesiapan ketahanan pangan daerah"
+          "target": 61.77,
+          "realisasi": 60.26,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 63.02,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
+          "target": 64.27,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2029": {
+          "target": 65.52,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2030": {
+          "target": 66.77,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         }
-      }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
     },
     {
       "id": "IND-IKD-03",
       "code": "IKD-03",
-      "name": "Persentase Rumah Tangga Memperoleh Akses Air Minum Layak",
+      "name": "Rumah Tangga dengan Akses Sanitasi Aman",
       "categoryId": "ikd",
-      "bidangId": "cipta_karya",
-      "wewenangBidang": "Bidang Cipta Karya",
-      "pejabatPenanggungJawab": "Kepala Bidang Cipta Karya",
-      "seksiPelaksana": "Seksi Air Minum dan Penyehatan Lingkungan Permukiman",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
       "unit": "%",
       "polarization": "maximize",
-      "definition": "Proporsi rumah tangga di Kabupaten Demak yang memiliki akses terhadap fasilitas penyediaan air minum yang memenuhi syarat fisik, kimia, dan bakteriologis (perpipaan SPAM & non-perpipaan terlindungi).",
-      "formula": "(Jumlah KK Berakses Air Minum Layak / Jumlah Seluruh KK Kab. Demak) × 100%",
-      "formulaExpr": "(KK_AIR_MINUM / KK_TOTAL_DEMAK) * 100",
-      "formulaVars": [
-        "VAR_CK_01",
-        "VAR_CK_02"
-      ],
-      "source": "Bidang Cipta Karya DINPUTARU Demak, SPAM IKK, PPSP & Data Susenas BPS",
+      "definition": "Persentase rumah tangga di Kabupaten Demak yang memiliki akses fasilitas sanitasi milik sendiri dengan kloset leher angsa dan tangki septik aman yang disedot secara berkala (L2T2/IPLT).",
+      "formula": "(Jumlah RT Akses Sanitasi Aman / Total Rumah Tangga Kabupaten Demak) x 100%",
+      "source": "Survei EHRA, SSGI, BPS Kabupaten Demak & Data Seksi Sanitasi DINPUTARU",
       "records": {
         "2020": {
-          "target": 76,
-          "realisasi": 78.84,
-          "notes": "Perluasan jaringan pipa SPAM Bregas & Pamsimas"
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2021": {
-          "target": 79,
-          "realisasi": 80.53,
-          "notes": "Intervensi wilayah pesisir krisis air payau"
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2022": {
-          "target": 81.5,
-          "realisasi": 82.55,
-          "notes": "Optimalisasi pemanfaatan Waduk Jatibarang / Kedung Ombo"
+          "target": 3.27,
+          "realisasi": 3.27,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2023": {
-          "target": 83.5,
-          "realisasi": 84.79,
-          "notes": "Pemasangan sambungan rumah (SR) MBR bersubsidi"
+          "target": 4.1,
+          "realisasi": 4.1,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2024": {
-          "target": 85.5,
-          "realisasi": 86.87,
-          "notes": "Penyaluran air bersih perdesaan pesisir Demak"
+          "target": 5.79,
+          "realisasi": 5.79,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2025": {
-          "target": 87.5,
-          "realisasi": 88.83,
-          "notes": "Peningkatan kapasitas reservoir distribusi"
+          "target": 10,
+          "realisasi": 6.41,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2026": {
-          "target": 90,
-          "realisasi": 90.78,
-          "notes": "Target universal access air minum 100%"
+          "target": 15,
+          "realisasi": 6.41,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 20,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
+          "target": 25,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2029": {
+          "target": 30,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2030": {
+          "target": 32,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         }
-      }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
     },
     {
-      "id": "IND-IKP-BM-01",
-      "code": "IKP-BM-01",
-      "name": "Persentase Jembatan Kabupaten dalam Kondisi Baik dan Layak",
-      "categoryId": "ikp",
-      "bidangId": "bina_marga",
-      "wewenangBidang": "Bidang Bina Marga",
-      "pejabatPenanggungJawab": "Kepala Bidang Bina Marga",
-      "seksiPelaksana": "Seksi Jembatan & Bangunan Pelengkap Jalan",
+      "id": "IND-IKD-04",
+      "code": "IKD-04",
+      "name": "Persentase Rumah Tangga dengan Akses Air Minum Aman",
+      "categoryId": "ikd",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
       "unit": "%",
       "polarization": "maximize",
-      "definition": "Proporsi jembatan pada ruas jalan kabupaten yang memiliki kondisi struktural aman, lantai dan gelagar tidak retak/ambles, serta berfungsi normal memperlancar arus transportasi.",
-      "formula": "(Jumlah Jembatan Kondisi Baik & Sedang / Total Jembatan Kabupaten) × 100%",
-      "formulaExpr": "(JEMBATAN_BAIK / JEMBATAN_TOTAL) * 100",
-      "formulaVars": [
-        "VAR_BM_01"
-      ],
-      "source": "Database Sistem Manajemen Jembatan (BMS) Bidang Bina Marga DINPUTARU Demak",
+      "definition": "Persentase rumah tangga dengan akses air minum layak, bebas kontaminasi bakteriologis, berada di premis, dan tersedia sepanjang waktu sesuai target SDGs 6.1.",
+      "formula": "(Jumlah RT dengan Akses Air Minum Aman / Total Rumah Tangga Kabupaten Demak) x 100%",
+      "source": "Data Susenas BPS Kabupaten Demak & Laporan Kinerja Bidang Cipta Karya",
       "records": {
         "2020": {
-          "target": 82,
-          "realisasi": 83.4,
-          "notes": "Penggantian jembatan gelagar kayu ke komposit"
+          "target": 16.82,
+          "realisasi": 16.82,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2021": {
-          "target": 84,
-          "realisasi": 85.1,
-          "notes": "Perbaikan oprit jembatan terdampak rob pesisir"
+          "target": 17.11,
+          "realisasi": 17.11,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2022": {
-          "target": 86.5,
-          "realisasi": 87.8,
-          "notes": "Pelebaran jembatan jalur alternatif Gajah-Dempet"
+          "target": 18.09,
+          "realisasi": 18.09,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2023": {
-          "target": 88,
-          "realisasi": 89.5,
-          "notes": "Pemeliharaan berkala expansion joint jembatan utama"
+          "target": 20.51,
+          "realisasi": 20.51,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2024": {
-          "target": 90,
-          "realisasi": 91.2,
-          "notes": "Inspeksi berkala 142 jembatan kabupaten"
+          "target": 20.22,
+          "realisasi": 20.22,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2025": {
-          "target": 91.5,
-          "realisasi": 92.4,
-          "notes": "Pemasangan rambu tonase pembatas muatan"
+          "target": 22.5,
+          "realisasi": 20.49,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2026": {
-          "target": 93,
-          "realisasi": 93.8,
-          "notes": "Standardisasi keselamatan jembatan"
-        }
-      }
-    },
-    {
-      "id": "IND-IKP-SDA-01",
-      "code": "IKP-SDA-01",
-      "name": "Rasio Luas Kawasan Rawan Banjir/Rob yang Tertangani Pengendalian Genangan",
-      "categoryId": "ikp",
-      "bidangId": "sda",
-      "wewenangBidang": "Bidang Sumber Daya Air",
-      "pejabatPenanggungJawab": "Kepala Bidang Sumber Daya Air",
-      "seksiPelaksana": "Seksi Pengendalian Banjir & Drainase Pesisir",
-      "unit": "%",
-      "polarization": "maximize",
-      "definition": "Persentase luas kawasan permukiman dan tambak/pertanian pesisir (Sayung, Karangtengah, Bonang, Wedung) yang terlindungi dari limpasan banjir rob melalui tanggul laut, polder, dan rumah pompa.",
-      "formula": "(Luas Kawasan Rawan Banjir/Rob Tertangani / Total Luas Kawasan Rawan) × 100%",
-      "formulaExpr": "(L_ROB_TERTANGANI / L_ROB_TOTAL) * 100",
-      "formulaVars": [
-        "VAR_SDA_03",
-        "VAR_SDA_04"
-      ],
-      "source": "Bidang Sumber Daya Air DINPUTARU Demak & Balai Besar Wilayah Sungai (BBWS) Pemali-Juana",
-      "records": {
-        "2020": {
+          "target": 25,
+          "realisasi": 20.49,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 30,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
           "target": 35,
-          "realisasi": 38.54,
-          "notes": "Operasional pompa darurat banjir Sayung"
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
-        "2021": {
-          "target": 40,
-          "realisasi": 43.75,
-          "notes": "Pembangunan polder percontohan Sriwulan"
+        "2029": {
+          "target": 43,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         },
-        "2022": {
-          "target": 47,
-          "realisasi": 51.04,
-          "notes": "Sinergi tanggul laut Tol Semarang-Demak Seksi 1 & 2"
-        },
-        "2023": {
-          "target": 54,
-          "realisasi": 57.92,
-          "notes": "Penguatan tanggul sungai Buyaran dan Sungai Dolog"
-        },
-        "2024": {
-          "target": 60,
-          "realisasi": 65,
-          "notes": "Penambahan 6 unit pompa mobile kapasitas tinggi"
-        },
-        "2025": {
-          "target": 68,
-          "realisasi": 71.88,
-          "notes": "Integrasi sistem drainase perkotaan Demak"
-        },
-        "2026": {
-          "target": 75,
-          "realisasi": 79.17,
-          "notes": "Target masterplan pengendalian rob pesisir Demak"
+        "2030": {
+          "target": 45,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         }
-      }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
     },
     {
-      "id": "IND-IKP-CK-01",
-      "code": "IKP-CK-01",
-      "name": "Persentase Rumah Tangga dengan Akses Sanitasi dan Air Limbah Layak",
-      "categoryId": "ikp",
-      "bidangId": "cipta_karya",
-      "wewenangBidang": "Bidang Cipta Karya",
-      "pejabatPenanggungJawab": "Kepala Bidang Cipta Karya",
-      "seksiPelaksana": "Seksi Sanitasi & Penyehatan Lingkungan Permukiman",
+      "id": "IND-IKD-05",
+      "code": "IKD-05",
+      "name": "Indeks Layanan Infrastruktur daerah",
+      "categoryId": "ikd",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Angka",
+      "polarization": "maximize",
+      "definition": "Indikator komposit indeks layanan infrastruktur ke-PU-an daerah Kabupaten Demak.",
+      "formula": "(Indeks Jalan + Indeks Irigasi + Indeks Air Minum + Indeks Sanitasi) / 4",
+      "source": "LAKIP DINPUTARU Kabupaten Demak & Laporan Kinerja Pembangunan Daerah",
+      "records": {
+        "2020": {
+          "target": 27,
+          "realisasi": 27,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2021": {
+          "target": 27.71,
+          "realisasi": 27.71,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2022": {
+          "target": 28.42,
+          "realisasi": 28.42,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2023": {
+          "target": 29.13,
+          "realisasi": 29.13,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2024": {
+          "target": 34.83,
+          "realisasi": 34.83,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2025": {
+          "target": 35.55,
+          "realisasi": 38.649,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2026": {
+          "target": 37.25,
+          "realisasi": 38.649,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 40.3,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
+          "target": 42.67,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2029": {
+          "target": 44.05,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2030": {
+          "target": 46.76,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
+    },
+    {
+      "id": "IND-IKD-06",
+      "code": "IKD-06",
+      "name": "Indeks Kinerja Infrastruktur Daerah",
+      "categoryId": "ikd",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Angka",
+      "polarization": "maximize",
+      "definition": "Tingkat pemenuhan dan keberfungsian sarana dan prasarana infrastruktur daerah kewenangan DINPUTARU.",
+      "formula": "(Total Aset Infrastruktur Berfungsi Baik / Total Inventarisasi Aset Infrastruktur) x 100%",
+      "source": "Buku Laporan Neraca Aset DINPUTARU Kab. Demak",
+      "records": {
+        "2020": {
+          "target": 82.24,
+          "realisasi": 82.24,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2021": {
+          "target": 82.4,
+          "realisasi": 82.4,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2022": {
+          "target": 82.9,
+          "realisasi": 82.9,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2023": {
+          "target": 85.4,
+          "realisasi": 85.4,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2024": {
+          "target": 86.92,
+          "realisasi": 86.92,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2025": {
+          "target": 85.44,
+          "realisasi": 88.772,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2026": {
+          "target": 86.73,
+          "realisasi": 88.772,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 87.48,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
+          "target": 88.23,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2029": {
+          "target": 88.98,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2030": {
+          "target": 89.72,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
+    },
+    {
+      "id": "IND-IKD-07",
+      "code": "IKD-07",
+      "name": "Persentase Panjang Jalan Kondisi Permukaan Mantap Kewenangan Kabupaten/Kota",
+      "categoryId": "ikd",
+      "bidangId": "bidang_bm",
+      "wewenangBidang": "Bidang Bina Marga",
+      "pejabatPenanggungJawab": "Budi Santoso, S.T., M.T. (Kabid Bina Marga)",
+      "seksiPelaksana": "Seksi Pembangunan & Preservasi Jalan Jembatan",
       "unit": "%",
       "polarization": "maximize",
-      "definition": "Persentase kepala keluarga yang menggunakan jamban leher angsa bersumber tangki septik aman atau SPALD-T/SPALD-S yang memenuhi baku mutu kesehatan lingkungan.",
-      "formula": "(Jumlah KK Berakses Sanitasi Layak / Jumlah KK Total Demak) × 100%",
-      "formulaExpr": "(KK_SANITASI / KK_TOTAL_DEMAK) * 100",
-      "formulaVars": [
-        "VAR_CK_03",
-        "VAR_CK_02"
-      ],
-      "source": "Bidang Cipta Karya DINPUTARU, Dinas Kesehatan Kab. Demak & Verifikasi ODF Desa",
+      "definition": "Persentase panjang jalan kabupaten dalam kondisi permukaan baik dan sedang sesuai standar Permen PUPR No. 14/PRT/M/2018 terhadap total panjang jalan kabupaten.",
+      "formula": "((Panjang Jalan Kondisi Baik + Panjang Jalan Kondisi Sedang) / Total Panjang Jalan Kabupaten) x 100%",
+      "source": "Hasil Survei Kondisi Jalan (SKJ / RNI) Bidang Bina Marga DINPUTARU",
       "records": {
         "2020": {
-          "target": 75,
-          "realisasi": 77,
-          "notes": "Pembangunan tangki septik individual pedesaan"
+          "target": 97.24,
+          "realisasi": 97.24,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2021": {
-          "target": 77.5,
-          "realisasi": 79.17,
-          "notes": "Pemberantasan buang air besar sembarangan (BABS)"
+          "target": 98.48,
+          "realisasi": 98.48,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2022": {
-          "target": 80,
-          "realisasi": 81.76,
-          "notes": "Deklarasi 180 desa ODF (Open Defecation Free)"
+          "target": 88.25,
+          "realisasi": 88.25,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2023": {
-          "target": 82.5,
-          "realisasi": 84.36,
-          "notes": "Pembangunan IPAL Komunal permukiman padat"
+          "target": 88.57,
+          "realisasi": 88.57,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2024": {
-          "target": 85,
-          "realisasi": 86.68,
-          "notes": "Optimalisasi Instalasi Pengolahan Lumpur Tinja (IPLT)"
+          "target": 81.48,
+          "realisasi": 81.48,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2025": {
-          "target": 87.5,
-          "realisasi": 88.96,
-          "notes": "Layanan sedot tinja berkala terpadu"
+          "target": 85.25,
+          "realisasi": 82.46,
+          "notes": "Sesuai penetapan RKPD"
         },
         "2026": {
-          "target": 90,
-          "realisasi": 90.91,
-          "notes": "Menuju Demak Bebas BABS 100% dan Sanitasi Aman"
+          "target": 85.75,
+          "realisasi": 82.46,
+          "notes": "Realisasi TW berjalan sesuai pelaporan SPJ triwulanan"
+        },
+        "2027": {
+          "target": 86.25,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2028": {
+          "target": 86.75,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2029": {
+          "target": 91.6,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
+        },
+        "2030": {
+          "target": 91.65,
+          "realisasi": 0,
+          "notes": "Sesuai penetapan RKPD"
         }
-      }
+      },
+      "notes": "Indikator Kinerja Daerah (RPJMD Kabupaten Demak)"
     },
     {
-      "id": "IND-IKK-BK-01",
-      "code": "IKK-BK-01",
-      "name": "Jumlah Tenaga Kerja Konstruksi yang Memiliki Sertifikat Standar Kompetensi Kerja (SKK)",
-      "categoryId": "ikk",
-      "bidangId": "bina_konstruksi",
-      "wewenangBidang": "Bidang Bina Konstruksi",
-      "pejabatPenanggungJawab": "Kepala Bidang Bina Konstruksi",
-      "seksiPelaksana": "Seksi Pembinaan, Kelembagaan & Sertifikasi Jasa Konstruksi",
-      "unit": "Orang",
+      "id": "IND-IKU-PD-01",
+      "code": "IKU-PD-01",
+      "name": "Nilai SAKIP Perangkat Daerah",
+      "categoryId": "iku_pd",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Angka",
       "polarization": "maximize",
-      "definition": "Jumlah tukang, mandor, dan pelaksana teknis konstruksi di Kabupaten Demak yang telah lulus uji kompetensi dan memiliki sertifikat resmi sesuai UU No. 2 Tahun 2017 tentang Jasa Konstruksi.",
-      "formula": "Akumulasi jumlah tenaga kerja konstruksi terlatih dan tersertifikasi (orang)",
-      "formulaExpr": "TKK_SERTIFIKAT",
-      "formulaVars": [
-        "VAR_BK_01"
-      ],
-      "source": "Bidang Bina Konstruksi DINPUTARU Kab. Demak & Lembaga Sertifikasi Profesi (LSP)",
+      "definition": "Nilai evaluasi akuntabilitas kinerja perangkat daerah oleh Inspektorat Daerah Kabupaten Demak meliputi perencanaan, pengukuran, pelaporan, dan evaluasi internal (PermenPAN-RB No. 88/2021).",
+      "formula": "Total Skor Evaluasi AKIP (Skala 0 - 100)",
+      "source": "Laporan Hasil Evaluasi (LHE) AKIP Inspektorat Daerah Kabupaten Demak",
       "records": {
         "2020": {
-          "target": 150,
-          "realisasi": 185,
-          "notes": "Pelatihan tukang pasang batu & pembesian"
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         },
         "2021": {
-          "target": 200,
-          "realisasi": 240,
-          "notes": "Fasilitasi sertifikasi gratis bagi pekerja lokal Demak"
+          "target": 75.61,
+          "realisasi": 75.61,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         },
         "2022": {
-          "target": 300,
-          "realisasi": 365,
-          "notes": "Kerjasama dengan Balai Jasa Konstruksi Wilayah IV"
+          "target": 75.61,
+          "realisasi": 75.61,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         },
         "2023": {
-          "target": 450,
-          "realisasi": 490,
-          "notes": "Pelatihan Keselamatan dan Kesehatan Kerja Konstruksi (K3)"
+          "target": 76.4,
+          "realisasi": 76.4,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         },
         "2024": {
-          "target": 550,
-          "realisasi": 610,
-          "notes": "Uji kompetensi mobile training unit (MTU)"
+          "target": 76.7,
+          "realisasi": 76.7,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         },
         "2025": {
-          "target": 700,
-          "realisasi": 750,
-          "notes": "Target sertifikasi pengawas lapangan"
+          "target": 77,
+          "realisasi": 76.85,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         },
         "2026": {
-          "target": 850,
-          "realisasi": 900,
-          "notes": "Standardisasi seluruh mitra penyedia jasa DINPUTARU"
+          "target": 77.3,
+          "realisasi": 0,
+          "notes": "Realisasi berjalan tahun anggaran aktif 2026"
+        },
+        "2027": {
+          "target": 77.6,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2028": {
+          "target": 77.9,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2029": {
+          "target": 78.2,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2030": {
+          "target": 78.5,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
         }
-      }
+      },
+      "notes": "Perjanjian Kinerja Utama Kepala Dinas (Renstra DINPUTARU)"
+    },
+    {
+      "id": "IND-IKU-PD-02",
+      "code": "IKU-PD-02",
+      "name": "Indeks Pelayanan Publik Perangkat Daerah",
+      "categoryId": "iku_pd",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Angka",
+      "polarization": "maximize",
+      "definition": "Indeks kepatuhan dan mutu standar pelayanan perizinan teknis, PBG, dan rekomendasi tata ruang pada DINPUTARU Kabupaten Demak (PermenPAN-RB No. 17/2017).",
+      "formula": "Rata-rata Skor 6 Aspek Pelayanan Publik KemenPAN-RB (Skala 1 - 5)",
+      "source": "Evaluasi Kinerja Pelayanan Publik KemenPAN-RB & Bagian Organisasi",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2024": {
+          "target": 4.6,
+          "realisasi": 4.6,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2025": {
+          "target": 4.6,
+          "realisasi": 4.43,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2026": {
+          "target": 4.61,
+          "realisasi": 0,
+          "notes": "Realisasi berjalan tahun anggaran aktif 2026"
+        },
+        "2027": {
+          "target": 4.61,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2028": {
+          "target": 4.62,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2029": {
+          "target": 4.62,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2030": {
+          "target": 4.62,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        }
+      },
+      "notes": "Perjanjian Kinerja Utama Kepala Dinas (Renstra DINPUTARU)"
+    },
+    {
+      "id": "IND-IKU-PD-03",
+      "code": "IKU-PD-03",
+      "name": "Persentase Panjang Jalan Kondisi Permukaan Mantap Kewenangan Kabupaten/Kota",
+      "categoryId": "iku_pd",
+      "bidangId": "bidang_bm",
+      "wewenangBidang": "Bidang Bina Marga",
+      "pejabatPenanggungJawab": "Budi Santoso, S.T., M.T. (Kabid Bina Marga)",
+      "seksiPelaksana": "Seksi Pembangunan & Preservasi Jalan Jembatan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Tingkat kemantapan infrastruktur jaringan jalan kabupaten dalam melayani konektivitas antar wilayah dan pusat produksi di Kabupaten Demak.",
+      "formula": "((Panjang Jalan Baik + Sedang) / Total Panjang Jalan Kabupaten) x 100%",
+      "source": "Data Survei Kondisi Jalan Bidang Bina Marga DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 97.24,
+          "realisasi": 97.24,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2021": {
+          "target": 98.48,
+          "realisasi": 98.48,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2022": {
+          "target": 88.25,
+          "realisasi": 88.25,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2023": {
+          "target": 88.57,
+          "realisasi": 88.57,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2024": {
+          "target": 81.48,
+          "realisasi": 81.48,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2025": {
+          "target": 85.25,
+          "realisasi": 82.46,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2026": {
+          "target": 85.75,
+          "realisasi": 82.46,
+          "notes": "Realisasi berjalan tahun anggaran aktif 2026"
+        },
+        "2027": {
+          "target": 86.25,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2028": {
+          "target": 86.75,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2029": {
+          "target": 91.6,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2030": {
+          "target": 91.65,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        }
+      },
+      "notes": "Perjanjian Kinerja Utama Kepala Dinas (Renstra DINPUTARU)"
+    },
+    {
+      "id": "IND-IKU-PD-04",
+      "code": "IKU-PD-04",
+      "name": "Persentase capaian kinerja pengelolaan sumber daya air",
+      "categoryId": "iku_pd",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Persentase ketercapaian target pengelolaan jaringan irigasi, drainase utama, dan pemeliharaan sarpras pengendali banjir/rob di Kabupaten Demak.",
+      "formula": "(Rata-rata Capaian Sub-Kegiatan SDA / Target) x 100%",
+      "source": "Laporan Kinerja Bidang SDA & Bina Konstruksi DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 93.54,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Realisasi berjalan tahun anggaran aktif 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        }
+      },
+      "notes": "Perjanjian Kinerja Utama Kepala Dinas (Renstra DINPUTARU)"
+    },
+    {
+      "id": "IND-IKU-PD-05",
+      "code": "IKU-PD-05",
+      "name": "Persentase capaian kinerja penyelenggaraan penataan ruang",
+      "categoryId": "iku_pd",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Persentase capaian kinerja penyelenggaraan penataan ruang meliputi penyusunan RDTR, penerbitan KKPR tepat waktu, dan pengawasan pemanfaatan ruang.",
+      "formula": "(Jumlah Layanan Penataan Ruang Terpenuhi / Total Agenda Penataan Ruang) x 100%",
+      "source": "Laporan Penyelenggaraan Tata Ruang Bidang Penataan Ruang & Pertanahan",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2025": {
+          "target": 92.08,
+          "realisasi": 100,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2026": {
+          "target": 92.09,
+          "realisasi": 0,
+          "notes": "Realisasi berjalan tahun anggaran aktif 2026"
+        },
+        "2027": {
+          "target": 92.1,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2028": {
+          "target": 92.11,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2029": {
+          "target": 92.12,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        },
+        "2030": {
+          "target": 92.13,
+          "realisasi": 0,
+          "notes": "Sesuai Renstra 2021-2026 DINPUTARU"
+        }
+      },
+      "notes": "Perjanjian Kinerja Utama Kepala Dinas (Renstra DINPUTARU)"
+    },
+    {
+      "id": "IND-IKK-01",
+      "code": "IKK-01",
+      "name": "Rasio luas kawasan permukiman rawan banjir yang terlindungi oleh infrastruktur pengendalian banjir di Wilayah Sungai Kewenangan Kab/Kota",
+      "categoryId": "ikk",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 94.161,
+          "realisasi": 94.161,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 94.899,
+          "realisasi": 94.899,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 57.51,
+          "realisasi": 57.51,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 19,
+          "realisasi": 19,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 29,
+          "realisasi": 19,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 39,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 49,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 60,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 70,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-02",
+      "code": "IKK-02",
+      "name": "Rasio luas kawasan permukiman sepanjang pantai rawan abrasi, erosi, dan akresi yang terlindungi oleh infrastruktur pengaman pantai di Wilayah Sungai Kewenangan Kab/Kota",
+      "categoryId": "ikk",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 94.161,
+          "realisasi": 94.161,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 94.899,
+          "realisasi": 94.899,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 43.79,
+          "realisasi": 43.79,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 27.68,
+          "realisasi": 27.68,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 36.74,
+          "realisasi": 27.68,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 45.81,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 54.87,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 63.94,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 73,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-03",
+      "code": "IKK-03",
+      "name": "Rasio luas daerah irigasi kewenangan kabupaten/kota yang dilayani oleh jaringan irigasi",
+      "categoryId": "ikk",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 94.161,
+          "realisasi": 94.161,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 94.899,
+          "realisasi": 94.899,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 94.899,
+          "realisasi": 94.899,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 96.374,
+          "realisasi": 96.374,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 97.11,
+          "realisasi": 97.11,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 97.23,
+          "realisasi": 97.23,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 97.36,
+          "realisasi": 97.23,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 97.48,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 97.6,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 97.73,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 97.85,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-04",
+      "code": "IKK-04",
+      "name": "Persentase jumlah rumah tangga yang mendapatkan akses terhadap air minum melalui SPAM jaringan perpipaan dan bukan jaringan perpipaan terlindungi terhadap rumah tangga di seluruh kabupaten/kota",
+      "categoryId": "ikk",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 80.078,
+          "realisasi": 80.078,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 82.977,
+          "realisasi": 82.977,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 85.583,
+          "realisasi": 85.583,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 87.643,
+          "realisasi": 87.643,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 92.26,
+          "realisasi": 92.26,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 92.42,
+          "realisasi": 95.18,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 92.58,
+          "realisasi": 95.18,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 92.73,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 92.89,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 93.05,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 93.2,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-05",
+      "code": "IKK-05",
+      "name": "Persentase jumlah rumah tangga yang memperoleh layanan pengolahan air limbah domestik",
+      "categoryId": "ikk",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 97.997,
+          "realisasi": 97.997,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 98.153,
+          "realisasi": 98.153,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 5.79,
+          "realisasi": 5.79,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 10,
+          "realisasi": 6.41,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 15,
+          "realisasi": 6.41,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 20,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 25,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 30,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 32,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-06",
+      "code": "IKK-06",
+      "name": "Rasio kepatuhan IMB kab/ kota",
+      "categoryId": "ikk",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-07",
+      "code": "IKK-07",
+      "name": "Tingkat Kemantapan Jalan kabupaten/kota",
+      "categoryId": "ikk",
+      "bidangId": "bidang_bm",
+      "wewenangBidang": "Bidang Bina Marga",
+      "pejabatPenanggungJawab": "Budi Santoso, S.T., M.T. (Kabid Bina Marga)",
+      "seksiPelaksana": "Seksi Pembangunan & Preservasi Jalan Jembatan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 97.2399,
+          "realisasi": 97.2399,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 98.48,
+          "realisasi": 98.48,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 88.25,
+          "realisasi": 88.25,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 89.369,
+          "realisasi": 89.369,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 81.48,
+          "realisasi": 81.48,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 85.25,
+          "realisasi": 82.46,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 85.75,
+          "realisasi": 82.46,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 86.25,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 86.75,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 91.6,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 91.65,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-08",
+      "code": "IKK-08",
+      "name": "Rasio tenaga operator/ teknisi/analisis yang memiliki sertifikat kompetensi",
+      "categoryId": "ikk",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 114.385,
+          "realisasi": 114.385,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 47.688,
+          "realisasi": 47.688,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 52.271,
+          "realisasi": 52.271,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 50,
+          "realisasi": 50,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 55.7,
+          "realisasi": 58.59,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 57.7,
+          "realisasi": 58.59,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 59.7,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 61.7,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 63.7,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 65.7,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-09",
+      "code": "IKK-09",
+      "name": "Rasio proyek yang menjadi kewenangan pengawasannya tanpa kecelakaan konstruksi",
+      "categoryId": "ikk",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-10",
+      "code": "IKK-10",
+      "name": "Persentase pemanfaatan tanah yang sesuai dengan peruntukkan tanahnya diatas izin lokasi dibandingkan dengan luas izin lokasi yang diterbitkan",
+      "categoryId": "ikk",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-11",
+      "code": "IKK-11",
+      "name": "Persentase penetapan tanah untuk pembangunan fasilitas umum",
+      "categoryId": "ikk",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 95.266,
+          "realisasi": 95.266,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-12",
+      "code": "IKK-12",
+      "name": "Tersedianya lokasi pembangunan dalam rangka penanaman modal.",
+      "categoryId": "ikk",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 95.266,
+          "realisasi": 95.266,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-13",
+      "code": "IKK-13",
+      "name": "Tersedianya Tanah Obyek Landreform (TOL) yang siap diredistribusikan yang berasal dari Tanah Kelebihan Maksimum dan Tanah Absentee",
+      "categoryId": "ikk",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-14",
+      "code": "IKK-14",
+      "name": "Tersedianya tanah untuk masyarakat",
+      "categoryId": "ikk",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKK-15",
+      "code": "IKK-15",
+      "name": "Penanganan sengketa tanah garapan yang dilakukan melalui mediasi",
+      "categoryId": "ikk",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator Kinerja Kunci (IKK) evaluasi penyelenggaraan urusan ke-PU-an dan penataan ruang pemerintah daerah Kabupaten Demak sesuai pedoman LPPD Kemendagri.",
+      "formula": "(Realisasi Output Terpenuhi / Target Penetapan Kinerja) x 100%",
+      "source": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) Kabupaten Demak",
+      "records": {
+        "2020": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2021": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2022": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2024": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 100,
+          "notes": "Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai data LPPD tahun anggaran bersangkutan"
+        }
+      },
+      "notes": "Indikator Kinerja Kunci (LPPD Kemendagri)"
+    },
+    {
+      "id": "IND-IKP-01",
+      "code": "IKP-01",
+      "name": "IKM Perangkat Daerah",
+      "categoryId": "program",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Angka",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENUNJANG URUSAN PEMERINTAHAN DAERAH KABUPATEN/KOTA. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 93,
+          "realisasi": 93,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 93.1,
+          "realisasi": 93.01,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 93.2,
+          "realisasi": 0,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 93.3,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 93.4,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 93.5,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 93.6,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENUNJANG URUSAN PEMERINTAHAN DAERAH KABUPATEN/KOTA"
+    },
+    {
+      "id": "IND-IKP-02",
+      "code": "IKP-02",
+      "name": "Persentase jaringan irigasi dalam kondisi baik",
+      "categoryId": "program",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENGELOLAAN SUMBER DAYA AIR (SDA). Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 88.07,
+          "realisasi": 88.07,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 88.07,
+          "realisasi": 89.02,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 89.78,
+          "realisasi": 89.02,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 93.2,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 92.19,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 93.4,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 94.61,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENGELOLAAN SUMBER DAYA AIR (SDA)"
+    },
+    {
+      "id": "IND-IKP-03",
+      "code": "IKP-03",
+      "name": "Persentase sarana prasarana pengendali banjir dalam kondisi baik",
+      "categoryId": "program",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENGELOLAAN SUMBER DAYA AIR (SDA). Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 19,
+          "realisasi": 19,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 25,
+          "realisasi": 26,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 34,
+          "realisasi": 26,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 42,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 49,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 55,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 60,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENGELOLAAN SUMBER DAYA AIR (SDA)"
+    },
+    {
+      "id": "IND-IKP-04",
+      "code": "IKP-04",
+      "name": "persentase rumah tangga dengan akses air minum jaringan perpipaan (PDAM dan Non PDAM)",
+      "categoryId": "program",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENGELOLAAN DAN PENGEMBANGAN SISTEM PENYEDIAAN AIR MINUM. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 57.37,
+          "realisasi": 57.37,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 65.87,
+          "realisasi": 65.87,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 67.42,
+          "realisasi": 67.42,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 74.15,
+          "realisasi": 74.15,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 74.15,
+          "realisasi": 78.27,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 74.18,
+          "realisasi": 78.27,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 74.21,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 74.24,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 74.27,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 74.3,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENGELOLAAN DAN PENGEMBANGAN SISTEM PENYEDIAAN AIR MINUM"
+    },
+    {
+      "id": "IND-IKP-05",
+      "code": "IKP-05",
+      "name": "Persentase rumah tangga yang terlayani akses sanitasi layak",
+      "categoryId": "program",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENGELOLAAN DAN PENGEMBANGAN SISTEM AIR LIMBAH. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 49.7,
+          "realisasi": 49.7,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 50.56,
+          "realisasi": 50.56,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 77.04,
+          "realisasi": 77.04,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 79.06,
+          "realisasi": 79.06,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 83.33,
+          "realisasi": 83.33,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 83.78,
+          "realisasi": 86.72,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 84.43,
+          "realisasi": 86.72,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 84.5,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 84.56,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 84.62,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 84.68,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENGELOLAAN DAN PENGEMBANGAN SISTEM AIR LIMBAH"
+    },
+    {
+      "id": "IND-IKP-06",
+      "code": "IKP-06",
+      "name": "Persentase drainase perkotaan yang tertangani",
+      "categoryId": "program",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENGELOLAAN DAN PENGEMBANGAN SISTEM DRAINASE. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 80.71,
+          "realisasi": 80.71,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 83.51,
+          "realisasi": 83.51,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 86.31,
+          "realisasi": 86.31,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 90.11,
+          "realisasi": 90.11,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 92.2,
+          "realisasi": 92.2,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 92.8,
+          "realisasi": 87846,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 94.36,
+          "realisasi": 88.17,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 95.92,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 97.48,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 99.04,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENGELOLAAN DAN PENGEMBANGAN SISTEM DRAINASE"
+    },
+    {
+      "id": "IND-IKP-07",
+      "code": "IKP-07",
+      "name": "Rasio kepatuhan Persetujuan Bangunan Gedung (PBG) kabupaten",
+      "categoryId": "program",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENATAAN BANGUNAN GEDUNG. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 1,
+          "realisasi": 1,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 1,
+          "realisasi": 1,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 1,
+          "realisasi": 0,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 1,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 1,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 1,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 1,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENATAAN BANGUNAN GEDUNG"
+    },
+    {
+      "id": "IND-IKP-08",
+      "code": "IKP-08",
+      "name": "Luas kawasan bangunan dan lingkungan yang tertata dengan baik",
+      "categoryId": "program",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "Ha",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENATAAN BANGUNAN DAN LINGKUNGANNYA. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 0.2,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 0.2,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 0.2,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 0.2,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENATAAN BANGUNAN DAN LINGKUNGANNYA"
+    },
+    {
+      "id": "IND-IKP-09",
+      "code": "IKP-09",
+      "name": "Panjang Jalan dalam kondisi mantap",
+      "categoryId": "program",
+      "bidangId": "bidang_bm",
+      "wewenangBidang": "Bidang Bina Marga",
+      "pejabatPenanggungJawab": "Budi Santoso, S.T., M.T. (Kabid Bina Marga)",
+      "seksiPelaksana": "Seksi Pembangunan & Preservasi Jalan Jembatan",
+      "unit": "Km",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENYELENGGARAAN JALAN. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 750074,
+          "realisasi": 750074,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 751357,
+          "realisasi": 750.07,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 752024,
+          "realisasi": 750.07,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 755784,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 759563,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 763361,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 767178,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENYELENGGARAAN JALAN"
+    },
+    {
+      "id": "IND-IKP-10",
+      "code": "IKP-10",
+      "name": "Rasio tenaga kerja konstruksi yang terlatih",
+      "categoryId": "program",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENGEMBANGAN JASA KONSTRUKSI. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 52.85,
+          "realisasi": 52.85,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 55.7,
+          "realisasi": 58.59,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 57.7,
+          "realisasi": 0,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 59.7,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 61.7,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 63.7,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 65.7,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENGEMBANGAN JASA KONSTRUKSI"
+    },
+    {
+      "id": "IND-IKP-11",
+      "code": "IKP-11",
+      "name": "Persentase kepatuhan terhadap Rencana Tata Ruang Wilayah",
+      "categoryId": "program",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENYELENGGARAAN PENATAAN RUANG. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 65,
+          "realisasi": 65,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 70,
+          "realisasi": 0,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 75,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 80,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 85,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 90,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENYELENGGARAAN PENATAAN RUANG"
+    },
+    {
+      "id": "IND-IKP-12",
+      "code": "IKP-12",
+      "name": "Persentase pelaksanaan rencana aksi gugus tugas reforma agraria",
+      "categoryId": "program",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM REDISTRIBUSI TANAH, DAN GANTI KERUGIAN PROGRAM TANAH KELEBIHAN MAKSIMUM DAN TANAH ABSENTEE. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM REDISTRIBUSI TANAH, DAN GANTI KERUGIAN PROGRAM TANAH KELEBIHAN MAKSIMUM DAN TANAH ABSENTEE"
+    },
+    {
+      "id": "IND-IKP-13",
+      "code": "IKP-13",
+      "name": "Persentase tanah pemkab yang bersertifikat",
+      "categoryId": "program",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator outcome keberhasilan pelaksanaan PROGRAM PENATAGUNAAN TANAH. Mengukur efektivitas intervensi kegiatan terhadap sasaran kinerja program.",
+      "formula": "(Output Nyata Terwujud / Target Outcome Program) x 100%",
+      "source": "Dokumen Pelaksanaan Anggaran (DPA) & Laporan Akuntabilitas Kinerja DINPUTARU",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2020"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2021"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2022"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Sesuai dokumen DPA & LAKIP 2023"
+        },
+        "2024": {
+          "target": 98,
+          "realisasi": 98,
+          "notes": "Sesuai dokumen DPA & LAKIP 2024"
+        },
+        "2025": {
+          "target": 98.3,
+          "realisasi": 99.21,
+          "notes": "Sesuai dokumen DPA & LAKIP 2025"
+        },
+        "2026": {
+          "target": 98.42,
+          "realisasi": 97.66,
+          "notes": "Realisasi kumulatif program tahun berjalan 2026"
+        },
+        "2027": {
+          "target": 98.83,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2027"
+        },
+        "2028": {
+          "target": 99.23,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2028"
+        },
+        "2029": {
+          "target": 99.62,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2029"
+        },
+        "2030": {
+          "target": 99.89,
+          "realisasi": 0,
+          "notes": "Sesuai dokumen DPA & LAKIP 2030"
+        }
+      },
+      "notes": "Program Prioritas: PROGRAM PENATAGUNAAN TANAH"
+    },
+    {
+      "id": "IND-SAS-01",
+      "code": "SAS-01",
+      "name": "Persentase Panjang Jalan Kondisi Permukaan Mantap Kewenangan Kabupaten/Kota",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_bm",
+      "wewenangBidang": "Bidang Bina Marga",
+      "pejabatPenanggungJawab": "Budi Santoso, S.T., M.T. (Kabid Bina Marga)",
+      "seksiPelaksana": "Seksi Pembangunan & Preservasi Jalan Jembatan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatkan kualitas layanan jalan.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 85.25,
+          "realisasi": 82.46,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 85.75,
+          "realisasi": 82.46,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 86.25,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 86.75,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 91.6,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 91.65,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatkan kualitas layanan jalan"
+    },
+    {
+      "id": "IND-SAS-02",
+      "code": "SAS-02",
+      "name": "Persentase Panjang Jalan Kondisi Baik",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_bm",
+      "wewenangBidang": "Bidang Bina Marga",
+      "pejabatPenanggungJawab": "Budi Santoso, S.T., M.T. (Kabid Bina Marga)",
+      "seksiPelaksana": "Seksi Pembangunan & Preservasi Jalan Jembatan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya kualitas jalan kewenangan kabupaten.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 42.9,
+          "realisasi": 42.9,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 43.16,
+          "realisasi": 42.9,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 43.66,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 44.16,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 44.66,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 45.16,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya kualitas jalan kewenangan kabupaten"
+    },
+    {
+      "id": "IND-SAS-03",
+      "code": "SAS-03",
+      "name": "Indeks Pelayanan Publik Dinas Pekerjaan Umum dan Penataan Ruang",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya tata kelola pemerintahan di perangkat daerah.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 4.6,
+          "realisasi": 4.43,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 4.61,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 4.61,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 4.62,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 4.62,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 4.62,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya tata kelola pemerintahan di perangkat daerah"
+    },
+    {
+      "id": "IND-SAS-04",
+      "code": "SAS-04",
+      "name": "Nilai SAKIP Dinas Pekerjaan Umum dan Penataan Ruang",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Nilai SAKIP Dinas Pekerjaan Umum dan Penataan Ruang.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 75.61,
+          "realisasi": 75.61,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 75.61,
+          "realisasi": 75.61,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 76.4,
+          "realisasi": 76.4,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 76.7,
+          "realisasi": 76.7,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 77,
+          "realisasi": 76.85,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 77.3,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 77.6,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 77.9,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 78.2,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 78.5,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: -"
+    },
+    {
+      "id": "IND-SAS-05",
+      "code": "SAS-05",
+      "name": "Persentase capaian kinerja pengelolaan sumber daya air",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatkan kualitas layanan Sumber Daya Air.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 100,
+          "realisasi": 93.54,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 100,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatkan kualitas layanan Sumber Daya Air"
+    },
+    {
+      "id": "IND-SAS-06",
+      "code": "SAS-06",
+      "name": "Indeks kinerja sistem irigasi Kewenangan Kabupaten",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya pengembangan dan pengelolaan Sumber Daya Air.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 54.46,
+          "realisasi": 54.46,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 59.27,
+          "realisasi": 59.27,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 57.21,
+          "realisasi": 60.26,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 58.58,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 59.96,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 61.33,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 62.71,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 64.08,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya pengembangan dan pengelolaan Sumber Daya Air"
+    },
+    {
+      "id": "IND-SAS-07",
+      "code": "SAS-07",
+      "name": "Luas wilayah rawan banjir yang tertangani",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "Ha",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Luas wilayah rawan banjir yang tertangani.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 99.81,
+          "realisasi": 99.81,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 101.86,
+          "realisasi": 101.86,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 110.91,
+          "realisasi": 110.91,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 119.96,
+          "realisasi": 119.96,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 129.02,
+          "realisasi": 129.02,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 138.07,
+          "realisasi": 129.01,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 147.13,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 156.18,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 165.24,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 174.29,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: -"
+    },
+    {
+      "id": "IND-SAS-08",
+      "code": "SAS-08",
+      "name": "Persentase drainase dalam kondisi baik",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya daya tampung drainase.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 80.71,
+          "realisasi": 80.71,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 83.51,
+          "realisasi": 83.51,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 86.31,
+          "realisasi": 86.31,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 90.11,
+          "realisasi": 90.11,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 92.14,
+          "realisasi": 92.14,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 92.2,
+          "realisasi": 87846,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 92.72,
+          "realisasi": 87.85,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 93.24,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 93.76,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 94.28,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 94.8,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya daya tampung drainase"
+    },
+    {
+      "id": "IND-SAS-09",
+      "code": "SAS-09",
+      "name": "Persentase rumah tangga dengan akses sanitasi aman (IUP)",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya pelayanan air minum dan sanitasi untuk masyarakat.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 2.82,
+          "realisasi": 2.82,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 3.27,
+          "realisasi": 3.27,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 4.1,
+          "realisasi": 4.1,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 5.05,
+          "realisasi": 5.05,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 5.79,
+          "realisasi": 5.79,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 10,
+          "realisasi": 6.41,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 15,
+          "realisasi": 6.41,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 20,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 25,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 30,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 32,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya pelayanan air minum dan sanitasi untuk masyarakat"
+    },
+    {
+      "id": "IND-SAS-10",
+      "code": "SAS-10",
+      "name": "Persentase rumah tangga yang terlayani akses air minum layak",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Persentase rumah tangga yang terlayani akses air minum layak.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 80.08,
+          "realisasi": 80.08,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 82.98,
+          "realisasi": 82.98,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 85.58,
+          "realisasi": 85.58,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 87.64,
+          "realisasi": 87.64,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 92.26,
+          "realisasi": 92.26,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 92.42,
+          "realisasi": 95.18,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 92.58,
+          "realisasi": 95.18,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 92.73,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 92.89,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 93.05,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 93.2,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: -"
+    },
+    {
+      "id": "IND-SAS-11",
+      "code": "SAS-11",
+      "name": "Persentase capaian kinerja penyelenggaraan penataan ruang",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sekretariat",
+      "wewenangBidang": "Sekretariat DINPUTARU",
+      "pejabatPenanggungJawab": "Amirul Mukminin, S.T., M.Si. (Sekretaris Dinas)",
+      "seksiPelaksana": "Subbag Program, Keuangan & Akuntabilitas Kinerja",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatkan kualitas penyelenggaraan penataan ruang.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 92.08,
+          "realisasi": 100,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 92.09,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 92.1,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 92.11,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 92.12,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 92.13,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatkan kualitas penyelenggaraan penataan ruang"
+    },
+    {
+      "id": "IND-SAS-12",
+      "code": "SAS-12",
+      "name": "Indeks penyelenggaraan penataan ruang",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_tr",
+      "wewenangBidang": "Bidang Penataan Ruang & Pertanahan",
+      "pejabatPenanggungJawab": "Siti Rahmawati, S.T., M.PWK. (Kabid Tata Ruang)",
+      "seksiPelaksana": "Seksi Perencanaan Ruang, KKPR & Fasilitasi Pertanahan",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya kualitas penyelenggaraan penataan ruang.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 0,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 0.62,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 0.71,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 0.79,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 0.91,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 0.94,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya kualitas penyelenggaraan penataan ruang"
+    },
+    {
+      "id": "IND-SAS-13",
+      "code": "SAS-13",
+      "name": "rasio bangunan berizin",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_ck",
+      "wewenangBidang": "Bidang Cipta Karya & Perumahan",
+      "pejabatPenanggungJawab": "Dian Pratama, S.T., M.Sc. (Kabid Cipta Karya)",
+      "seksiPelaksana": "Seksi Air Minum, Sanitasi & Tata Bangunan",
+      "unit": "angka",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya kualitas penataan bangunan gedung.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 0.0097,
+          "realisasi": 0.0224,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 0.0219,
+          "realisasi": 0,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 0.0233,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 0.0246,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 0.0259,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 0.0272,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya kualitas penataan bangunan gedung"
+    },
+    {
+      "id": "IND-SAS-14",
+      "code": "SAS-14",
+      "name": "Persentase partisipasi tenaga kerja konstruksi dalam pembangunan",
+      "categoryId": "tujuan_sasaran",
+      "bidangId": "bidang_sda",
+      "wewenangBidang": "Bidang Sumber Daya Air & Bina Konstruksi",
+      "pejabatPenanggungJawab": "Ir. Hendra Wijaya, M.Eng. (Kabid SDA & BK)",
+      "seksiPelaksana": "Seksi Irigasi, Pengendalian Banjir & Pembinaan Jasa Konstruksi",
+      "unit": "%",
+      "polarization": "maximize",
+      "definition": "Indikator capaian tujuan dan sasaran strategis Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak: Meningkatnya kualitas pengembangan jasa konstruksi.",
+      "formula": "(Realisasi Sasaran Terpenuhi / Target Renstra) x 100%",
+      "source": "Rencana Strategis (Renstra) DINPUTARU Kabupaten Demak 2021-2026",
+      "records": {
+        "2020": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2021": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2022": {
+          "target": 0,
+          "realisasi": null,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2023": {
+          "target": 25.7,
+          "realisasi": 25.7,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2024": {
+          "target": 26.79,
+          "realisasi": 26.79,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2025": {
+          "target": 26.79,
+          "realisasi": 28.23,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2026": {
+          "target": 28.8,
+          "realisasi": 28.23,
+          "notes": "Sasaran strategis Renstra DINPUTARU tahun aktif"
+        },
+        "2027": {
+          "target": 29.84,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2028": {
+          "target": 30.87,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2029": {
+          "target": 31.9,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        },
+        "2030": {
+          "target": 32.94,
+          "realisasi": 0,
+          "notes": "Renstra DINPUTARU Kabupaten Demak"
+        }
+      },
+      "notes": "Tujuan / Sasaran: Meningkatnya kualitas pengembangan jasa konstruksi"
     }
   ],
   "documents": [
@@ -1283,7 +4762,7 @@
     "contactEmail": "dinputaru@demakkab.go.id",
     "footerText": "© 2026 DINPUTARU Kabupaten Demak. Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak.",
     "version": "3.0.0",
-    "lastUpdated": "2026-11-02T07:26:27.178Z",
+    "lastUpdated": "2026-11-02T08:10:11.278Z",
     "pubTab1Title": "1. Indikator & Grafik Tren",
     "pubTab2Title": "2. Matriks Tabel Multi-Tahun (2020-2026)",
     "pubTab3Title": "3. Dokumen Laporan Kinerja Resmi (Cetak / PDF)",
@@ -1310,7 +4789,11 @@
     2023,
     2024,
     2025,
-    2026
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
   ],
   "activeYear": 2026
 }
