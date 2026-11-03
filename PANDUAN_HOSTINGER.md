@@ -1,125 +1,134 @@
-# PANDUAN LENGKAP KONEKSI & DEPLOYMENT HOSTINGER
+# PANDUAN LENGKAP KONEKSI DATABASE & DEPLOYMENT HOSTINGER
 ## SISTEM INFORMASI CAPAIAN KINERJA & SATU DATA (SIDAT - SATUPUTARU)
 **Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak**
+**Domain Terpasang:** `https://sidat.satuputarudemak.id`
 
 ---
 
-Panduan ini disusun secara rinci dan bertahap (*step-by-step*) agar Anda dapat menghubungkan web aplikasi **SIDAT - SATUPUTARU** dengan database **MySQL di Hostinger** sehingga aplikasi dapat langsung digunakan secara online di domain Anda.
+Panduan ini disusun secara rinci langkah demi langkah (*step-by-step*) khusus untuk menghubungkan web aplikasi **SIDAT - SATUPUTARU** yang sudah tersinkronisasi dari GitHub ke domain **`sidat.satuputarudemak.id`** dengan database **MySQL di Hostinger**.
 
 ---
 
 ## DAFTAR ISI
-1. [Struktur File Database Siap Pakai](#1-struktur-file-database-siap-pakai)
+1. [Berkas Database Siap Pakai](#1-berkas-database-siap-pakai)
 2. [Langkah 1: Membuat Database MySQL di hPanel Hostinger](#langkah-1-membuat-database-mysql-di-hpanel-hostinger)
-3. [Langkah 2: Mengimpor File SQL ke phpMyAdmin Hostinger](#langkah-2-mengimpor-file-sql-ke-phpmyadmin-hostinger)
-4. [Langkah 3: Konfigurasi Koneksi Database Aplikasi](#langkah-3-konfigurasi-koneksi-database-aplikasi)
+3. [Langkah 2: Mengimpor Database SQL ke phpMyAdmin](#langkah-2-mengimpor-database-sql-ke-phpmyadmin)
+4. [Langkah 3: Menghubungkan SIDAT dengan Database MySQL](#langkah-3-menghubungkan-sidat-dengan-database-mysql)
+   - [Opsi A: Mengatur dari Panel Admin Web (Tanpa Edit File)](#opsi-a-mengatur-dari-panel-admin-web-paling-mudah)
+   - [Opsi B: Mengedit File config/db.json di File Manager Hostinger](#opsi-b-mengedit-file-configdbjson-di-file-manager)
+   - [Opsi C: Mengatur File .env](#opsi-c-mengatur-file-env)
 5. [Langkah 4: Menjalankan Aplikasi di Hostinger](#langkah-4-menjalankan-aplikasi-di-hostinger)
-   - [Opsi A: Menggunakan Menu Node.js Application di hPanel (Shared/Cloud Hosting)](#opsi-a-menggunakan-menu-nodejs-application-di-hpanel)
-   - [Opsi B: Menggunakan VPS Hostinger (PM2 + Nginx)](#opsi-b-menggunakan-vps-hostinger-pm2--nginx)
-6. [Fitur Dual-Engine & Auto-Fallback Aman](#6-fitur-dual-engine--auto-fallback-aman)
-7. [Daftar Akun Login Bawaan (7 Peran Aparatur)](#7-daftar-akun-login-bawaan-7-peran-aparatur)
-8. [Uji Koneksi & Verifikasi Sistem](#8-uji-koneksi--verifikasi-sistem)
+   - [Model 1: Hostinger Web Hosting Standar (Otomatis via Apache/LiteSpeed & PHP Bridge)](#model-1-hostinger-web-hosting-standar-otomatis-aktif)
+   - [Model 2: Hostinger Cloud / Business Hosting (Menu Node.js Application)](#model-2-hostinger-cloud--business-hosting-fitur-nodejs)
+   - [Model 3: Hostinger Cloud VPS (PM2 & Nginx)](#model-3-hostinger-cloud-vps-pm2--nginx)
+6. [Daftar Akun Pengguna & Password (7 Peran Aparatur DINPUTARU)](#6-daftar-akun-pengguna--password)
+7. [Pengecekan & Verifikasi Hasil](#7-pengecekan--verifikasi-hasil)
 
 ---
 
-## 1. STRUKTUR FILE DATABASE SIAP PAKAI
+## 1. BERKAS DATABASE SIAP PAKAI
 
-File database MySQL telah disiapkan 100% lengkap dan siap diimpor di lokasi:
-```
-database/sidat_demak_hostinger.sql
-```
+Aplikasi telah dilengkapi berkas database SQL lengkap yang siap diimpor ke MySQL Hostinger:
+* **Lokasi Berkas Utama:** `database/sidat_demak_hostinger.sql`
+* **Salinan Berkas di Root:** `database.sql`
 
-File SQL ini berukuran ~100 KB dan sudah mencakup seluruh data:
-- **`system_settings`**: Identitas instansi DINPUTARU, teks antarmuka, dan logo resmi PUPR.
-- **`roles`**: 7 Peran resmi aparatur (Super Admin s.d. Kepala Dinas).
-- **`bidang`**: Struktur 5 Bidang Teknis + 1 Sekretariat DINPUTARU Demak.
-- **`users`**: 7 Akun resmi siap login langsung.
-- **`categories`**: 6 Kategori Indikator resmi sesuai lembar kerja Renstra.
-- **`indicators`**: 55 Indikator Kinerja lengkap dengan formulasi, definisi, dan polaritas.
-- **`target_realisasi`**: 605 Baris data target & realisasi multi-tahun (2020 s.d. 2030) dengan kalkulasi persentase otomatis.
-- **`bank_data`**: 20 Dataset resmi bersumber dari **BPS Kabupaten Demak (Kabupaten Demak Dalam Angka 2025)** mencakup jalan, irigasi, air minum, sanitasi, rob, dan penataan ruang.
-- **`variables`**: Master variabel perhitungan indikator kinerja.
+### Isi & Struktur Tabel Database (9 Tabel Utama):
+1. **`system_settings`**: Menyimpan identitas aplikasi, nama instansi DINPUTARU, teks antarmuka, pengaturan tahun aktif, dan URL logo resmi PUPR.
+2. **`roles`**: 7 Peran resmi aparatur (Super Admin, Kepala Dinas, Sekretaris, Kepala Bidang, Koordinator Bidang, Kasubag Program, Kasubag Umum).
+3. **`bidang`**: Struktur organisasi 5 Bidang Teknis (Bina Marga, SDA, Cipta Karya, Tata Ruang, Bina Konstruksi) + 1 Sekretariat Dinas.
+4. **`users`**: 8 Akun aparatur internal lengkap dengan NIP, nomor kontak, wewenang peran, dan password siap login.
+5. **`categories`**: 6 Kategori Indikator resmi sesuai lembar kerja Renstra (IKU Daerah, IKD, IKU PD, IKK, PROGRAM, TUJUAN-SASARAN).
+6. **`indicators`**: 55 Indikator Kinerja lengkap dengan kode, nama, definisi operasional, rumus formulasi, polaritas (*maximize/minimize*), wewenang bidang, dan seksi penanggung jawab.
+7. **`target_realisasi`**: 605 Baris data target dan realisasi dari tahun **2020 s.d. 2030** dengan kolom kalkulasi otomatis persentase capaian.
+8. **`bank_data`**: 20 Dataset resmi bersumber dari **BPS Kabupaten Demak (Kabupaten Demak Dalam Angka 2025)** serta laporan teknis kedinasan, dilengkapi angka metrik kunci, nomor registrasi, sumber data, dan ringkasan statistik.
+9. **`variables`**: Master variabel perhitungan matematis indikator kinerja.
 
 ---
 
 ## LANGKAH 1: MEMBUAT DATABASE MYSQL DI hPANEL HOSTINGER
 
-1. Masuk (*Log In*) ke **hPanel Hostinger** Anda (`https://hpanel.hostinger.com`).
-2. Pada menu bilah sisi kiri, klik **Databases** -> **Management** (atau cari **MySQL Databases**).
-3. Di bagian **Create a New MySQL Database and Database User**, masukkan data:
-   - **MySQL Database Name**: misal `u123456789_sidat` (Hostinger akan otomatis menambahkan prefix akun Anda).
-   - **MySQL Username**: misal `u123456789_admin`.
-   - **Password**: Buat password yang kuat (contoh: `DemakJaya2026!*`).
-4. Klik tombol **Create** / **Buat**.
-5. **CATAT BAIK-BAIK**:
-   - **MySQL Host**: biasanya `localhost` (atau IP yang tertera di hPanel Hostinger).
-   - **Database Name**: nama lengkap database (contoh: `u123456789_sidat`).
-   - **Username**: nama lengkap user (contoh: `u123456789_admin`).
-   - **Password**: password yang baru saja Anda buat.
-   - **Port**: `3306`.
+1. Buka dan masuk ke **hPanel Hostinger**: [https://hpanel.hostinger.com](https://hpanel.hostinger.com).
+2. Pilih akun hosting Anda yang memuat domain **`sidat.satuputarudemak.id`**.
+3. Pada bilah menu sebelah kiri, buka menu **Databases** ➔ **Management** (atau cari **MySQL Databases**).
+4. Pada bagian **Create a New MySQL Database and Database User**, masukkan informasi:
+   * **MySQL Database Name**: misal ketik `sidat` (Hostinger akan menambahkan prefiks username akun Anda, contoh: `u123456789_sidat`).
+   * **MySQL Username**: misal ketik `admin` (contoh hasil: `u123456789_admin`).
+   * **Password**: Buat kata sandi yang kuat (contoh: `DemakPUPR2026!#`).
+5. Klik tombol **Create** / **Buat**.
+6. **CATAT 4 DATA PENTING INI**:
+   * **MySQL Host**: `localhost` (Hostinger selalu menggunakan `localhost` untuk web hosting internal).
+   * **Database Name**: nama lengkap database Anda (contoh: `u123456789_sidat`).
+   * **Username**: nama lengkap pengguna MySQL (contoh: `u123456789_admin`).
+   * **Password**: kata sandi yang baru saja Anda buat.
+   * **Port**: `3306`.
 
 ---
 
-## LANGKAH 2: MENGIMPOR FILE SQL KE phpMyAdmin HOSTINGER
+## LANGKAH 2: MENGIMPOR DATABASE SQL KE phpMyAdmin
 
-1. Masih di halaman **Databases** hPanel Hostinger, cari tabel database yang baru Anda buat pada daftar **List of Current MySQL Databases**.
-2. Klik tombol **Enter phpMyAdmin** di sebelah kanan nama database Anda.
-3. Jendela phpMyAdmin akan terbuka.
-4. Di bilah menu bagian atas phpMyAdmin, klik tab **Import**.
-5. Klik tombol **Choose File** / **Pilih Berkas**, lalu arahkan ke file:
+1. Masih di halaman **Databases** hPanel Hostinger, lihat daftar **List of Current MySQL Databases**.
+2. Di sebelah kanan baris database yang baru Anda buat, klik tombol **Enter phpMyAdmin**.
+3. Jendela **phpMyAdmin** akan terbuka secara otomatis di tab baru browser.
+4. Di bilah menu atas phpMyAdmin, klik tab **Import** (Impor).
+5. Pada bagian *File to import*, klik tombol **Choose File** / **Pilih Berkas**, lalu pilih berkas:
    ```
    database/sidat_demak_hostinger.sql
    ```
-6. Pastikan pengaturan *Format* adalah **SQL**.
-7. Gulir ke bagian paling bawah dan klik tombol **Import** (atau **Go**).
-8. Tunggu beberapa detik hingga muncul pesan sukses berwarna hijau:
-   > *"Import has been successfully finished, 9 queries executed."*
-9. Anda sekarang dapat melihat 9 tabel (`bank_data`, `bidang`, `categories`, `indicators`, `roles`, `system_settings`, `target_realisasi`, `users`, `variables`) sudah terisi penuh data.
+   *(atau berkas `database.sql` yang berada di folder utama proyek).*
+6. Pastikan pilihan Format adalah **SQL**.
+7. Gulir ke bawah dan klik tombol **Import** (atau **Go**).
+8. Tunggu beberapa detik hingga muncul notifikasi sukses berwarna hijau:
+   > *"Import has been successfully finished, queries executed."*
+9. Di bilah kiri phpMyAdmin, klik nama database Anda. Pastikan **9 tabel** telah terbentuk dan terisi data dengan benar.
 
 ---
 
-## LANGKAH 3: KONFIGURASI KONEKSI DATABASE APLIKASI
+## LANGKAH 3: MENGHUBUNGKAN SIDAT DENGAN DATABASE MYSQL
 
-Aplikasi SIDAT - SATUPUTARU menyediakan **3 cara mudah** untuk mengatur kredensial koneksi:
+Aplikasi SIDAT - SATUPUTARU telah dilengkapi fitur **Dual-Engine Auto-Detect**. Anda dapat memasukkan kredensial database dengan salah satu dari 3 cara berikut:
 
-### Cara 1: Mengatur Melalui Panel Admin (Paling Mudah, Tanpa Edit File)
-1. Buka aplikasi di browser Anda.
+### OPSI A: Mengatur dari Panel Admin Web (Paling Mudah)
+1. Buka browser dan akses: **`https://sidat.satuputarudemak.id`**
 2. Klik tombol **Login** di pojok kanan atas.
-3. Masuk menggunakan akun Super Admin:
-   - **Username**: `superadmin`
-   - **Password**: `password123`
-   - Selesaikan Captcha matematika sederhana.
-4. Di panel aparatur, klik tab **Pengaturan Teks & Logo**.
-5. Gulir ke bagian **Konfigurasi Database MySQL Hostinger**.
-6. Masukkan data yang Anda catat pada Langkah 1:
-   - **Host Database**: `localhost`
-   - **Port**: `3306`
-   - **Nama Database**: nama database Hostinger Anda (contoh: `u123456789_sidat`)
-   - **Username MySQL**: user database Hostinger Anda (contoh: `u123456789_admin`)
-   - **Password**: password database Hostinger Anda
-   - Centang kotak: **Aktifkan Koneksi MySQL Hostinger**
-7. Klik tombol **Tes Koneksi Database**. Sistem akan langsung memvalidasi koneksi ke server MySQL Hostinger dan menampilkan notifikasi sukses hijau.
-8. Klik tombol **Simpan Konfigurasi Database**.
+3. Masuk dengan akun Super Admin:
+   * **Username**: `superadmin`
+   * **Password**: `password123`
+   * Masukkan hasil perhitungan Captcha matematika.
+4. Setelah masuk ke Dashboard Internal, pada bilah menu sisi kiri klik menu **Koneksi Database MySQL** (di bawah kelompok *Menu Khusus Admin*).
+5. Pada formulir konfigurasi database:
+   * **Database Host**: ketik `localhost`
+   * **Port MySQL**: `3306`
+   * **Nama Database (DB Name)**: masukkan nama database Hostinger Anda (contoh: `u123456789_sidat`)
+   * **Username Database (DB User)**: masukkan username Hostinger Anda (contoh: `u123456789_admin`)
+   * **Password Database**: masukkan kata sandi MySQL Anda
+   * Beri tanda centang pada: **Aktifkan MySQL**
+6. Klik tombol biru **Uji Tes Koneksi MySQL**.
+   * Jika benar, akan langsung muncul notifikasi hijau: *"Koneksi berhasil! Database siap digunakan."*
+7. Klik tombol **Simpan Konfigurasi DB**. Sistem akan menyimpan konfigurasi ke server dan status database berubah menjadi **MySQL Hostinger Terhubung**.
 
 ---
 
-### Cara 2: Melalui File `config/db.json`
-Buka berkas `config/db.json` di file manager Hostinger / kode lokal, lalu sesuaikan:
-```json
-{
-  "host": "localhost",
-  "port": 3306,
-  "user": "u123456789_admin",
-  "password": "PasswordDatabaseAnda",
-  "database": "u123456789_sidat",
-  "enabled": true
-}
-```
+### OPSI B: Mengedit File `config/db.json` di File Manager
+Jika Anda lebih suka mengatur langsung berkas di Hostinger:
+1. Di hPanel Hostinger, buka **Files** ➔ **File Manager**.
+2. Masuk ke folder instalasi domain `sidat.satuputarudemak.id` (biasanya `public_html`).
+3. Buka folder `config/`, lalu buat atau sunting berkas `db.json`:
+   ```json
+   {
+     "host": "localhost",
+     "port": 3306,
+     "user": "u123456789_admin",
+     "password": "PasswordMySQLAnda",
+     "database": "u123456789_sidat",
+     "enabled": true
+   }
+   ```
+4. Simpan berkas (*Save & Close*).
 
 ---
 
-### Cara 3: Melalui File Lingkungan `.env`
-Jika server Anda mendukung variabel lingkungan `.env`, cukup ubah berkas `.env`:
+### OPSI C: Mengatur File `.env`
+Buka atau buat berkas `.env` di folder utama aplikasi:
 ```env
 PORT=3003
 NODE_ENV=production
@@ -128,7 +137,7 @@ DB_ENABLED=true
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=u123456789_admin
-DB_PASSWORD=PasswordDatabaseAnda
+DB_PASSWORD=PasswordMySQLAnda
 DB_NAME=u123456789_sidat
 ```
 
@@ -136,129 +145,95 @@ DB_NAME=u123456789_sidat
 
 ## LANGKAH 4: MENJALANKAN APLIKASI DI HOSTINGER
 
-### Opsi A: Menggunakan Menu Node.js Application di hPanel
-Jika paket hosting Anda adalah **Cloud Hosting / Business Hosting** yang memiliki fitur **Node.js**:
+Sesuaikan dengan jenis paket hosting yang Anda miliki di Hostinger:
 
-1. Unggah seluruh file proyek ke folder domain Anda di Hostinger (misal melalui File Manager atau Git Deployment di hPanel).
-2. Di hPanel Hostinger, cari dan buka menu **Node.js**.
-3. Klik **Create Application**:
-   - **Node.js version**: Pilih versi **20.x LTS** atau **18.x LTS**.
-   - **Application root**: pilih folder tempat file proyek berada (contoh: `public_html` atau `sidat`).
-   - **Application startup file**: isi dengan `server.js`.
-4. Klik **Create**.
-5. Setelah dibuat, klik tombol **npm install** pada menu Node.js tersebut untuk menginstal modul pendukung (`mysql2`).
-6. Klik tombol **Restart** / **Start Application**.
-7. Akses domain Anda (contoh: `https://namadomainanda.com`). Aplikasi SIDAT - SATUPUTARU langsung aktif!
+### MODEL 1: Hostinger Web Hosting Standar (Otomatis Aktif)
+*(Paket Single, Premium, atau Business Web Hosting berbasis LiteSpeed/Apache)*
+
+* Proyek ini sudah dilengkapi file **`.htaccess`** dan backend bridge **`api.php`**.
+* Begitu Anda melakukan sinkronisasi Git dari repositori GitHub ke `public_html`, aplikasi **langsung aktif bekerja secara otomatis**:
+  * Tampilan publik (`index.html`) langsung terbuka di peramban.
+  * Permintaan API (`/api/db/*`, `/api/admin/*`, `/api/auth/*`) otomatis diarahkan oleh `.htaccess` ke `api.php`.
+  * Seluruh data disimpan dan disinkronkan secara aman.
 
 ---
 
-### Opsi B: Menggunakan VPS Hostinger (PM2 + Nginx)
-Jika Anda menggunakan paket **VPS Hostinger (Ubuntu/Debian)**:
+### MODEL 2: Hostinger Cloud / Business Hosting (Fitur Node.js)
+Jika paket hosting Anda menyediakan menu **Node.js** di hPanel:
 
-1. Masuk ke VPS Anda via SSH:
+1. Di hPanel, buka menu **Node.js**.
+2. Klik tombol **Create Application**:
+   * **Node.js version**: Pilih versi **20.x LTS** (atau 18.x LTS).
+   * **Application root**: pilih folder tempat file berada (contoh: `public_html`).
+   * **Application startup file**: isi dengan `server.js`.
+3. Klik **Create**.
+4. Klik tombol **Run npm install** pada panel Node.js tersebut agar dependensi `mysql2` terpasang.
+5. Klik **Restart Application**.
+6. Buka `https://sidat.satuputarudemak.id`.
+
+---
+
+### MODEL 3: Hostinger Cloud VPS (PM2 & Nginx)
+Jika Anda menggunakan paket VPS Hostinger:
+
+1. Masuk ke VPS via SSH:
    ```bash
-   ssh root@ip_vps_anda
+   ssh root@IP_VPS_ANDA
    ```
-2. Pastikan Node.js dan Git sudah terpasang:
+2. Pasang dependensi dan clone repositori:
    ```bash
-   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-   sudo apt-get install -y nodejs git
-   sudo npm install -g pm2
-   ```
-3. Unduh repositori aplikasi:
-   ```bash
-   cd /var/www
-   git clone https://github.com/ariyoigun/capaian.git sidat
-   cd sidat
+   cd /var/www/sidat
+   git pull origin main
    npm install
    ```
-4. Salin dan sesuaikan konfigurasi database:
-   ```bash
-   cp .env.example .env
-   nano .env
-   ```
-   *(Isi kredensial MySQL sesuai database Hostinger Anda)*
-5. Jalankan aplikasi menggunakan PM2:
+3. Jalankan aplikasi menggunakan PM2:
    ```bash
    pm2 start server.js --name "sidat-demak"
    pm2 save
    pm2 startup
    ```
-6. Konfigurasikan Nginx sebagai reverse proxy ke port `3003`:
-   ```nginx
-   server {
-       listen 80;
-       server_name domainanda.com www.domainanda.com;
-
-       location / {
-           proxy_pass http://127.0.0.1:3003;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection 'upgrade';
-           proxy_set_header Host $host;
-           proxy_cache_bypass $http_upgrade;
-           proxy_set_header X-Real-IP $remote_addr;
-           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-       }
-   }
-   ```
-7. Uji dan restart Nginx:
+4. Konfigurasikan Nginx Reverse Proxy ke port `3003` dan aktifkan SSL Certbot:
    ```bash
-   sudo nginx -t
-   sudo systemctl restart nginx
-   ```
-8. Pasang SSL gratis (HTTPS):
-   ```bash
-   sudo apt install -y certbot python3-certbot-nginx
-   sudo certbot --nginx -d domainanda.com -d www.domainanda.com
+   sudo certbot --nginx -d sidat.satuputarudemak.id
    ```
 
 ---
 
-## 6. FITUR DUAL-ENGINE & AUTO-FALLBACK AMAN
+## 6. DAFTAR AKUN PENGGUNA & PASSWORD
 
-Sistem SIDAT - SATUPUTARU dirancang dengan prinsip **Zero Downtime**:
-- **Saat MySQL Hostinger Aktif**: Seluruh data dibaca dan disimpan langsung ke database relasional MySQL Hostinger.
-- **Saat MySQL Tidak Tersedia / Maintenance**: Sistem **tidak akan error atau mati**. Mesin otomatis beralih ke mesin penyimpanan data lokal JSON (`data/database.json`), sehingga layanan publik warga Demak tetap berjalan 24 jam nonstop tanpa gangguan.
-- Status koneksi mesin database dapat selalu dipantau secara langsung di header modul Pengaturan Super Admin.
+Seluruh akun telah disematkan di dalam database SQL (`users`) dan siap login langsung dengan password bawaan:
 
----
+| No | Username | Password | Nama Lengkap & Gelar | Jabatan & Peran di DINPUTARU |
+|:---:|:---|:---|:---|:---|
+| 1 | **`superadmin`** | `password123` | Budi Santoso, S.T., M.T. | **Super Admin** (Akses Penuh Seluruh Sistem) |
+| 2 | **`kadin`** | `password123` | Drs. H. Ahmad Sugiharto, S.T., M.Si. | **Kepala Dinas** (Dashboard Eksekutif Kinerja & Pengesahan) |
+| 3 | **`sekdin`** | `password123` | Nurul Hidayati, S.T., M.M. | **Sekretaris Dinas** (Monitoring Kinerja Lintas Bidang & Laporan) |
+| 4 | **`kabid_bm`** | `password123` | Sutanto, S.T., M.Tech. | **Kepala Bidang Bina Marga** (Monitoring Infrastruktur Jalan) |
+| 5 | **`koor_bm`** | `password123` | Rizky Kurniawan, S.T. | **Koordinator Bidang Bina Marga** (Input Target & Realisasi) |
+| 6 | **`koor_sda`** | `password123` | Tri Wahyudi, S.T. | **Koordinator Bidang Sumber Daya Air** (Input Irigasi & Drainase) |
+| 7 | **`kasubag_program`** | `password123` | Eko Prasetyo, S.E., M.Acc. | **Kasubag Program & Keuangan** (Renstra, Target, & Cetak Laporan) |
+| 8 | **`kasubag_umum`** | `password123` | Siti Rahmawati, S.Sos. | **Kasubag Umum & Kepegawaian** (Bank Data & Administrasi) |
 
-## 7. DAFTAR AKUN LOGIN BAWAAN (7 PERAN APARATUR)
-
-Semua akun telah terdaftar di database MySQL dengan password standar: `password123`
-
-| No | Peran / Jabatan | Username | Password | Wewenang Akses Utama |
-|---|---|---|---|---|
-| 1 | **Super Admin** | `superadmin` | `password123` | Akses penuh seluruh modul, ganti logo, edit teks FE/BE, manajemen user, config database |
-| 2 | **Kepala Dinas** | `kadin` | `password123` | Dashboard eksekutif IKU & strategis, grafik tren daerah, persetujuan laporan |
-| 3 | **Sekretaris Dinas** | `sekretaris` | `password123` | Monitoring capaian lintas 5 bidang, evaluasi kinerja tahunan, unduh rekap |
-| 4 | **Kasubag Program & Keuangan** | `kasubag_program` | `password123` | Monitoring target Renstra, cetak laporan resmi per indikator & tahunan |
-| 5 | **Kasubag Umum & Kepegawaian** | `kasubag_umum` | `password123` | Bank data arsip kedinasan, sarana prasarana, inventarisasi data |
-| 6 | **Kepala Bidang Bina Marga** | `kabid_bm` | `password123` | Monitoring teknis capaian jalan jembatan, evaluasi diagram kemantapan |
-| 7 | **Koordinator Bidang Bina Marga** | `koor_bm` | `password123` | Input & update target/realisasi indikator bidang, kelola data teknis |
-
-*(Catatan: Anda dapat mengubah password dan data akun kapan saja melalui menu Manajemen User setelah login sebagai Super Admin).*
+> [!TIP]
+> Demi keamanan, setelah Anda berhasil login pertama kali sebagai `superadmin`, Anda dapat mengubah password dan data aparatur melalui menu **Manajemen Pengguna (7 Peran)**.
 
 ---
 
-## 8. UJI KONEKSI & VERIFIKASI SISTEM
+## 7. PENGECEKAN & VERIFIKASI HASIL
 
-Setelah melakukan instalasi dan koneksi, verifikasi beberapa hal berikut di browser:
-1. **Tampilan Publik**:
-   - Header berwarna Biru Resmi Kementerian PUPR (`#0B3C84`) dengan logo PUPR.
-   - Tombol **Mode Malam** berfungsi mengubah tema terang / gelap secara instan.
-   - Tiga tab utama publik aktif:
-     1. *Indikator & Grafik Tren*
-     2. *Matriks Multi-Tahun (2020–2030)*
-     3. *Bank Data DINPUTARU (Data BPS Demak 2025)*
-   - Fitur pencarian Bank Data dan filter bidang berfungsi responsif.
-2. **Login & Dashboard Internal**:
-   - Klik tombol **Login** di header kanan atas.
-   - Masukkan username `superadmin` dan password `password123` + selesaikan Captcha.
-   - Pastikan masuk ke Dashboard Internal Aparatur.
-   - Menu **Laporan Kinerja Resmi (Cetak / PDF)** dapat dibuka dan dicetak.
-   - Masuk ke tab **Pengaturan Teks & Logo**: logo dapat diganti via berkas gambar lokal atau link gambar, dan status MySQL Hostinger tertera **Terhubung**.
+Untuk memastikan sistem Anda berjalan sempurna 100%:
 
-Selamat! Aplikasi **SIDAT - SATUPUTARU** telah berhasil terkoneksi dengan database MySQL Hostinger dan siap digunakan melayani masyarakat serta jajaran DINPUTARU Kabupaten Demak.
+1. **Akses Publik:**
+   Buka `https://sidat.satuputarudemak.id`. Pastikan ketiga menu publik bekerja lancar:
+   * **Indikator & Grafik Tren**: 55 Indikator terfilter per kategori, grafik Chart.js tampil rapi.
+   * **Matriks Multi-Tahun**: Tabel matriks 2020 s.d. 2030 lengkap dengan tombol unduh CSV/Excel.
+   * **Bank Data BPS 2025**: Menampilkan 20 data infrastruktur dalam format **2 kolom** dan fitur pencarian reaktif.
+2. **Dashboard Internal Aparatur:**
+   * Klik tombol **Login** di header, masukkan akun `superadmin` dan `password123`.
+   * Buka menu **Diagram Pohon Cascading (Tree View)**: diagram pohon hierarki kinerja muncul utuh dan bisa diklik (*expand/collapse*).
+   * Buka menu **Input Target & Realisasi**: tombol *+ Tambah Tahun Baru*, *Atur Tampilan Tahun*, dan *Ekspor CSV* aktif penuh.
+   * Buka menu **Laporan Resmi (Cetak)**: dropdown 55 indikator terisi penuh, lembar berkas kedinasan siap dicetak/PDF.
+   * Buka menu **Koneksi Database MySQL**: badge menunjukkan status **MySQL Hostinger Terhubung**.
 
+---
+*Dokumen ini diterbitkan oleh DINPUTARU Kabupaten Demak untuk kelancaran operasional SIDAT - SATUPUTARU.*

@@ -1,0 +1,29 @@
+# SIDAT - SATUPUTARU - Apache / LiteSpeed Configuration for Hostinger
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Route /api/* requests to api.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^api/(.*)$ api.php [QSA,L]
+
+    # Serve index.html by default
+    DirectoryIndex index.html index.php
+</IfModule>
+
+# MIME types
+<IfModule mod_mime.c>
+    AddType application/json .json
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType image/svg+xml .svg
+</IfModule>
+
+# Caching for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+</IfModule>
