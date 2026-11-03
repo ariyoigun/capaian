@@ -7,3 +7,4 @@
   "enabled": false,
   "_comment": "Ganti 'enabled': true dan isi host, user, password, database saat deployment ke Hostinger."
 }
+

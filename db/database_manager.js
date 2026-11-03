@@ -156,3 +156,4 @@ class DatabaseManager {
 }
 
 module.exports = new DatabaseManager();
+

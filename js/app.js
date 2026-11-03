@@ -126,8 +126,11 @@ const App = {
       document.body.classList.add('theme-admin-white');
 
       if (publicContainer) publicContainer.style.display = 'none';
-      if (adminContainer) adminContainer.style.display = 'block';
-      if (adminNavBar) adminNavBar.style.display = 'block';
+      if (adminContainer) adminContainer.style.display = 'flex';
+      if (adminNavBar) adminNavBar.style.display = 'none';
+
+      this.renderSidebarProfile();
+      this.initSidebarYearSelect();
     }
 
     if (window.Auth) window.Auth.renderSessionBar();
@@ -177,7 +180,75 @@ const App = {
     if (window.lucide) window.lucide.createIcons();
   },
 
-  /* ----------------- ADMIN NAVIGATION TABS ----------------- */
+  /* ----------------- ADMIN NAVIGATION TABS (LEFT SIDEBAR) ----------------- */
+  toggleSidebar() {
+    const sidebar = document.getElementById('admin-sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('sidebar-open');
+    }
+  },
+
+  renderSidebarProfile() {
+    const container = document.getElementById('sidebar-user-profile');
+    if (!container) return;
+
+    const currentUser = window.store.getCurrentUser();
+    if (!currentUser) {
+      container.innerHTML = `
+        <div class="sidebar-avatar">
+          <i data-lucide="user" class="icon-sm"></i>
+        </div>
+        <div class="sidebar-user-details">
+          <div class="sidebar-user-name">Tamu / Publik</div>
+          <div class="sidebar-user-bidang">Silakan login aparatur</div>
+        </div>
+      `;
+    } else {
+      const roleObj = window.store.data.roles?.find(r => r.id === currentUser.role) || { name: currentUser.roleLabel || currentUser.role };
+      const bidangObj = window.store.getBidang().find(b => b.id === currentUser.bidangId) || { name: 'DINPUTARU Demak' };
+      
+      const initials = currentUser.name
+        .replace(/^(Drs\.|Ir\.|Dr\.|H\.|Hj\.)\s*/gi, '')
+        .split(' ')
+        .filter(w => w && !w.includes('.') && !w.includes(','))
+        .slice(0, 2)
+        .map(w => w[0].toUpperCase())
+        .join('') || 'DP';
+
+      container.innerHTML = `
+        <div class="sidebar-avatar" title="${currentUser.name}">
+          ${initials}
+          <span class="sidebar-avatar-online" title="Online"></span>
+        </div>
+        <div class="sidebar-user-details">
+          <div class="sidebar-user-name" title="${currentUser.name}">${currentUser.name}</div>
+          <span class="sidebar-user-role-badge">${roleObj.name}</span>
+          <div class="sidebar-user-bidang" title="${bidangObj.name}">
+            ${bidangObj.name}
+          </div>
+        </div>
+      `;
+    }
+
+    if (window.lucide) window.lucide.createIcons();
+  },
+
+  initSidebarYearSelect() {
+    const select = document.getElementById('admin-global-year-select');
+    if (!select) return;
+
+    const years = window.store.getYears();
+    const activeYear = window.store.getActiveYear();
+
+    select.innerHTML = years.map(y => `<option value="${y}" ${y === activeYear ? 'selected' : ''}>Tahun ${y}</option>`).join('');
+  },
+
+  changeActiveYear(year) {
+    window.store.setActiveYear(Number(year));
+    this.showToast(`Tahun kerja aktif diubah ke tahun ${year}`, 'info');
+    this.switchTab(this.currentTab || 'dashboard');
+  },
+
   bindNavigation() {
     document.querySelectorAll('.nav-tab-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -188,15 +259,19 @@ const App = {
   },
 
   switchTab(tabId) {
-    this.currentTab = tabId;
-
-    // Check permission for User Management & System Settings
-    if ((tabId === 'manajemen-user' || tabId === 'pengaturan-teks') && !window.store.canManageUsers()) {
+    // Check permission for Super Admin Only tabs
+    if ((tabId === 'manajemen-user' || tabId === 'pengaturan-teks' || tabId === 'pengaturan-database') && !window.store.canManageUsers()) {
       this.showToast('Halaman ini khusus dapat diakses oleh Super Admin!', 'warning');
       return;
     }
 
-    // Update nav tab buttons
+    this.currentTab = tabId;
+
+    // Close mobile sidebar if open
+    const sidebar = document.getElementById('admin-sidebar');
+    if (sidebar) sidebar.classList.remove('sidebar-open');
+
+    // Update active state on sidebar menu items
     document.querySelectorAll('.nav-tab-btn').forEach(btn => {
       if (btn.getAttribute('data-tab') === tabId) {
         btn.classList.add('active');
@@ -205,14 +280,77 @@ const App = {
       }
     });
 
-    // Update tab content panes
+    // Hide all tab panes
     document.querySelectorAll('.tab-pane-content').forEach(pane => {
       pane.classList.remove('active');
     });
 
-    const activePane = document.getElementById(`tab-pane-${tabId}`);
+    // Determine target DOM pane
+    let targetPaneId = `tab-pane-${tabId}`;
+    if (tabId === 'master-kategori') {
+      targetPaneId = 'tab-pane-master-data';
+    } else if (tabId === 'pengaturan-database') {
+      targetPaneId = 'tab-pane-pengaturan-teks';
+    }
+
+    const activePane = document.getElementById(targetPaneId);
     if (activePane) {
       activePane.classList.add('active');
+    }
+
+    // Update Topbar Title & Subtitle Breadcrumb
+    const pageMeta = {
+      'dashboard': {
+        title: '<i data-lucide="line-chart" class="icon-sm text-primary"></i> Dashboard Monitoring Kinerja',
+        desc: 'Evaluasi visual capaian indikator, kartu KPI, dan diagram tren realisasi vs target multi-tahun.'
+      },
+      'capaian': {
+        title: '<i data-lucide="network" class="icon-sm text-primary"></i> Hierarki Kinerja (Cascading Tree)',
+        desc: 'Visualisasi pohon hierarki dari Sasaran Daerah, IKU Renstra, hingga Indikator Program/Kegiatan.'
+      },
+      'target-realisasi': {
+        title: '<i data-lucide="table-2" class="icon-sm text-primary"></i> Input & Evaluasi Target dan Realisasi',
+        desc: 'Kelola data target dan realisasi 55 indikator kinerja DINPUTARU Kabupaten Demak periode 2020 s.d. 2030.'
+      },
+      'laporan': {
+        title: '<i data-lucide="printer" class="icon-sm text-primary"></i> Dokumen Laporan Kinerja Resmi (Cetak / PDF)',
+        desc: 'Format cetak resmi laporan perkembangan indikator dan rekapitulasi tahunan dengan Kop Dinas & Tanda Tangan Pimpinan.'
+      },
+      'bank-data': {
+        title: '<i data-lucide="folder-archive" class="icon-sm text-primary"></i> Master Bank Data DINPUTARU (BPS Demak 2025)',
+        desc: 'Pusat data statistik infrastruktur terpadu jalan, jembatan, irigasi, air minum, dan penataan ruang Kabupaten Demak.'
+      },
+      'master-indikator': {
+        title: '<i data-lucide="tag" class="icon-sm text-primary"></i> Master Data Indikator Kinerja',
+        desc: '55 Indikator kinerja resmi lengkap dengan formulasi matematis, definisi operasional, polaritas, dan bidang pengampu.'
+      },
+      'master-kategori': {
+        title: '<i data-lucide="layers" class="icon-sm text-primary"></i> Master Kategori Indikator Renstra',
+        desc: '6 Kategori lembar kerja perencanaan kinerja DINPUTARU Kabupaten Demak.'
+      },
+      'master-data': {
+        title: '<i data-lucide="cpu" class="icon-sm text-primary"></i> Master Variabel & Rumus Perhitungan',
+        desc: 'Data kuantitatif dasar lapangan untuk kalkulasi otomatis nilai realisasi indikator.'
+      },
+      'manajemen-user': {
+        title: '<i data-lucide="users" class="icon-sm text-primary"></i> Manajemen Pengguna & 7 Peran Aparatur',
+        desc: 'Khusus Super Admin: Pengelolaan akun aparatur, hak akses peran jabatan, dan reset password pengguna.'
+      },
+      'pengaturan-teks': {
+        title: '<i data-lucide="settings-2" class="icon-sm text-primary"></i> Pengaturan Teks Sistem & Ganti Logo',
+        desc: 'Khusus Super Admin: Kustomisasi logo resmi PUPR/Pemkab, judul portal, kop surat dinas, dan redaksi antarmuka.'
+      },
+      'pengaturan-database': {
+        title: '<i data-lucide="database" class="icon-sm text-primary"></i> Konfigurasi Database MySQL Hostinger',
+        desc: 'Khusus Super Admin: Pengaturan koneksi database MySQL, tes latensi, dan sinkronisasi dual-engine.'
+      }
+    };
+
+    const titleEl = document.getElementById('admin-current-page-title');
+    const descEl = document.getElementById('admin-current-page-subtitle');
+    if (pageMeta[tabId]) {
+      if (titleEl) titleEl.innerHTML = pageMeta[tabId].title;
+      if (descEl) descEl.textContent = pageMeta[tabId].desc;
     }
 
     // Refresh submodules
@@ -228,12 +366,28 @@ const App = {
       window.BankDataModule.render();
     } else if (tabId === 'master-indikator' && window.MasterIndikatorModule) {
       window.MasterIndikatorModule.render();
-    } else if (tabId === 'master-data' && window.MasterDataModule) {
+    } else if (tabId === 'master-kategori' && window.MasterDataModule) {
+      window.MasterDataModule.activeSubTab = 'categories';
       window.MasterDataModule.render();
+      document.querySelectorAll('.master-subtab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-subtab') === 'categories');
+      });
+    } else if (tabId === 'master-data' && window.MasterDataModule) {
+      window.MasterDataModule.activeSubTab = 'variables';
+      window.MasterDataModule.render();
+      document.querySelectorAll('.master-subtab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-subtab') === 'variables');
+      });
     } else if (tabId === 'manajemen-user' && window.UserManagementModule) {
       window.UserManagementModule.render();
     } else if (tabId === 'pengaturan-teks' && window.SystemSettingsModule) {
       window.SystemSettingsModule.render();
+    } else if (tabId === 'pengaturan-database' && window.SystemSettingsModule) {
+      window.SystemSettingsModule.render();
+      setTimeout(() => {
+        const dbCard = document.getElementById('db-host');
+        if (dbCard) dbCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 150);
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });

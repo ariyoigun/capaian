@@ -261,3 +261,4 @@ Setelah melakukan instalasi dan koneksi, verifikasi beberapa hal berikut di brow
    - Masuk ke tab **Pengaturan Teks & Logo**: logo dapat diganti via berkas gambar lokal atau link gambar, dan status MySQL Hostinger tertera **Terhubung**.
 
 Selamat! Aplikasi **SIDAT - SATUPUTARU** telah berhasil terkoneksi dengan database MySQL Hostinger dan siap digunakan melayani masyarakat serta jajaran DINPUTARU Kabupaten Demak.
+

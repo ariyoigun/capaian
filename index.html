@@ -200,51 +200,150 @@
   <!-- ====================================================================== -->
   <!-- 4. HALAMAN ADMIN (PANEL APARATUR RESMI DINPUTARU DEMAK)               -->
   <!-- ====================================================================== -->
-  <div id="admin-panel-container" style="display: none;">
+  <div id="admin-panel-container" class="admin-layout-wrapper" style="display: none;">
 
-    <!-- Admin Navigation Tabs Bar (Tema Putih Bersih Resmi) -->
-    <nav class="app-nav-bar" id="admin-nav-bar">
-      <div class="nav-tabs-list">
-        <button class="nav-tab-btn active" data-tab="target-realisasi" title="Menu Utama: Input Target & Realisasi">
-          <i data-lucide="table-2" class="icon-sm"></i>
-          <span>1. Input Target & Realisasi</span>
+    <!-- 4.1 SIDEBAR SISI KIRI (Menu Navigasi Vertikal Berkelompok) -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      
+      <!-- Profil Pengguna Aktif di Atas Menu -->
+      <div class="sidebar-user-card" id="sidebar-user-profile">
+        <!-- Rendered by Auth / App -->
+      </div>
+
+      <!-- Navigasi Menu Berkelompok -->
+      <nav class="sidebar-nav-container">
+
+        <!-- GRUP 1: KINERJA & MONITORING -->
+        <div class="sidebar-nav-group">
+          <div class="sidebar-group-title">
+            <span>KINERJA & MONITORING</span>
+          </div>
+          <button class="nav-tab-btn sidebar-menu-item active" data-tab="dashboard" title="Dashboard Eksekutif Capaian Kinerja">
+            <i data-lucide="line-chart" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Dashboard Kinerja</span>
+            <span class="sidebar-menu-badge badge-primary">Utama</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="capaian" title="Diagram Pohon Cascading Kinerja">
+            <i data-lucide="network" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Hierarki Kinerja (Tree)</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="target-realisasi" title="Input & Evaluasi Target dan Realisasi">
+            <i data-lucide="table-2" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Target & Realisasi</span>
+            <span class="sidebar-menu-badge">2020–2030</span>
+          </button>
+        </div>
+
+        <!-- GRUP 2: PELAPORAN & DATA -->
+        <div class="sidebar-nav-group">
+          <div class="sidebar-group-title">
+            <span>PELAPORAN & DATA</span>
+          </div>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="laporan" title="Menu Cetak Dokumen Laporan Kedinasan">
+            <i data-lucide="printer" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Laporan Resmi (Cetak)</span>
+            <span class="sidebar-menu-badge badge-warning">PDF/Kop</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="bank-data" title="Bank Data Infrastruktur & Arsip BPS 2025">
+            <i data-lucide="folder-archive" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Bank Data DINPUTARU</span>
+            <span class="sidebar-menu-badge">BPS 2025</span>
+          </button>
+        </div>
+
+        <!-- GRUP 3: MASTER DATA KEDINASAN (DIPISAHKAN) -->
+        <div class="sidebar-nav-group">
+          <div class="sidebar-group-title">
+            <span>MASTER DATA KEDINASAN</span>
+          </div>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="master-indikator" title="Master Data 55 Indikator & Wewenang Bidang">
+            <i data-lucide="tag" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Master Indikator</span>
+            <span class="sidebar-menu-badge">55 Indikator</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="master-kategori" title="Master 6 Kategori Indikator Renstra">
+            <i data-lucide="layers" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Master Kategori</span>
+            <span class="sidebar-menu-badge">6 Kategori</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="master-data" title="Master Variabel & Rumus Perhitungan Matematis">
+            <i data-lucide="cpu" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Master Variabel Rumus</span>
+          </button>
+        </div>
+
+        <!-- GRUP 4: KHUSUS ADMINISTRATOR (SUPER ADMIN ONLY - DIPISAHKAN KHUSUS) -->
+        <div class="sidebar-nav-group sidebar-group-admin" data-permission="super_admin_only">
+          <div class="sidebar-group-title">
+            <span class="d-flex align-items-center gap-1">
+              <i data-lucide="shield" class="icon-xs text-amber"></i> KHUSUS ADMINISTRATOR
+            </span>
+            <span class="sidebar-menu-badge badge-admin">Super Admin</span>
+          </div>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="manajemen-user" data-permission="super_admin_only" title="Manajemen Pengguna 7 Peran Aparatur">
+            <i data-lucide="users" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Manajemen Pengguna</span>
+            <span class="sidebar-menu-badge badge-info">7 Role</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="pengaturan-teks" data-permission="super_admin_only" title="Pengaturan Teks Sistem & Ganti Logo Instansi">
+            <i data-lucide="settings-2" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Pengaturan Teks & Logo</span>
+          </button>
+          <button class="nav-tab-btn sidebar-menu-item" data-tab="pengaturan-database" data-permission="super_admin_only" title="Konfigurasi Database MySQL Hostinger">
+            <i data-lucide="database" class="sidebar-menu-icon"></i>
+            <span class="sidebar-menu-text">Database MySQL Hostinger</span>
+            <span class="sidebar-menu-badge badge-success">Dual-Mode</span>
+          </button>
+        </div>
+
+      </nav>
+
+      <!-- Footer Menu Samping: Akses Portal & Keluar -->
+      <div class="sidebar-footer">
+        <button class="sidebar-footer-btn" onclick="App.switchMode('public')" title="Lihat Portal Publik (3 Menu)">
+          <i data-lucide="globe" class="icon-xs"></i>
+          <span>Portal Publik</span>
         </button>
-        <button class="nav-tab-btn" data-tab="dashboard" title="Dashboard Monitoring Capaian Kinerja">
-          <i data-lucide="line-chart" class="icon-sm"></i>
-          <span>2. Dashboard Monitoring</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="capaian" title="Struktur Hierarki Capaian Kinerja">
-          <i data-lucide="network" class="icon-sm"></i>
-          <span>3. Hierarki Capaian (Tree)</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="laporan" title="Menu Cetak Dokumen Laporan Kedinasan">
-          <i data-lucide="printer" class="icon-sm"></i>
-          <span>4. Menu Laporan & Cetak</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="bank-data" title="Master Data Bank Data & Dokumen">
-          <i data-lucide="folder-archive" class="icon-sm"></i>
-          <span>5. Master Bank Data</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="master-indikator" title="Master Data Indikator & Wewenang Bidang">
-          <i data-lucide="tag" class="icon-sm"></i>
-          <span>6. Master Data Indikator</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="master-data" title="Master Variabel Perhitungan & Rumus">
-          <i data-lucide="cpu" class="icon-sm"></i>
-          <span>7. Master Variabel & Rumus</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="manajemen-user" data-permission="super_admin_only" title="Manajemen Pengguna 7 Role">
-          <i data-lucide="users" class="icon-sm"></i>
-          <span>8. Manajemen Pengguna</span>
-        </button>
-        <button class="nav-tab-btn" data-tab="pengaturan-teks" data-permission="super_admin_only" title="Pengaturan Teks Sistem, Ganti Logo Instansi, & Database Hostinger">
-          <i data-lucide="settings-2" class="icon-sm"></i>
-          <span>9. Pengaturan Teks, Logo & DB</span>
+        <button class="sidebar-footer-btn sidebar-footer-btn-danger" onclick="Auth.logout()" title="Keluar / Logout dari Sistem">
+          <i data-lucide="log-out" class="icon-xs"></i>
+          <span>Logout</span>
         </button>
       </div>
-    </nav>
+    </aside>
 
-    <main class="main-wrapper">
+    <!-- 4.2 PANEL KONTEN SEBELAH KANAN (Right Content Area) -->
+    <div class="admin-main-panel">
+      <!-- Top Action / Breadcrumb Header for Content Area -->
+      <header class="admin-content-topbar">
+        <div class="admin-topbar-left">
+          <button class="admin-sidebar-toggle-btn" id="btn-toggle-sidebar" onclick="App.toggleSidebar()" title="Buka/Tutup Menu Samping">
+            <i data-lucide="menu" class="icon-sm"></i>
+          </button>
+          <div class="admin-breadcrumb-info">
+            <h2 class="admin-page-title" id="admin-current-page-title">
+              <i data-lucide="line-chart" class="icon-sm text-primary"></i> Dashboard Monitoring Kinerja
+            </h2>
+            <span class="admin-page-subtitle" id="admin-current-page-subtitle">
+              Evaluasi visual capaian indikator, kartu KPI, dan diagram tren realisasi vs target multi-tahun.
+            </span>
+          </div>
+        </div>
+        <div class="admin-topbar-right">
+          <div class="admin-active-year-badge">
+            <span class="badge-label"><i data-lucide="calendar" class="icon-xs"></i> Tahun Kerja:</span>
+            <select id="admin-global-year-select" class="admin-year-select" onchange="App.changeActiveYear(this.value)">
+              <!-- Populated by App -->
+            </select>
+          </div>
+          <div class="admin-quick-stats d-none d-md-flex align-items-center gap-2">
+            <span class="badge bg-primary text-white font-mono" id="topbar-indicator-count"><i data-lucide="tag" class="icon-xs"></i> 55 Indikator</span>
+            <span class="badge bg-success text-white font-mono" id="topbar-db-badge"><i data-lucide="database" class="icon-xs"></i> MySQL Hostinger Ready</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Konten Tab Panes -->
+      <main class="admin-content-body">
 
       <!-- ==================== ADMIN TAB 1: DASHBOARD KEDINASAN MODERN ==================== -->
       <section class="tab-pane-content" id="tab-pane-dashboard">
@@ -693,7 +792,8 @@
         </div>
       </section>
 
-    </main>
+      </main>
+    </div>
   </div>
 
   <!-- 5. UNIVERSAL MODAL OVERLAY -->

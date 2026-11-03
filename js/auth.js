@@ -69,6 +69,10 @@ const Auth = {
       `;
     }
 
+    if (window.App && typeof window.App.renderSidebarProfile === 'function') {
+      window.App.renderSidebarProfile();
+    }
+
     if (window.lucide) window.lucide.createIcons();
   },
 
@@ -450,4 +454,3 @@ const Auth = {
 };
 
 window.Auth = Auth;
-window.AuthModule = Auth;
