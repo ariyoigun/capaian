@@ -5,7 +5,7 @@
 
 const App = {
   currentMode: 'public', // 'public' or 'admin'
-  currentTab: 'target-realisasi', // Menu Utama sesuai permintaan: Input Realisasi & Target
+  currentTab: 'dashboard', // Dashboard Profesional Monitoring Capaian Kinerja Indikator
 
   init() {
     // Initialize Night Mode
@@ -412,10 +412,12 @@ const App = {
     const elTotalInd = document.getElementById('header-stat-total-ind');
     const elAchieved = document.getElementById('header-stat-achieved');
     const elTotalDocs = document.getElementById('header-stat-docs');
+    const elTopbarInd = document.getElementById('topbar-indicator-count');
 
     if (elTotalInd) elTotalInd.textContent = indicators.length;
     if (elAchieved) elAchieved.textContent = `${achieved} / ${indicators.length}`;
     if (elTotalDocs) elTotalDocs.textContent = docs.length;
+    if (elTopbarInd) elTopbarInd.innerHTML = `<i data-lucide="tag" class="icon-xs"></i> ${indicators.length} Indikator`;
   },
 
   /* ----------------- MODAL SYSTEM ----------------- */

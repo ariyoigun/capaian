@@ -441,15 +441,9 @@ const Auth = {
     });
 
     // Update active tab buttons if non-superadmin tries to access admin tabs
-    const userMgmtTabBtn = document.querySelector('.nav-tab-btn[data-tab="manajemen-user"]');
-    if (userMgmtTabBtn) {
-      userMgmtTabBtn.style.display = isSuperAdmin ? 'inline-flex' : 'none';
-    }
-
-    const settingsTabBtn = document.querySelector('.nav-tab-btn[data-tab="pengaturan-teks"]');
-    if (settingsTabBtn) {
-      settingsTabBtn.style.display = isSuperAdmin ? 'inline-flex' : 'none';
-    }
+    document.querySelectorAll('.sidebar-group-admin, .nav-tab-btn[data-tab="manajemen-user"], .nav-tab-btn[data-tab="pengaturan-teks"], .nav-tab-btn[data-tab="pengaturan-database"]').forEach(el => {
+      el.style.display = isSuperAdmin ? '' : 'none';
+    });
   }
 };
 
