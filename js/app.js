@@ -8,6 +8,9 @@ const App = {
   currentTab: 'target-realisasi', // Menu Utama sesuai permintaan: Input Realisasi & Target
 
   init() {
+    // Initialize Night Mode
+    this.initNightMode();
+
     // Check url hash or query param if any
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('mode') === 'admin' && window.store.isLoggedIn()) {
@@ -110,31 +113,67 @@ const App = {
     const publicContainer = document.getElementById('public-portal-container');
     const adminContainer = document.getElementById('admin-panel-container');
     const adminNavBar = document.getElementById('admin-nav-bar');
-    const btnToAdmin = document.getElementById('btn-switch-to-admin');
-    const btnToPublic = document.getElementById('btn-switch-to-public');
 
     if (this.currentMode === 'public') {
-      document.body.classList.add('theme-public-orange');
+      document.body.classList.add('theme-pupr-blue');
       document.body.classList.remove('theme-admin-white');
 
       if (publicContainer) publicContainer.style.display = 'block';
       if (adminContainer) adminContainer.style.display = 'none';
       if (adminNavBar) adminNavBar.style.display = 'none';
-
-      if (btnToPublic) btnToPublic.classList.add('active-mode-btn');
-      if (btnToAdmin) btnToAdmin.classList.remove('active-mode-btn');
     } else {
-      document.body.classList.remove('theme-public-orange');
+      document.body.classList.remove('theme-pupr-blue');
       document.body.classList.add('theme-admin-white');
 
       if (publicContainer) publicContainer.style.display = 'none';
       if (adminContainer) adminContainer.style.display = 'block';
       if (adminNavBar) adminNavBar.style.display = 'block';
-
-      if (btnToPublic) btnToPublic.classList.remove('active-mode-btn');
-      if (btnToAdmin) btnToAdmin.classList.add('active-mode-btn');
     }
 
+    if (window.Auth) window.Auth.renderSessionBar();
+    if (window.lucide) window.lucide.createIcons();
+  },
+
+  /* ----------------- NIGHT MODE / DARK THEME ----------------- */
+  initNightMode() {
+    const saved = localStorage.getItem('sidat_night_mode');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved === 'true' || (saved === null && prefersDark);
+    this.setNightMode(isDark);
+  },
+
+  toggleNightMode() {
+    const isDark = document.body.classList.contains('theme-dark');
+    this.setNightMode(!isDark);
+  },
+
+  setNightMode(isDark) {
+    if (isDark) {
+      document.body.classList.add('theme-dark');
+      localStorage.setItem('sidat_night_mode', 'true');
+    } else {
+      document.body.classList.remove('theme-dark');
+      localStorage.setItem('sidat_night_mode', 'false');
+    }
+    this.updateNightModeButton();
+
+    // Re-render highlight chart if visible to update chart colors
+    if (window.PublicPortalModule && window.PublicPortalModule.renderSelectedIndicatorHighlight) {
+      window.PublicPortalModule.renderSelectedIndicatorHighlight();
+    }
+  },
+
+  updateNightModeButton() {
+    const isDark = document.body.classList.contains('theme-dark');
+    const icon = document.getElementById('nightmode-icon');
+    const label = document.getElementById('nightmode-label');
+
+    if (icon) {
+      icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+    }
+    if (label) {
+      label.textContent = isDark ? 'Mode Terang' : 'Mode Malam';
+    }
     if (window.lucide) window.lucide.createIcons();
   },
 

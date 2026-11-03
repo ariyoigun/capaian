@@ -1,0 +1,9 @@
+{
+  "host": "localhost",
+  "user": "u123456789_sidat",
+  "password": "PasswordDatabaseHostingerAnda",
+  "database": "u123456789_sidat",
+  "port": 3306,
+  "enabled": false,
+  "_comment": "Ganti 'enabled' menjadi true setelah memasukkan kredensial database Hostinger Anda, atau gunakan Environment Variables (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT)."
+}

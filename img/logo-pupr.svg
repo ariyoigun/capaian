@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="puprGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="50%" stop-color="#F4B41A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="puprNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#002D62"/>
+      <stop offset="50%" stop-color="#0B3C84"/>
+      <stop offset="100%" stop-color="#07234E"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Navy Circle -->
+  <circle cx="80" cy="80" r="76" fill="url(#puprNavy)" stroke="url(#puprGold)" stroke-width="4" filter="url(#dropShadow)"/>
+  <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(244,180,26,0.35)" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- Iconic PUPR 8-Blade Gear Propeller in Golden Yellow -->
+  <g transform="translate(80, 80) scale(0.92)">
+    <!-- Central Hub -->
+    <circle cx="0" cy="0" r="18" fill="url(#puprGold)" stroke="#002D62" stroke-width="2"/>
+    <circle cx="0" cy="0" r="8" fill="#0B3C84"/>
+
+    <!-- 8 Curving Propeller Blades -->
+    <!-- Blade 1 (0 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)"/>
+    <!-- Blade 2 (45 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(45)"/>
+    <!-- Blade 3 (90 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(90)"/>
+    <!-- Blade 4 (135 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(135)"/>
+    <!-- Blade 5 (180 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(180)"/>
+    <!-- Blade 6 (225 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(225)"/>
+    <!-- Blade 7 (270 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(270)"/>
+    <!-- Blade 8 (315 deg) -->
+    <path d="M -10 -15 C -8 -38, 8 -46, 12 -58 C 4 -54, -14 -42, -18 -26 Z" fill="url(#puprGold)" transform="rotate(315)"/>
+  </g>
+
+  <!-- Inner Gold Trim -->
+  <circle cx="80" cy="80" r="26" fill="none" stroke="url(#puprGold)" stroke-width="1.5"/>
+</svg>

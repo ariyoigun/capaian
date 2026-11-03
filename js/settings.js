@@ -70,6 +70,50 @@ const SystemSettingsModule = {
 
         <div class="row g-4">
           
+          <!-- 0. LOGO INSTANSI & BRANDING RESMI -->
+          <div class="col-12">
+            <div class="settings-group-card p-3 bg-white border rounded shadow-sm">
+              <div class="settings-group-title font-bold text-dark pb-2 mb-3 border-bottom d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                  <i data-lucide="image" class="icon-xs text-primary"></i>
+                  <span class="fs-6 font-bold">1. Logo Aplikasi & Lambang Kedinasan (PUPR / Pemkab Demak)</span>
+                </div>
+                <span class="badge bg-primary text-white font-mono small">Ganti Logo</span>
+              </div>
+
+              <div class="row g-3 align-items-center">
+                <div class="col-md-3 text-center">
+                  <div class="p-3 bg-light rounded border mb-2 d-flex flex-column align-items-center justify-content-center" style="min-height: 120px;">
+                    <img id="settings-logo-preview" src="${info.logoUrl || '/img/logo-pupr.svg'}" alt="Preview Logo" style="max-height: 75px; max-width: 100%; object-fit: contain;">
+                    <span class="small text-muted mt-2 font-mono" style="font-size: 0.72rem;">Pratinjau Logo Aktif</span>
+                  </div>
+                </div>
+
+                <div class="col-md-9">
+                  <div class="mb-2">
+                    <label class="form-label font-bold small mb-1">Unggah Berkas Logo Baru (PNG, JPG, SVG, WebP):</label>
+                    <input type="file" id="set-logo-file" class="form-control form-control-sm" accept="image/*" onchange="SystemSettingsModule.handleLogoUpload(event)">
+                    <span class="small text-muted" style="font-size: 0.75rem;">Berkas otomatis dikonversi dan disimpan ke database (mendukung SVG/PNG transparan).</span>
+                  </div>
+
+                  <div class="mb-2">
+                    <label class="form-label font-bold small mb-1">Atau Gunakan Tautan URL Gambar Logo:</label>
+                    <input type="text" id="set-logo-url" class="form-control form-control-sm font-mono" value="${info.logoUrl || '/img/logo-pupr.svg'}" placeholder="/img/logo-pupr.svg atau https://..." onchange="SystemSettingsModule.handleLogoUrlChange(this.value)">
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2 pt-1">
+                    <button type="button" class="glass-btn glass-btn-sm glass-btn-primary" onclick="SystemSettingsModule.setPresetLogo('/img/logo-pupr.svg')">
+                      <i data-lucide="check-circle" class="icon-xs"></i> Gunakan Logo Resmi PUPR
+                    </button>
+                    <button type="button" class="glass-btn glass-btn-sm glass-btn-outline" onclick="SystemSettingsModule.resetLogo()">
+                      <i data-lucide="rotate-ccw" class="icon-xs"></i> Reset Logo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- 1. IDENTITAS & BRANDING UTAMA APLIKASI -->
           <div class="col-lg-6">
             <div class="settings-group-card h-100 p-3 bg-white border rounded shadow-sm">
@@ -276,11 +320,76 @@ const SystemSettingsModule = {
             </div>
           </div>
 
+          <!-- 7. PENGATURAN KONEKSI DATABASE MYSQL HOSTINGER -->
+          <div class="col-12">
+            <div class="settings-group-card p-3 bg-white border rounded shadow-sm">
+              <div class="settings-group-title font-bold text-dark pb-2 mb-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div class="d-flex align-items-center gap-2">
+                  <i data-lucide="database" class="icon-xs text-primary"></i>
+                  <span class="fs-6 font-bold">7. Koneksi Database MySQL (Hostinger Deployment & phpMyAdmin)</span>
+                </div>
+                <div id="db-status-badge-container">
+                  <span class="badge bg-secondary font-mono">Memeriksa Status DB...</span>
+                </div>
+              </div>
+
+              <p class="small text-muted mb-3">
+                Aplikasi ini mendukung <strong>Dual Database Engine</strong>: berjalan otomatis menggunakan berkas JSON lokal saat pengembangan, dan langsung terkoneksi ke <strong>MySQL Hostinger</strong> saat kredensial diaktifkan. Anda cukup mengimpor berkas SQL ke phpMyAdmin Hostinger.
+              </p>
+
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label font-bold small">Database Host:</label>
+                  <input type="text" id="db-host" class="form-control font-mono" value="localhost" placeholder="localhost">
+                  <span class="small text-muted" style="font-size: 0.72rem;">Pada Hostinger gunakan "localhost"</span>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label font-bold small">Nama Database (DB Name):</label>
+                  <input type="text" id="db-name" class="form-control font-mono" placeholder="u123456789_sidat">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label font-bold small">Username Database (DB User):</label>
+                  <input type="text" id="db-user" class="form-control font-mono" placeholder="u123456789_sidat">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-bold small">Password Database:</label>
+                  <input type="password" id="db-password" class="form-control font-mono" placeholder="Password MySQL Anda">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label font-bold small">Port MySQL:</label>
+                  <input type="number" id="db-port" class="form-control font-mono" value="3306">
+                </div>
+                <div class="col-md-3 d-flex align-items-center mt-4">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="db-enabled">
+                    <label class="form-check-label font-bold small" for="db-enabled">Aktifkan MySQL</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap align-items-center justify-content-between pt-3 mt-3 border-top gap-2">
+                <div class="d-flex gap-2">
+                  <button type="button" class="glass-btn glass-btn-primary" onclick="SystemSettingsModule.testDatabaseConnection()">
+                    <i data-lucide="activity" class="icon-xs"></i> Uji Tes Koneksi MySQL
+                  </button>
+                  <button type="button" class="glass-btn glass-btn-outline" onclick="SystemSettingsModule.saveDatabaseConfig()">
+                    <i data-lucide="save" class="icon-xs"></i> Simpan Konfigurasi DB
+                  </button>
+                </div>
+
+                <a href="/database/sidat_demak_hostinger.sql" download class="glass-btn glass-btn-outline text-primary font-bold">
+                  <i data-lucide="download" class="icon-xs"></i> Unduh File SQL (sidat_demak_hostinger.sql)
+                </a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     `;
 
     if (window.lucide) window.lucide.createIcons();
+    this.checkDatabaseStatus();
   },
 
   saveSettings() {
@@ -328,7 +437,10 @@ const SystemSettingsModule = {
     const contactPhone = document.getElementById('set-contactPhone')?.value.trim();
     const contactEmail = document.getElementById('set-contactEmail')?.value.trim();
 
+    const logoUrl = this.pendingLogoData || document.getElementById('set-logo-url')?.value.trim() || info.logoUrl || '/img/logo-pupr.svg';
+
     const newSettings = {
+      logoUrl,
       appName: appName || 'SIDAT - SATUPUTARU',
       instansi: instansi || 'Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak',
       tagline: tagline || 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak',
@@ -367,7 +479,138 @@ const SystemSettingsModule = {
       window.LaporanModule.renderPreview();
     }
 
-    App.showToast('Seluruh teks sistem (Front End & Back End) berhasil disimpan dan diperbarui!', 'success');
+    App.showToast('Seluruh teks sistem (Front End & Back End) dan logo berhasil disimpan!', 'success');
+    this.render();
+  },
+
+  pendingLogoData: null,
+
+  handleLogoUpload(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      App.showToast('Ukuran file logo maksimal 2 MB!', 'warning');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      this.pendingLogoData = event.target.result;
+      const preview = document.getElementById('settings-logo-preview');
+      if (preview) preview.src = this.pendingLogoData;
+      const urlInput = document.getElementById('set-logo-url');
+      if (urlInput) urlInput.value = '(Berkas Gambar Lokal Terpilih)';
+      App.showToast('File logo berhasil dimuat! Klik "Simpan Semua Teks" untuk menerapkan secara permanen.', 'info');
+    };
+    reader.readAsDataURL(file);
+  },
+
+  handleLogoUrlChange(val) {
+    if (val && val.trim()) {
+      this.pendingLogoData = val.trim();
+      const preview = document.getElementById('settings-logo-preview');
+      if (preview) preview.src = this.pendingLogoData;
+    }
+  },
+
+  setPresetLogo(presetPath) {
+    this.pendingLogoData = presetPath;
+    const preview = document.getElementById('settings-logo-preview');
+    if (preview) preview.src = presetPath;
+    const urlInput = document.getElementById('set-logo-url');
+    if (urlInput) urlInput.value = presetPath;
+    App.showToast('Logo resmi PUPR dipilih! Klik "Simpan Semua Teks" untuk menyimpan.', 'info');
+  },
+
+  resetLogo() {
+    this.setPresetLogo('/img/logo-pupr.svg');
+  },
+
+  checkDatabaseStatus() {
+    fetch('/api/db/status')
+      .then(res => res.json())
+      .then(res => {
+        const container = document.getElementById('db-status-badge-container');
+        if (!container) return;
+
+        if (res.connected) {
+          container.innerHTML = `<span class="badge bg-success font-mono font-bold"><i data-lucide="check-circle" class="icon-xs"></i> MySQL Hostinger Terhubung (${res.host}/${res.database})</span>`;
+        } else {
+          container.innerHTML = `<span class="badge bg-primary font-mono font-bold"><i data-lucide="file-text" class="icon-xs"></i> Mode Berkas JSON Lokal (${res.database})</span>`;
+        }
+
+        const hIn = document.getElementById('db-host');
+        const nIn = document.getElementById('db-name');
+        const pIn = document.getElementById('db-port');
+        const enIn = document.getElementById('db-enabled');
+
+        if (hIn && res.host) hIn.value = res.host;
+        if (nIn && res.database && res.database !== 'database.json') nIn.value = res.database;
+        if (enIn) enIn.checked = !!res.enabled;
+
+        if (window.lucide) window.lucide.createIcons();
+      })
+      .catch(err => {
+        console.warn('Gagal memuat status database:', err);
+      });
+  },
+
+  async testDatabaseConnection() {
+    const host = document.getElementById('db-host')?.value.trim() || 'localhost';
+    const database = document.getElementById('db-name')?.value.trim();
+    const user = document.getElementById('db-user')?.value.trim();
+    const password = document.getElementById('db-password')?.value || '';
+    const port = Number(document.getElementById('db-port')?.value) || 3306;
+
+    if (!database || !user) {
+      App.showToast('Nama database dan Username wajib diisi untuk tes koneksi!', 'warning');
+      return;
+    }
+
+    App.showToast('Menguji koneksi ke database MySQL...', 'info');
+
+    try {
+      const res = await fetch('/api/db/test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ host, database, user, password, port })
+      });
+      const data = await res.json();
+      if (data.success) {
+        App.showToast(data.message, 'success');
+      } else {
+        App.showToast(data.message, 'danger');
+      }
+    } catch (e) {
+      App.showToast('Gagal mengirim permintaan tes koneksi: ' + e.message, 'danger');
+    }
+  },
+
+  async saveDatabaseConfig() {
+    const host = document.getElementById('db-host')?.value.trim() || 'localhost';
+    const database = document.getElementById('db-name')?.value.trim() || '';
+    const user = document.getElementById('db-user')?.value.trim() || '';
+    const password = document.getElementById('db-password')?.value || '';
+    const port = Number(document.getElementById('db-port')?.value) || 3306;
+    const enabled = document.getElementById('db-enabled')?.checked || false;
+
+    try {
+      const res = await fetch('/api/db/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ host, database, user, password, port, enabled })
+      });
+      const data = await res.json();
+      if (data.success) {
+        App.showToast('Konfigurasi database Hostinger berhasil disimpan!', 'success');
+        this.checkDatabaseStatus();
+      } else {
+        App.showToast(data.message || 'Gagal menyimpan konfigurasi.', 'danger');
+      }
+    } catch (e) {
+      App.showToast('Terjadi kesalahan saat menyimpan: ' + e.message, 'danger');
+    }
   },
 
   resetDefaultTexts() {
@@ -417,6 +660,12 @@ const SystemSettingsModule = {
     if (!info) return;
 
     document.title = `${info.appName || 'SIDAT - SATUPUTARU'} - ${info.instansi || 'DINPUTARU Demak'}`;
+
+    // Apply Logo
+    const logoImg = document.getElementById('dom-app-logo');
+    if (logoImg && info.logoUrl) {
+      logoImg.src = info.logoUrl;
+    }
 
     // Header brand text
     const brandTitle = document.getElementById('dom-app-title');

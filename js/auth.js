@@ -30,18 +30,19 @@ const Auth = {
     const currentUser = window.store.getCurrentUser();
 
     if (!currentUser) {
-      // Guest / Public Mode: clean "Masuk Admin" button right in the header
+      // Guest / Public Mode: clean "Login" button right in the header
       headerAuthContainer.innerHTML = `
-        <button class="header-btn-login" onclick="Auth.openLoginModal()" title="Masuk ke Panel Admin Aparatur">
-          <i data-lucide="lock" class="icon-xs"></i>
-          <span>Masuk Admin</span>
+        <button class="header-btn-login" onclick="Auth.openLoginModal()" title="Login ke Dashboard Internal DINPUTARU">
+          <i data-lucide="log-in" class="icon-xs"></i>
+          <span>Login</span>
         </button>
       `;
     } else {
-      // Logged in user: user name pill + role badge + logout button
+      // Logged in user: user name pill + role badge + Dashboard toggle + logout button
       const roleObj = window.store.data.roles?.find(r => r.id === currentUser.role) || { name: currentUser.roleLabel || currentUser.role };
       const bidangObj = window.store.getBidang().find(b => b.id === currentUser.bidangId) || { name: 'DINPUTARU' };
       const shortName = currentUser.name.split(',')[0].replace(/^(Drs\.|Ir\.|Dr\.|H\.)\s*/, '');
+      const isInternal = window.App && window.App.currentMode === 'admin';
 
       headerAuthContainer.innerHTML = `
         <div class="header-auth-badge" title="Login: ${currentUser.name} (${roleObj.name}) - ${bidangObj.name}">
@@ -50,6 +51,17 @@ const Auth = {
             <span class="hab-name">${shortName}</span>
           </span>
           <span class="hab-role">${roleObj.name}</span>
+          ${isInternal ? `
+            <button class="hab-nav-btn" onclick="App.switchMode('public')" title="Lihat Tampilan Portal Publik">
+              <i data-lucide="globe" class="icon-xs"></i>
+              <span>Portal</span>
+            </button>
+          ` : `
+            <button class="hab-nav-btn hab-nav-dash" onclick="App.switchMode('admin')" title="Masuk ke Dashboard Internal">
+              <i data-lucide="layout-dashboard" class="icon-xs"></i>
+              <span>Dashboard</span>
+            </button>
+          `}
           <button class="hab-logout-btn" onclick="Auth.logout()" title="Keluar / Logout">
             <i data-lucide="log-out" class="icon-xs"></i>
           </button>
@@ -438,3 +450,4 @@ const Auth = {
 };
 
 window.Auth = Auth;
+window.AuthModule = Auth;

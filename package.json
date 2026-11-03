@@ -6,13 +6,16 @@
   "scripts": {
     "start": "node server.js"
   },
+  "dependencies": {
+    "mysql2": "^3.9.0"
+  },
   "keywords": [
     "monitoring",
     "capaian",
-    "dputr",
+    "dinputaru",
     "demak",
     "kinerja",
-    "semi-retro"
+    "pupr"
   ],
   "author": "DINPUTARU Kab. Demak",
   "license": "MIT"

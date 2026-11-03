@@ -10,7 +10,7 @@
 const PublicPortalModule = {
   selectedPublicIndicatorId: null,
   publicChartInstance: null,
-  currentPubTab: 'cards', // 'cards', 'matrix', 'laporan', 'bankdata'
+  currentPubTab: 'cards', // 'cards', 'matrix', 'bankdata'
   selectedCategoryTab: 'all', // 'all', 'iku', 'ikd', 'ikp', 'ikk'
   publicSearchTerm: '',
   
@@ -61,6 +61,14 @@ const PublicPortalModule = {
       });
     }
 
+    // Bank data category filter
+    const catSelect = document.getElementById('public-bd-category-filter');
+    if (catSelect) {
+      catSelect.addEventListener('change', (e) => {
+        this.setBankDataCategory(e.target.value);
+      });
+    }
+
     // Search indicator input in public view
     const pubSearchInput = document.getElementById('public-indicator-search');
     if (pubSearchInput) {
@@ -89,7 +97,7 @@ const PublicPortalModule = {
     });
 
     // Toggle pane visibility
-    const panes = ['cards', 'matrix', 'laporan', 'bankdata'];
+    const panes = ['cards', 'matrix', 'bankdata'];
     panes.forEach(t => {
       const pane = document.getElementById(`pub-tab-pane-${t}`);
       if (pane) {
@@ -103,10 +111,6 @@ const PublicPortalModule = {
       this.renderIndicatorSegments();
     } else if (tab === 'matrix') {
       this.renderPublicMatrixTable();
-    } else if (tab === 'laporan') {
-      if (window.LaporanModule) {
-        window.LaporanModule.renderPublicLaporan();
-      }
     } else if (tab === 'bankdata') {
       this.renderBankDataSegment();
     }
@@ -134,8 +138,6 @@ const PublicPortalModule = {
       this.renderIndicatorSegments();
     } else if (this.currentPubTab === 'matrix') {
       this.renderPublicMatrixTable();
-    } else if (this.currentPubTab === 'laporan') {
-      if (window.LaporanModule) window.LaporanModule.renderPublicLaporan();
     } else if (this.currentPubTab === 'bankdata') {
       this.renderBankDataSegment();
     }
@@ -173,45 +175,50 @@ const PublicPortalModule = {
     if (!container) return;
 
     const categories = window.store.getCategories().sort((a, b) => (a.segmentNumber || 9) - (b.segmentNumber || 9));
-    const visibleYears = window.store.getVisibleYears ? window.store.getVisibleYears() : [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+    const indicators = window.store.getIndicators();
+    const visibleYears = window.store.getVisibleYears ? window.store.getVisibleYears() : [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
     const activeYear = window.store.getActiveYear ? window.store.getActiveYear() : 2026;
 
     container.innerHTML = `
       <div class="pub-toolbar-card mb-3">
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-2">
           
-          <!-- Category Filter Buttons -->
-          <div class="pub-cat-filters-wrap d-flex flex-wrap gap-1">
-            <button class="pub-cat-filter-btn ${this.selectedCategoryTab === 'all' ? 'active' : ''}" onclick="PublicPortalModule.setCategoryTab('all')">
-              Semua Kategori
+          <!-- Category Filter Buttons (Uniform, Compact & Rapi) -->
+          <div class="pub-cat-filters-grid">
+            <button class="pub-cat-btn ${this.selectedCategoryTab === 'all' ? 'active' : ''}" onclick="PublicPortalModule.setCategoryTab('all')">
+              <span class="pcb-name">Semua Kategori</span>
+              <span class="pcb-count">${indicators.length}</span>
             </button>
-            ${categories.map(c => `
-              <button class="pub-cat-filter-btn ${this.selectedCategoryTab === c.id ? 'active' : ''}" onclick="PublicPortalModule.setCategoryTab('${c.id}')">
-                ${c.code} (${c.name})
-              </button>
-            `).join('')}
+            ${categories.map(c => {
+              const count = indicators.filter(i => (i.categoryId === c.id || i.category === c.code || i.category === c.id)).length;
+              return `
+                <button class="pub-cat-btn ${this.selectedCategoryTab === c.id ? 'active' : ''}" onclick="PublicPortalModule.setCategoryTab('${c.id}')" title="${c.name}">
+                  <span class="pcb-name">${c.code}</span>
+                  <span class="pcb-count">${count}</span>
+                </button>
+              `;
+            }).join('')}
           </div>
 
           <!-- Periode Info Pill -->
           <div class="d-flex align-items-center gap-2">
             <span class="pub-year-badge-pill">
-              <i data-lucide="calendar" class="icon-xs text-orange"></i>
-              <span>Periode Aktif: <strong>${visibleYears[0]} s.d. ${activeYear}</strong></span>
+              <i data-lucide="calendar" class="icon-xs text-warning"></i>
+              <span>Periode: <strong>${visibleYears[0]} s.d. ${activeYear}</strong></span>
             </span>
           </div>
-
         </div>
 
-        <!-- Search Bar -->
-        <div class="row g-2 mt-2 align-items-center">
+        <!-- Search Bar with Live Filter -->
+        <div class="row g-2 align-items-center mt-1">
           <div class="col-md-8">
             <div class="pub-search-box">
-              <i data-lucide="search" class="icon-xs text-orange"></i>
-              <input type="text" id="public-indicator-search" class="pub-search-input" value="${this.publicSearchTerm}" placeholder="Cari nama indikator, kode, atau wewenang bidang penanggung jawab...">
+              <i data-lucide="search" class="icon-xs text-primary"></i>
+              <input type="text" id="public-indicator-search" class="pub-search-input" value="${this.publicSearchTerm}" placeholder="Cari nama indikator, kode, atau bidang teknis penanggung jawab...">
             </div>
           </div>
-          <div class="col-md-4 text-md-end text-muted small">
-            Menampilkan data <strong>Target & Realisasi</strong> tahun <strong>${visibleYears[0]} - ${activeYear}</strong>
+          <div class="col-md-4 text-md-end text-muted small font-mono">
+            Target & Realisasi <strong>${visibleYears[0]} - ${activeYear}</strong>
           </div>
         </div>
       </div>
@@ -353,8 +360,7 @@ const PublicPortalModule = {
         <section class="pub-segment-section" id="public-segment-section-${cat.id}">
           <div class="pub-segment-header">
             <div class="pub-segment-title-wrap">
-              <span class="pub-segment-badge-orange" style="background: ${cat.badgeColor || '#ea580c'};">SEGMEN ${cat.segmentNumber || 1}</span>
-              <h3 class="pub-segment-title">${cat.name} (${cat.code})</h3>
+              <span class="pub-cat-badge-pill" style="background: ${cat.badgeColor || '#0B3C84'}; color: #fff;">${cat.code}</span><h3 class="pub-segment-title mb-0">${cat.name}</h3>
             </div>
             <span class="badge badge-orange-subtle font-bold font-mono">${cat.desc || ''}</span>
           </div>
@@ -415,9 +421,7 @@ const PublicPortalModule = {
           <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
             <div class="d-flex flex-wrap align-items-center gap-2">
               <span class="badge-orange-primary font-mono font-bold">${ind.code}</span>
-              <span class="badge-orange-subtle font-bold">
-                Segmen ${cat?.segmentNumber || '-'}: ${cat?.name || '-'}
-              </span>
+              <span class="pub-cat-desc-badge">${cat?.name || "-"}</span>
               <span class="badge-adm-slate font-mono">Satuan: ${ind.unit}</span>
             </div>
 
@@ -567,8 +571,8 @@ const PublicPortalModule = {
     if (typeof Chart !== 'undefined') {
       try {
         const ctx = canvas.getContext('2d');
-        // Explicit white fill
-        ctx.fillStyle = '#ffffff';
+        const isDark = document.body.classList.contains('theme-dark');
+        ctx.fillStyle = isDark ? '#111D3B' : '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         this.publicChartInstance = new Chart(ctx, {
@@ -579,26 +583,22 @@ const PublicPortalModule = {
               {
                 label: `Target (${ind.unit})`,
                 data: targets,
-                borderColor: '#9a3412', // Warm amber-brown
-                backgroundColor: 'transparent',
-                borderWidth: 2,
+                borderColor: isDark ? '#94A3B8' : '#D97706',
                 borderDash: [5, 4],
-                pointRadius: 4,
-                pointBackgroundColor: '#ffffff',
-                pointBorderColor: '#9a3412',
-                pointBorderWidth: 2,
+                pointBackgroundColor: isDark ? '#111D3B' : '#FFFFFF',
+                pointBorderColor: isDark ? '#94A3B8' : '#D97706',
                 fill: false,
                 tension: 0.15
               },
               {
                 label: `Realisasi (${ind.unit})`,
                 data: realisasi,
-                borderColor: '#ea580c', // Vibrant Orange
-                backgroundColor: 'rgba(234, 88, 12, 0.15)',
+                borderColor: isDark ? '#F4B41A' : '#0B3C84',
+                backgroundColor: isDark ? 'rgba(244, 180, 26, 0.15)' : 'rgba(11, 60, 132, 0.12)',
                 borderWidth: 3,
                 pointRadius: 5,
-                pointBackgroundColor: '#ea580c',
-                pointBorderColor: '#ffffff',
+                pointBackgroundColor: isDark ? '#F4B41A' : '#0B3C84',
+                pointBorderColor: isDark ? '#07234E' : '#FFFFFF',
                 pointBorderWidth: 2,
                 pointHoverRadius: 7,
                 fill: true,
@@ -970,25 +970,52 @@ const PublicPortalModule = {
     this.selectIndicator(indId);
   },
 
-  /* ----------------- RENDER SEGMEN BANK DATA PUBLIK ----------------- */
+  /* ----------------- RENDER SEGMEN BANK DATA PUBLIK (BPS KAB. DEMAK 2025) ----------------- */
   renderBankDataSegment() {
     const container = document.getElementById('public-bank-data-list');
     const paginationContainer = document.getElementById('public-bank-data-pagination');
     const infoContainer = document.getElementById('public-bank-data-info');
+    const bidangButtonsContainer = document.getElementById('public-bd-bidang-buttons');
     if (!container) return;
 
     const allDocs = window.store.getDocuments ? window.store.getDocuments() : [];
+    const bidangList = window.store.getBidang();
 
-    // Filter by search & bidang
+    // Render Bidang Filter Buttons
+    if (bidangButtonsContainer) {
+      bidangButtonsContainer.innerHTML = `
+        <button class="pub-cat-btn ${this.bankDataBidangFilter === 'all' ? 'active' : ''}" onclick="PublicPortalModule.setBankDataBidang('all')">
+          <span>Semua Bidang</span>
+          <span class="pcb-count">${allDocs.length}</span>
+        </button>
+        ${bidangList.map(b => {
+          const count = allDocs.filter(d => d.bidangId === b.id).length;
+          return `
+            <button class="pub-cat-btn ${this.bankDataBidangFilter === b.id ? 'active' : ''}" onclick="PublicPortalModule.setBankDataBidang('${b.id}')" title="${b.name}">
+              <span>${b.name.replace('Bidang ', '')}</span>
+              <span class="pcb-count">${count}</span>
+            </button>
+          `;
+        }).join('')}
+      `;
+    }
+
+    // Filter by search, bidang, and category
     let filtered = allDocs.filter(doc => {
       if (this.bankDataBidangFilter !== 'all' && doc.bidangId !== this.bankDataBidangFilter) {
+        return false;
+      }
+      if (this.bankDataCategoryFilter && this.bankDataCategoryFilter !== 'all' && doc.category !== this.bankDataCategoryFilter) {
         return false;
       }
       if (this.bankDataSearchTerm) {
         const titleMatch = (doc.title || '').toLowerCase().includes(this.bankDataSearchTerm);
         const tagMatch = (doc.tags || []).some(t => t.toLowerCase().includes(this.bankDataSearchTerm));
         const numMatch = (doc.documentNumber || '').toLowerCase().includes(this.bankDataSearchTerm);
-        return titleMatch || tagMatch || numMatch;
+        const descMatch = (doc.desc || '').toLowerCase().includes(this.bankDataSearchTerm);
+        const statMatch = (doc.statSummary || '').toLowerCase().includes(this.bankDataSearchTerm);
+        const metricMatch = (doc.metricValue || '').toLowerCase().includes(this.bankDataSearchTerm);
+        return titleMatch || tagMatch || numMatch || descMatch || statMatch || metricMatch;
       }
       return true;
     });
@@ -1002,14 +1029,15 @@ const PublicPortalModule = {
     const pageItems = filtered.slice(startIdx, endIdx);
 
     if (infoContainer) {
-      infoContainer.textContent = `Menampilkan ${totalItems === 0 ? 0 : startIdx + 1} - ${Math.min(endIdx, totalItems)} dari ${totalItems} dokumen publik DINPUTARU Kab. Demak`;
+      infoContainer.textContent = `Menampilkan ${totalItems === 0 ? 0 : startIdx + 1} - ${Math.min(endIdx, totalItems)} dari ${totalItems} data resmi BPS 2025 & DINPUTARU Demak`;
     }
 
     if (pageItems.length === 0) {
       container.innerHTML = `
-        <div class="p-4 bg-white rounded border-orange text-center text-muted">
-          <i data-lucide="file-question" class="icon-md text-orange mb-2"></i>
-          <p class="mb-0">Tidak ada dokumen bank data yang cocok dengan kriteria pencarian.</p>
+        <div class="p-5 bg-white rounded border text-center text-muted">
+          <i data-lucide="file-question" class="icon-lg text-primary mb-2"></i>
+          <h5 class="font-bold text-dark mb-1">Data Tidak Ditemukan</h5>
+          <p class="mb-0 small">Tidak ada data statistik atau arsip dokumen yang cocok dengan kata kunci "${this.bankDataSearchTerm}".</p>
         </div>
       `;
       if (paginationContainer) paginationContainer.innerHTML = '';
@@ -1020,26 +1048,49 @@ const PublicPortalModule = {
     container.innerHTML = `
       <div class="row g-3">
         ${pageItems.map(doc => {
-          const bidang = window.store.getBidang().find(b => b.id === doc.bidangId);
+          const bidang = bidangList.find(b => b.id === doc.bidangId);
           return `
-            <div class="col-md-6">
-              <div class="pub-doc-card-orange">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                  <span class="badge-orange-primary font-mono font-bold">${doc.year || '-'}</span>
-                  <span class="badge-adm-slate font-mono">${doc.category || 'Dokumen Resmi'}</span>
-                </div>
-                <h5 class="pub-doc-title font-bold text-dark mb-1">${doc.title}</h5>
-                <p class="small text-muted mb-2 font-mono">No: ${doc.documentNumber || '-'}</p>
-                
-                <div class="d-flex flex-wrap gap-1 mb-3">
-                  ${(doc.tags || []).map(t => `<span class="badge bg-light text-dark border small">${t}</span>`).join('')}
+            <div class="col-lg-6">
+              <div class="pub-bd-card">
+                <div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="badge bg-primary text-white font-mono font-bold">${doc.year || '2024/2025'}</span>
+                    <span class="badge bg-light text-dark border font-mono">${doc.category || 'Statistik Resmi'}</span>
+                  </div>
+                  
+                  <h5 class="pub-doc-title font-bold text-dark mb-2">${doc.title}</h5>
+
+                  <!-- Big Metric Box Highlight -->
+                  <div class="pub-bd-metric-box">
+                    <div>
+                      <span class="pub-bd-metric-lbl d-block">${doc.metricLabel || 'Angka Kunci Data'}</span>
+                      <strong class="pub-bd-metric-val font-mono">${doc.metricValue || '-'}</strong>
+                    </div>
+                    <span class="badge bg-white text-primary border font-mono small font-bold px-2 py-1">${doc.fileType || 'XLSX & PDF'}</span>
+                  </div>
+
+                  <!-- Summary Statistics -->
+                  <p class="small text-muted mb-2" style="line-height: 1.5;">${doc.statSummary || doc.desc}</p>
+                  
+                  <div class="small mb-2 font-mono">
+                    <strong class="text-dark">Sumber:</strong> <span class="text-primary font-bold">${doc.source || 'BPS Kab. Demak'}</span>
+                  </div>
+
+                  <div class="pub-bd-tags-wrap mb-3">
+                    ${(doc.tags || []).map(t => `<span class="pub-bd-tag">${t}</span>`).join('')}
+                  </div>
                 </div>
 
-                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
-                  <span class="small text-muted">${bidang ? bidang.name : 'DINPUTARU Demak'}</span>
-                  <button class="pub-btn-orange-outline btn-sm" onclick="App.showToast('Mengunduh berkas: ${doc.title}', 'info')">
-                    <i data-lucide="download" class="icon-xs"></i> Unduh Berkas
-                  </button>
+                <div class="d-flex flex-wrap align-items-center justify-content-between pt-3 border-top gap-2">
+                  <span class="small font-bold text-dark">${bidang ? bidang.name : 'DINPUTARU Demak'}</span>
+                  <div class="d-flex gap-2">
+                    <button class="glass-btn glass-btn-sm glass-btn-outline" onclick="PublicPortalModule.viewBankDataDetail('${doc.id}')">
+                      <i data-lucide="info" class="icon-xs"></i> Rincian Data
+                    </button>
+                    <button class="glass-btn glass-btn-sm glass-btn-primary" onclick="PublicPortalModule.downloadBankData('${doc.id}')">
+                      <i data-lucide="download" class="icon-xs"></i> Unduh Data
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1050,30 +1101,46 @@ const PublicPortalModule = {
 
     // Render Pagination Controls (10 items per page)
     if (paginationContainer) {
-      let pagesHtml = '';
-      for (let p = 1; p <= totalPages; p++) {
-        pagesHtml += `
-          <button class="pub-pagination-btn ${p === this.bankDataCurrentPage ? 'active' : ''}" 
-                  onclick="PublicPortalModule.goToPage(${p})">
-            ${p}
+      if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+      } else {
+        let pagesHtml = '';
+        for (let p = 1; p <= totalPages; p++) {
+          pagesHtml += `
+            <button class="pub-pagination-btn ${p === this.bankDataCurrentPage ? 'active' : ''}" 
+                    onclick="PublicPortalModule.goToPage(${p})">
+              ${p}
+            </button>
+          `;
+        }
+
+        paginationContainer.innerHTML = `
+          <button class="pub-pagination-btn" ${this.bankDataCurrentPage <= 1 ? 'disabled' : ''} 
+                  onclick="PublicPortalModule.goToPage(${this.bankDataCurrentPage - 1})">
+            <i data-lucide="chevron-left" class="icon-xs"></i> Sebelumnya
+          </button>
+          ${pagesHtml}
+          <button class="pub-pagination-btn" ${this.bankDataCurrentPage >= totalPages ? 'disabled' : ''} 
+                  onclick="PublicPortalModule.goToPage(${this.bankDataCurrentPage + 1})">
+            Selanjutnya <i data-lucide="chevron-right" class="icon-xs"></i>
           </button>
         `;
       }
-
-      paginationContainer.innerHTML = `
-        <button class="pub-pagination-btn" ${this.bankDataCurrentPage <= 1 ? 'disabled' : ''} 
-                onclick="PublicPortalModule.goToPage(${this.bankDataCurrentPage - 1})">
-          <i data-lucide="chevron-left" class="icon-xs"></i> Sebelumnya
-        </button>
-        ${pagesHtml}
-        <button class="pub-pagination-btn" ${this.bankDataCurrentPage >= totalPages ? 'disabled' : ''} 
-                onclick="PublicPortalModule.goToPage(${this.bankDataCurrentPage + 1})">
-          Selanjutnya <i data-lucide="chevron-right" class="icon-xs"></i>
-        </button>
-      `;
     }
 
     if (window.lucide) window.lucide.createIcons();
+  },
+
+  setBankDataBidang(bidangId) {
+    this.bankDataBidangFilter = bidangId;
+    this.bankDataCurrentPage = 1;
+    this.renderBankDataSegment();
+  },
+
+  setBankDataCategory(category) {
+    this.bankDataCategoryFilter = category;
+    this.bankDataCurrentPage = 1;
+    this.renderBankDataSegment();
   },
 
   goToPage(page) {
@@ -1081,6 +1148,111 @@ const PublicPortalModule = {
     this.renderBankDataSegment();
     const seg = document.getElementById('segment-bank-data');
     if (seg) seg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  },
+
+  viewBankDataDetail(docId) {
+    const doc = (window.store.getDocuments() || []).find(d => d.id === docId);
+    if (!doc) return;
+
+    const bidang = window.store.getBidang().find(b => b.id === doc.bidangId);
+
+    const detailHtml = `
+      <div class="bank-data-detail-modal">
+        <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+          <div>
+            <span class="badge bg-primary text-white font-mono font-bold">${doc.year || '2024/2025'}</span>
+            <span class="badge bg-light text-dark border ms-1 font-mono">${doc.category || 'Statistik'}</span>
+          </div>
+          <span class="small font-mono text-muted">No: ${doc.documentNumber || '-'}</span>
+        </div>
+
+        <h4 class="font-bold text-dark mb-3">${doc.title}</h4>
+
+        <!-- Metric Highlight Card -->
+        <div class="pub-bd-metric-box mb-3 p-3">
+          <div>
+            <span class="pub-bd-metric-lbl d-block small">${doc.metricLabel || 'Nilai Data Kunci'}</span>
+            <strong class="pub-bd-metric-val font-mono fs-3">${doc.metricValue || '-'}</strong>
+          </div>
+          <div class="text-end">
+            <span class="badge bg-white text-primary border font-mono font-bold px-3 py-2 fs-6">${doc.fileType || 'XLSX / PDF'}</span>
+            <span class="d-block small text-muted mt-1 font-mono">${doc.fileSize || 'Ukuran: 2 MB'}</span>
+          </div>
+        </div>
+
+        <!-- Rincian Data Tabular -->
+        <div class="card p-3 mb-3 bg-light border">
+          <h6 class="font-bold text-dark mb-2">
+            <i data-lucide="bar-chart-2" class="icon-xs text-primary"></i> Ringkasan Parameter & Angka Statistik:
+          </h6>
+          <p class="small text-dark mb-0 font-mono" style="line-height: 1.6;">${doc.statSummary || doc.desc}</p>
+        </div>
+
+        <!-- Deskripsi Lengkap -->
+        <div class="mb-3">
+          <h6 class="font-bold text-dark mb-1">Deskripsi & Ruang Lingkup Data:</h6>
+          <p class="small text-muted mb-0" style="line-height: 1.6;">${doc.desc || '-'}</p>
+        </div>
+
+        <!-- Metadata Sumber & Validasi -->
+        <div class="p-3 bg-white rounded border mb-3">
+          <div class="row g-2 small">
+            <div class="col-sm-6">
+              <strong class="text-dark d-block">Sumber Data Resmi:</strong>
+              <span class="text-primary font-bold">${doc.source || 'BPS Kab. Demak (Demak Dalam Angka 2025)'}</span>
+            </div>
+            <div class="col-sm-6">
+              <strong class="text-dark d-block">Bidang Pengampu:</strong>
+              <span>${bidang ? bidang.name : 'DINPUTARU Demak'}</span>
+            </div>
+            <div class="col-sm-6">
+              <strong class="text-dark d-block">Tanggal Rilis:</strong>
+              <span>${doc.date || '2025'}</span>
+            </div>
+            <div class="col-sm-6">
+              <strong class="text-dark d-block">Status Verifikasi:</strong>
+              <span class="badge bg-success-subtle text-success font-bold font-mono">Terverifikasi Resmi</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-1 mb-4">
+          ${(doc.tags || []).map(t => `<span class="badge bg-light text-dark border small">${t}</span>`).join('')}
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 pt-2 border-top">
+          <button class="glass-btn glass-btn-outline" onclick="App.closeModal()">
+            Tutup
+          </button>
+          <button class="glass-btn glass-btn-primary" onclick="PublicPortalModule.downloadBankData('${doc.id}')">
+            <i data-lucide="download" class="icon-xs"></i> Unduh Berkas Data (CSV / Excel)
+          </button>
+        </div>
+      </div>
+    `;
+
+    App.openModal('Rincian Bank Data Kedinasan', detailHtml);
+    if (window.lucide) window.lucide.createIcons();
+  },
+
+  downloadBankData(docId) {
+    const doc = (window.store.getDocuments() || []).find(d => d.id === docId);
+    if (!doc) return;
+
+    // Generate CSV content
+    const csvContent = "data:text/csv;charset=utf-8," + 
+      "ID,Judul,Bidang,Tahun,Nilai_Kunci,Label_Kunci,Sumber,Ringkasan\\n" +
+      `"${doc.id}","${doc.title.replace(/"/g, '""')}","${doc.bidangId}","${doc.year}","${doc.metricValue}","${doc.metricLabel}","${doc.source}","${(doc.statSummary || '').replace(/"/g, '""')}"`;
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `${doc.id}_${doc.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 40)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    App.showToast(`Berkas data "${doc.title}" berhasil diunduh.`, 'success');
   }
 };
 

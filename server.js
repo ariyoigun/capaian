@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const dbManager = require('./db/database_manager');
 
 const PORT = process.env.PORT || 3003;
 const BASE_DIR = __dirname;
@@ -42,29 +43,12 @@ setInterval(() => {
 
 // Helper: Load database
 function loadDatabase() {
-  try {
-    if (fs.existsSync(DB_FILE)) {
-      const data = fs.readFileSync(DB_FILE, 'utf8');
-      return JSON.parse(data);
-    }
-  } catch (err) {
-    console.error('Error reading database.json:', err);
-  }
-  return null;
+  return dbManager.loadDatabaseSync();
 }
 
 // Helper: Save database
 function saveDatabase(data) {
-  try {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf8');
-    return true;
-  } catch (err) {
-    console.error('Error writing database.json:', err);
-    return false;
-  }
+  return dbManager.saveDatabaseSync(data);
 }
 
 // Generate Math Captcha (Addition, Subtraction, Multiplication, Division)
@@ -653,6 +637,59 @@ const server = http.createServer(async (req, res) => {
       return;
     } catch (err) {
       sendJson(res, 500, { success: false, message: 'Gagal memperbarui pengaturan teks sistem.' });
+      return;
+    }
+  }
+
+  // 12. Database MySQL Status & Hostinger Tester
+  if (req.method === 'GET' && pathname === '/api/db/status') {
+    sendJson(res, 200, { success: true, ...dbManager.getStatus() });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/db/test') {
+    try {
+      const body = await parseJsonBody(req);
+      const result = await dbManager.testConnection(body);
+      sendJson(res, result.success ? 200 : 400, result);
+      return;
+    } catch (e) {
+      sendJson(res, 500, { success: false, message: 'Gagal melakukan tes koneksi MySQL: ' + e.message });
+      return;
+    }
+  }
+
+  if (req.method === 'POST' && pathname === '/api/db/config') {
+    try {
+      const body = await parseJsonBody(req);
+      dbManager.saveConfig(body);
+      await dbManager.init();
+      sendJson(res, 200, { success: true, message: 'Konfigurasi database berhasil disimpan.', status: dbManager.getStatus() });
+      return;
+    } catch (e) {
+      sendJson(res, 500, { success: false, message: 'Gagal menyimpan konfigurasi database: ' + e.message });
+      return;
+    }
+  }
+
+  // 13. Admin: Update Logo
+  if (req.method === 'POST' && pathname === '/api/admin/logo') {
+    try {
+      const body = await parseJsonBody(req);
+      const { logoUrl } = body;
+      if (!logoUrl) {
+        sendJson(res, 400, { success: false, message: 'Logo URL atau data Base64 wajib diisi!' });
+        return;
+      }
+      const db = loadDatabase();
+      if (!db.systemInfo) db.systemInfo = {};
+      db.systemInfo.logoUrl = logoUrl;
+      db.systemInfo.lastUpdated = new Date().toISOString();
+      saveDatabase(db);
+      sendJson(res, 200, { success: true, message: 'Logo instansi berhasil diperbarui!', logoUrl });
+      return;
+    } catch (e) {
+      sendJson(res, 500, { success: false, message: 'Gagal memperbarui logo: ' + e.message });
       return;
     }
   }

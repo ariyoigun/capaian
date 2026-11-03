@@ -13,7 +13,7 @@
   <script src="js/vendor/chart.umd.min.js"></script>
   <script src="js/vendor/lucide.min.js"></script>
 </head>
-<body class="theme-public-orange">
+<body class="theme-pupr-blue">
 
   <!-- 1. TOP SESSION & ROLE BAR (HIDDEN - Direct start with SIDAT - SATUPUTARU) -->
   <div id="role-switcher-container" style="display: none;"></div>
@@ -22,8 +22,8 @@
   <header class="app-header">
     <div class="header-inner">
       <div class="brand-section">
-        <div class="brand-emblem">
-          <span>PUTR</span>
+        <div class="brand-emblem" id="app-logo-container" title="Dinas Pekerjaan Umum dan Penataan Ruang Kab. Demak">
+          <img id="dom-app-logo" src="/img/logo-pupr.svg" alt="Logo PUPR" class="app-logo-img">
         </div>
         <div class="brand-text">
           <h1 id="dom-app-title">
@@ -34,25 +34,15 @@
         </div>
       </div>
 
-      <!-- Header Action Items: Mode Switcher, Menu Laporan, Actions, Auth Button -->
+      <!-- Header Action Items: Night Mode Toggle & Single Login / User Auth Button -->
       <div class="header-actions-group">
-        <div class="mode-toggle-group">
-          <button class="mode-switch-btn active-mode-btn" id="btn-switch-to-public">
-            <i data-lucide="globe" class="icon-xs"></i>
-            <span>Portal Publik</span>
-          </button>
-          <button class="mode-switch-btn" id="btn-switch-to-admin">
-            <i data-lucide="shield-check" class="icon-xs"></i>
-            <span>Panel Admin</span>
-          </button>
-        </div>
-
-        <button class="header-btn-laporan" id="btn-header-laporan" title="Buka Dokumen Laporan Resmi Kedinasan">
-          <i data-lucide="printer" class="icon-xs"></i>
-          <span>Menu Laporan</span>
+        <!-- Night Mode / Dark Mode Toggle Button -->
+        <button class="header-btn-nightmode" id="btn-toggle-nightmode" onclick="App.toggleNightMode()" title="Ganti Mode Tampilan (Terang / Gelap)">
+          <i data-lucide="moon" class="icon-xs" id="nightmode-icon"></i>
+          <span id="nightmode-label">Mode Malam</span>
         </button>
 
-        <!-- Dynamic User Auth Slot: Masuk Admin (Guest) or User Badge + Logout -->
+        <!-- Dynamic User Auth Slot: Login (Guest) or User Badge + Dashboard + Logout -->
         <div id="header-user-auth" class="header-user-auth-slot"></div>
 
         <button class="retro-btn retro-btn-sm retro-btn-primary" id="btn-global-add-indicator" data-permission="input_indikator" style="display: none;">
@@ -67,16 +57,16 @@
   <!-- ====================================================================== -->
   <div id="public-portal-container" class="main-wrapper">
     
-    <!-- Hero Banner Publik (Compact, Tidy & Modern Orange) -->
+    <!-- Hero Banner Publik (Compact, Tidy & Modern PUPR Blue) -->
     <div class="pub-hero-banner-compact">
       <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
         <div class="pub-hero-left">
           <div class="pub-hero-badge" id="dom-hero-badge">
-            <i data-lucide="shield-check" class="icon-xs"></i> PORTAL SATU DATA & CAPAIAN KINERJA PEMKAB DEMAK
+            <i data-lucide="shield-check" class="icon-xs"></i> SISTEM INFORMASI CAPAIAN KINERJA & SATU DATA DINPUTARU DEMAK
           </div>
           <h2 class="pub-hero-title mb-1" id="dom-hero-title">Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak</h2>
           <p class="pub-hero-desc mb-0" id="dom-hero-desc">
-            Keterbukaan informasi publik dan akuntabilitas kinerja penyelenggaraan infrastruktur jalan jembatan, sumber daya air, sanitasi air minum, penataan ruang, dan bina konstruksi DINPUTARU Kabupaten Demak.
+            Keterbukaan informasi dan akuntabilitas kinerja penyelenggaraan infrastruktur jalan jembatan, sumber daya air, sanitasi air minum, penataan ruang, dan bina konstruksi DINPUTARU Kabupaten Demak.
           </p>
         </div>
 
@@ -89,24 +79,24 @@
           </div>
           <div class="pub-stat-pill">
             <span class="ps-label">Capaian Target</span>
-            <strong class="ps-val text-success font-mono" id="pub-stat-achieved">8 / 9</strong>
+            <strong class="ps-val text-success font-mono" id="pub-stat-achieved">52 / 55</strong>
             <span class="ps-sub">≥100% Target</span>
           </div>
           <div class="pub-stat-pill">
             <span class="ps-label">Tahun Aktif</span>
-            <strong class="ps-val text-orange font-mono" id="pub-stat-year">2026</strong>
+            <strong class="ps-val text-warning font-mono" id="pub-stat-year">2026</strong>
             <span class="ps-sub">Penilaian</span>
           </div>
           <div class="pub-stat-pill">
             <span class="ps-label">Periode Publik</span>
-            <strong class="ps-val font-mono" id="pub-stat-period">2020-2026</strong>
+            <strong class="ps-val font-mono" id="pub-stat-period">2020-2030</strong>
             <span class="ps-sub">Multi-Tahun</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Public Main Navigation Tabs Bar (4 Tabs Nav) -->
+    <!-- Public Main Navigation Tabs Bar (HANYA 3 TAB SESUAI PERMINTAAN USER) -->
     <nav class="pub-main-nav">
       <div class="pub-nav-tabs">
         <button class="pub-nav-tab active" data-pub-tab="cards" onclick="PublicPortalModule.switchPubTab('cards')">
@@ -115,15 +105,11 @@
         </button>
         <button class="pub-nav-tab" data-pub-tab="matrix" onclick="PublicPortalModule.switchPubTab('matrix')">
           <i data-lucide="table-2" class="icon-xs"></i>
-          <span id="dom-pub-tab-2-text">2. Matriks Tabel Multi-Tahun (2020-2026)</span>
-        </button>
-        <button class="pub-nav-tab" data-pub-tab="laporan" id="tab-btn-pub-laporan" onclick="PublicPortalModule.switchPubTab('laporan')">
-          <i data-lucide="printer" class="icon-xs"></i>
-          <span id="dom-pub-tab-3-text">3. Dokumen Laporan Kinerja Resmi (Cetak / PDF)</span>
+          <span id="dom-pub-tab-2-text">2. Matriks Tabel Multi-Tahun (2020–2030)</span>
         </button>
         <button class="pub-nav-tab" data-pub-tab="bankdata" onclick="PublicPortalModule.switchPubTab('bankdata')">
           <i data-lucide="folder-archive" class="icon-xs"></i>
-          <span id="dom-pub-tab-4-text">4. Bank Data Publik</span>
+          <span id="dom-pub-tab-3-text">3. Bank Data DINPUTARU (BPS Demak 2025)</span>
         </button>
       </div>
     </nav>
@@ -154,41 +140,46 @@
       </div>
     </div>
 
-    <!-- TAB 3: DOKUMEN LAPORAN RESMI (AKSES PUBLIK LANGSUNG) -->
-    <div id="pub-tab-pane-laporan" class="pub-tab-pane" style="display: none;">
-      <div id="public-laporan-section">
-        <!-- Injected by PublicPortalModule / LaporanModule -->
-      </div>
-    </div>
-
-    <!-- TAB 4: BANK DATA PUBLIK -->
+    <!-- TAB 3: BANK DATA PUBLIK (DATA BPS KABUPATEN DEMAK 2025) -->
     <div id="pub-tab-pane-bankdata" class="pub-tab-pane" style="display: none;">
       <section class="pub-segment-section" id="segment-bank-data">
         <div class="pub-segment-header">
           <div class="pub-segment-title-wrap">
-            <span class="pub-segment-badge-orange bg-dark text-white">BANK DATA</span>
-            <h3 class="pub-segment-title">Bank Data & Dokumen Resmi DINPUTARU Demak</h3>
+            <span class="pub-cat-badge-pill" style="background: #0B3C84; color: #fff;">BANK DATA BPS 2025</span>
+            <h3 class="pub-segment-title">Bank Data & Dokumen Resmi DINPUTARU Kabupaten Demak</h3>
           </div>
-          <span class="badge bg-light text-dark border font-mono">10 Dokumen Per Halaman</span>
+          <span class="pub-cat-desc-badge">Sumber: BPS Kab. Demak (Demak Dalam Angka 2025) & Bidang Teknis</span>
         </div>
 
         <!-- Search & Filter Bar -->
         <div class="pub-toolbar-card mb-3">
-          <div class="row g-2 align-items-center">
-            <div class="col-md-7">
-              <div class="pub-search-box">
-                <i data-lucide="search" class="icon-xs text-orange"></i>
-                <input type="text" id="public-bd-search" class="pub-search-input" placeholder="Cari nama berkas, nomor SK, kata kunci (misal: Jalan, Irigasi, Sayung, RTRW)...">
-              </div>
+          <!-- Bidang Filter Buttons Bar -->
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2 pb-2 border-bottom">
+            <div class="pub-cat-filters-grid" id="public-bd-bidang-buttons">
+              <!-- Dynamically rendered bidang filters -->
             </div>
-            <div class="col-md-5">
-              <select id="public-bd-bidang-filter" class="pub-select-orange">
-                <option value="all">Semua Bidang Pengelola</option>
-              </select>
+            <div class="small text-muted font-mono" id="public-bank-data-info">
+              Memuat data statistik BPS Demak...
             </div>
           </div>
-          <div class="mt-2 text-muted small" id="public-bank-data-info">
-            Memuat data arsip dokumen DINPUTARU Demak...
+
+          <div class="row g-2 align-items-center">
+            <div class="col-md-8">
+              <div class="pub-search-box">
+                <i data-lucide="search" class="icon-xs text-primary"></i>
+                <input type="text" id="public-bd-search" class="pub-search-input" placeholder="Cari data: panjang jalan, rumah tangga, saluran, irigasi, jembatan, rob, polder, RTRW...">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <select id="public-bd-category-filter" class="form-select form-select-sm font-bold">
+                <option value="all">Semua Tipe Data / Klasifikasi</option>
+                <option value="Statistik BPS 2025">Statistik BPS 2025</option>
+                <option value="Laporan Teknis">Laporan Teknis Bidang</option>
+                <option value="Data Spasial / GIS">Data Spasial & GIS</option>
+                <option value="Regulasi & Kebijakan">Regulasi & Legalitas</option>
+                <option value="Laporan Akuntabilitas">Laporan Akuntabilitas (LKjIP)</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -246,9 +237,9 @@
           <i data-lucide="users" class="icon-sm"></i>
           <span>8. Manajemen Pengguna</span>
         </button>
-        <button class="nav-tab-btn" data-tab="pengaturan-teks" data-permission="super_admin_only" title="Pengaturan Semua Teks Sistem">
-          <i data-lucide="type" class="icon-sm"></i>
-          <span>9. Pengaturan Teks Sistem</span>
+        <button class="nav-tab-btn" data-tab="pengaturan-teks" data-permission="super_admin_only" title="Pengaturan Teks Sistem, Ganti Logo Instansi, & Database Hostinger">
+          <i data-lucide="settings-2" class="icon-sm"></i>
+          <span>9. Pengaturan Teks, Logo & DB</span>
         </button>
       </div>
     </nav>
