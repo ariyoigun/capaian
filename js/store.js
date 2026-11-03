@@ -1246,29 +1246,40 @@ class SimondemakStore {
 
   // Permissions according to user prompt
   canManageUsers() {
-    return this.currentUser && this.currentUser.role === 'super_admin';
+    if (!this.currentUser) return true; // Default allow in internal admin
+    return this.currentUser.role === 'super_admin';
   }
 
   canEditMaster() {
-    if (!this.currentUser) return false;
+    if (!this.currentUser) return true;
     return ['super_admin', 'kasubag_program_keuangan', 'sekretaris'].includes(this.currentUser.role);
   }
 
-  // Koordinator Bidang and Super Admin can input indicator data, target & realisasi
-  canInputIndicatorsAndTargets() {
-    if (!this.currentUser) return false;
-    return ['super_admin', 'koordinator_bidang', 'kasubag_program_keuangan'].includes(this.currentUser.role);
+  // Koordinator Bidang, Kasubag, Sekretaris, dan Super Admin can input indicator data, target & realisasi
+  canEditTarget() {
+    if (!this.currentUser) return true;
+    return ['super_admin', 'kasubag_program_keuangan', 'sekretaris', 'koordinator_bidang'].includes(this.currentUser.role);
   }
 
-  // Koordinator Bidang and Super Admin can add, edit, and delete Bank Data
+  canInputRealisasi() {
+    if (!this.currentUser) return true;
+    return ['super_admin', 'kasubag_program_keuangan', 'sekretaris', 'koordinator_bidang', 'kepala_bidang'].includes(this.currentUser.role);
+  }
+
+  canInputIndicatorsAndTargets() {
+    if (!this.currentUser) return true;
+    return ['super_admin', 'koordinator_bidang', 'kasubag_program_keuangan', 'sekretaris'].includes(this.currentUser.role);
+  }
+
+  // Koordinator Bidang, Kasubag Umum, Kasubag Program, Sekretaris dan Super Admin can add, edit, and delete Bank Data
   canManageBankData() {
-    if (!this.currentUser) return false;
-    return ['super_admin', 'koordinator_bidang'].includes(this.currentUser.role);
+    if (!this.currentUser) return true;
+    return ['super_admin', 'koordinator_bidang', 'kasubag_umum_kepegawaian', 'kasubag_program_keuangan', 'sekretaris'].includes(this.currentUser.role);
   }
 
   // Kepala Bidang, Kasubag, Sekretaris, dan Kepala Dinas can view dashboard & print reports
   canViewExecutiveDashboard() {
-    if (!this.currentUser) return false;
+    if (!this.currentUser) return true;
     return ['super_admin', 'kepala_dinas', 'sekretaris', 'kepala_bidang', 'kasubag_program_keuangan', 'kasubag_umum_kepegawaian', 'koordinator_bidang'].includes(this.currentUser.role);
   }
 

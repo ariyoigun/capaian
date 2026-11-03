@@ -220,6 +220,33 @@ const LaporanModule = {
   },
 
   render() {
+    this.populateSelectors();
+    this.updateControlVisibility();
+    this.renderPreview();
+  },
+
+  onIndicatorChange(indId) {
+    this.selectedIndicatorId = indId;
+    this.renderPreview();
+  },
+
+  onYearChange(yr) {
+    this.selectedYear = parseInt(yr, 10);
+    this.renderPreview();
+  },
+
+  onCategoryChange(catId) {
+    this.categoryFilter = catId;
+    this.renderPreview();
+  },
+
+  onBidangChange(bidId) {
+    this.bidangFilter = bidId;
+    this.renderPreview();
+  },
+
+  onReportTypeChange(type) {
+    this.reportType = type;
     this.updateControlVisibility();
     this.renderPreview();
   },
@@ -391,6 +418,10 @@ const LaporanModule = {
 
   /* ----------------- GENERATE HTML 1: LAPORAN PER INDIKATOR MULTI-TAHUN ----------------- */
   generateReportPerIndicatorHtml() {
+    if (!this.selectedIndicatorId) {
+      const allInds = window.store.getIndicators();
+      if (allInds.length > 0) this.selectedIndicatorId = allInds[0].id;
+    }
     const ind = window.store.getIndicatorById(this.selectedIndicatorId);
     if (!ind) {
       return `<div class="p-4 bg-white rounded text-center text-muted">Pilih indikator terlebih dahulu untuk menampilkan lembar laporan.</div>`;

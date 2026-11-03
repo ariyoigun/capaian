@@ -55,14 +55,32 @@ const TreeModule = {
     const btnCollapseAll = document.getElementById('btn-tree-collapse-all');
     if (btnCollapseAll) {
       btnCollapseAll.addEventListener('click', () => {
-        document.querySelectorAll('.tree-node-content').forEach(el => {
-          el.classList.add('collapsed');
-        });
-        document.querySelectorAll('.tree-toggle-icon').forEach(icon => {
-          icon.classList.remove('rotated');
-        });
+        this.collapseAll();
       });
     }
+  },
+
+  setGroupBy(val) {
+    this.groupBy = val;
+    this.render();
+  },
+
+  expandAll() {
+    document.querySelectorAll('.tree-node-content').forEach(el => {
+      el.classList.remove('collapsed');
+    });
+    document.querySelectorAll('.tree-toggle-icon').forEach(icon => {
+      icon.classList.add('rotated');
+    });
+  },
+
+  collapseAll() {
+    document.querySelectorAll('.tree-node-content').forEach(el => {
+      el.classList.add('collapsed');
+    });
+    document.querySelectorAll('.tree-toggle-icon').forEach(icon => {
+      icon.classList.remove('rotated');
+    });
   },
 
   render() {
@@ -199,7 +217,7 @@ const TreeModule = {
             <div class="tree-item-meta">
               <span class="meta-tag"><i data-lucide="tag" class="icon-xs"></i> ${cat ? cat.name : '-'}</span>
               <span class="meta-tag"><i data-lucide="building-2" class="icon-xs"></i> ${bidang ? bidang.name : '-'}</span>
-              <span class="meta-tag text-dark font-bold"><i data-lucide="shield" class="icon-xs text-primary"></i> Wewenang: ${ind.wewenangBidang || (bidang ? bidang.name : '-')}</span>
+              <span class="meta-tag text-dark font-bold"><i data-lucide="shield" class="icon-xs text-primary"></i> Wewenang: ${indicator.wewenangBidang || (bidang ? bidang.name : '-')}</span>
               <span class="meta-tag"><i data-lucide="ruler" class="icon-xs"></i> Satuan: <strong>${indicator.unit}</strong></span>
             </div>
           </div>

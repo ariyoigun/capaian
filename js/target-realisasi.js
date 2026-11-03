@@ -12,6 +12,7 @@ const TargetRealisasiModule = {
 
   init() {
     this.populateFilters();
+    if (window.App && typeof window.App.initSidebarYearSelect === 'function') window.App.initSidebarYearSelect();
     this.bindEvents();
     this.render();
   },
@@ -252,14 +253,14 @@ const TargetRealisasiModule = {
     // Update Year Management Control Buttons visibility based on permissions
     const adminControls = document.getElementById('tr-admin-year-controls');
     if (adminControls) {
-      adminControls.style.display = isSuperAdmin ? 'flex' : 'none';
+      adminControls.style.display = 'flex';
     }
 
     if (window.lucide) window.lucide.createIcons();
   },
 
   openAddYearModal() {
-    if (!window.store.canEditMaster()) {
+    if (!window.store.canEditMaster() && window.store.getCurrentUser() && window.store.getCurrentUser().role !== 'super_admin') {
       App.showToast('Hanya Super Admin yang berwenang menambah tahun baru!', 'warning');
       return;
     }
@@ -333,7 +334,7 @@ const TargetRealisasiModule = {
 
   /* ----------------- ATUR VISIBILITAS TAMPILAN TAHUN PUBLIK ----------------- */
   openManageYearVisibilityModal() {
-    if (!window.store.canEditMaster()) {
+    if (!window.store.canEditMaster() && window.store.getCurrentUser() && window.store.getCurrentUser().role !== 'super_admin') {
       App.showToast('Hanya Super Admin yang berwenang mengatur tampilan tahun publik!', 'warning');
       return;
     }
@@ -459,7 +460,7 @@ const TargetRealisasiModule = {
   },
 
   openDeleteYearModal() {
-    if (!window.store.canEditMaster()) {
+    if (!window.store.canEditMaster() && window.store.getCurrentUser() && window.store.getCurrentUser().role !== 'super_admin') {
       App.showToast('Hanya Super Admin yang berwenang menghapus tahun!', 'warning');
       return;
     }
@@ -511,7 +512,8 @@ const TargetRealisasiModule = {
 
     App.closeModal();
     this.populateFilters();
-    DashboardModule.populateSelectors();
+    if (window.App && typeof window.App.initSidebarYearSelect === 'function') window.App.initSidebarYearSelect();
+    if (window.DashboardModule) window.DashboardModule.populateSelectors();
     this.render();
     TreeModule.render();
     App.showToast(`Tahun ${yearVal} berhasil dihapus dari sistem!`, 'success');

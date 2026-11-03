@@ -449,14 +449,14 @@
 
           <div class="d-flex flex-wrap align-items-center gap-2">
             <label for="tree-group-by" class="small font-bold text-muted">Kelompokkan Tree:</label>
-            <select id="tree-group-by" class="retro-select retro-select-sm" style="width: auto;">
+            <select id="tree-group-by" class="retro-select retro-select-sm" style="width: auto;" onchange="TreeModule.setGroupBy(this.value)">
               <option value="category">Berdasarkan Kategori (IKD -> IKU -> IKP -> IKK)</option>
               <option value="bidang">Berdasarkan Bidang Penanggung Jawab</option>
             </select>
-            <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-tree-expand-all">
+            <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-tree-expand-all" onclick="TreeModule.expandAll()">
               <i data-lucide="unfold-vertical" class="icon-xs"></i> Buka Semua
             </button>
-            <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-tree-collapse-all">
+            <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-tree-collapse-all" onclick="TreeModule.collapseAll()">
               <i data-lucide="fold-vertical" class="icon-xs"></i> Tutup Semua
             </button>
           </div>
@@ -483,13 +483,13 @@
             </div>
             
             <div class="d-flex flex-wrap gap-2" id="tr-admin-year-controls">
-              <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-add-year">
+              <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-add-year" onclick="TargetRealisasiModule.openAddYearModal()" title="Tambah Tahun Anggaran / Target Baru">
                 <i data-lucide="calendar-plus" class="icon-xs"></i> Tambah Tahun Baru
               </button>
-              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-manage-visibility" title="Atur tahun apa saja yang ditampilkan di Portal Publik">
+              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-manage-visibility" onclick="TargetRealisasiModule.openManageYearVisibilityModal()" title="Atur tahun apa saja yang ditampilkan di Portal Publik">
                 <i data-lucide="eye" class="icon-xs"></i> Atur Tampilan Tahun Publik
               </button>
-              <button class="adm-btn adm-btn-sm adm-btn-danger" id="btn-delete-year">
+              <button class="adm-btn adm-btn-sm adm-btn-danger" id="btn-delete-year" onclick="TargetRealisasiModule.openDeleteYearModal()" title="Hapus Tahun Anggaran Tertentu">
                 <i data-lucide="calendar-minus" class="icon-xs"></i> Hapus Tahun
               </button>
             </div>
@@ -513,7 +513,7 @@
               <select id="tr-bidang-filter" class="retro-select flex-grow-1">
                 <!-- Injected by TargetRealisasiModule -->
               </select>
-              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-export-csv" title="Ekspor data ke file CSV">
+              <button class="adm-btn adm-btn-sm adm-btn-outline" id="btn-export-csv" onclick="TargetRealisasiModule.exportToCSV()" title="Ekspor data ke file CSV">
                 <i data-lucide="file-spreadsheet" class="icon-xs"></i> CSV
               </button>
             </div>
@@ -535,8 +535,8 @@
               </h3>
               <p class="text-muted small mb-0">Koordinator Bidang dan Super Admin dapat Menambah, Mengedit, dan Menghapus arsip dokumen bank data.</p>
             </div>
-            <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-upload-doc" data-permission="manage_bank_data">
-              <i data-lucide="upload-cloud" class="icon-xs"></i> Tambah Dokumen Bank Data
+            <button class="adm-btn adm-btn-sm adm-btn-primary" id="btn-upload-doc" onclick="BankDataModule.openUploadModal()" title="Tambah Data Baru ke Bank Data">
+              <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Data Bank Data
             </button>
           </div>
 
@@ -552,6 +552,7 @@
             <div class="col-md-3">
               <select id="bd-cat-filter" class="retro-select">
                 <option value="all">Semua Kategori Dokumen</option>
+                <option value="Statistik BPS 2025">Statistik BPS Demak 2025</option>
                 <option value="Laporan Teknis">Laporan Teknis & Survei Lapangan</option>
                 <option value="Data Base / Spasial">Database / Geospasial / E-PAKSI</option>
                 <option value="Laporan Akuntabilitas">Laporan Akuntabilitas (SAKIP / LKjIP)</option>
@@ -568,8 +569,8 @@
           <div class="mt-2 text-muted small" id="bd-info-container"></div>
         </div>
 
-        <div class="bank-data-grid" id="bank-data-container">
-          <!-- Injected by BankDataModule -->
+        <div class="row g-3" id="bank-data-container">
+          <!-- Injected by BankDataModule (2 Kolom Baris Berbeda) -->
         </div>
 
         <div class="d-flex justify-content-center align-items-center gap-2 mt-4" id="bd-pagination-container">
@@ -588,10 +589,10 @@
               <p class="text-muted small mb-0">Format resmi berstandar Pemkab Demak dengan Kop Surat dan Pengesahan Kepala Dinas DINPUTARU.</p>
             </div>
             <div class="d-flex flex-wrap gap-2">
-              <button class="adm-btn adm-btn-primary" id="btn-print-official-report" title="Cetak langsung menggunakan dialog peramban">
+              <button class="adm-btn adm-btn-primary" id="btn-print-official-report" onclick="LaporanModule.printReport()" title="Cetak langsung menggunakan dialog peramban">
                 <i data-lucide="printer" class="icon-xs"></i> Cetak Dokumen / Simpan PDF
               </button>
-              <button class="adm-btn adm-btn-outline" id="btn-open-print-win" title="Buka jendela cetak mandiri terisolasi">
+              <button class="adm-btn adm-btn-outline" id="btn-open-print-win" onclick="LaporanModule.openPrintWindow()" title="Buka jendela cetak mandiri terisolasi">
                 <i data-lucide="external-link" class="icon-xs"></i> Jendela Cetak Mandiri
               </button>
             </div>
@@ -602,11 +603,11 @@
             <label class="form-label font-bold mb-2">Pilih Format Laporan yang Ingin Dicetak:</label>
             <div class="d-flex flex-wrap gap-4">
               <label class="d-flex align-items-center gap-2 cursor-pointer font-bold">
-                <input type="radio" name="lap-report-type" value="per_indicator" checked>
+                <input type="radio" name="lap-report-type" value="per_indicator" checked onchange="LaporanModule.onReportTypeChange(this.value)">
                 <span>1. Cetak Per Indikator Dari Tahun ke Tahun (Riwayat Multi-Tahun)</span>
               </label>
               <label class="d-flex align-items-center gap-2 cursor-pointer font-bold">
-                <input type="radio" name="lap-report-type" value="all_indicators_by_year">
+                <input type="radio" name="lap-report-type" value="all_indicators_by_year" onchange="LaporanModule.onReportTypeChange(this.value)">
                 <span>2. Cetak Rekapitulasi Semua Indikator di Tahun Tertentu</span>
               </label>
             </div>
@@ -614,26 +615,26 @@
 
           <div id="lap-control-indicator-wrap" class="mb-2">
             <label class="form-label small font-bold text-muted">Pilih Indikator yang Dicetak:</label>
-            <select id="lap-indicator-select" class="retro-select font-bold">
+            <select id="lap-indicator-select" class="retro-select font-bold" onchange="LaporanModule.onIndicatorChange(this.value)">
               <!-- Injected by LaporanModule -->
             </select>
           </div>
 
           <div id="lap-control-year-wrap" class="mb-2" style="display: none;">
             <label class="form-label small font-bold text-muted">Pilih Tahun Anggaran yang Direkapitulasi:</label>
-            <select id="lap-year-select" class="retro-select font-bold">
+            <select id="lap-year-select" class="retro-select font-bold" onchange="LaporanModule.onYearChange(this.value)">
               <!-- Injected by LaporanModule -->
             </select>
           </div>
 
           <div id="lap-control-filters-wrap" class="row g-2 mt-1" style="display: none;">
             <div class="col-md-6">
-              <select id="lap-cat-filter" class="retro-select">
+              <select id="lap-cat-filter" class="retro-select" onchange="LaporanModule.onCategoryChange(this.value)">
                 <!-- Injected by LaporanModule -->
               </select>
             </div>
             <div class="col-md-6">
-              <select id="lap-bidang-filter" class="retro-select">
+              <select id="lap-bidang-filter" class="retro-select" onchange="LaporanModule.onBidangChange(this.value)">
                 <!-- Injected by LaporanModule -->
               </select>
             </div>
