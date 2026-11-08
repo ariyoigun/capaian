@@ -1,10 +1,8 @@
 {
   "host": "localhost",
-  "user": "root",
-  "password": "",
-  "database": "sidat_demak",
+  "user": "u490770675_sidatadmin",
+  "password": "*Demak2026",
+  "database": "u490770675_sidata",
   "port": 3306,
-  "enabled": false,
-  "_comment": "Ganti 'enabled': true dan isi host, user, password, database saat deployment ke Hostinger."
+  "enabled": true
 }
-
