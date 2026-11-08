@@ -29,108 +29,199 @@ const DEFAULT_BIDANG = [
 // Seed Users for all 7 Roles
 const DEFAULT_USERS = [
   {
-    id: 'USR-001',
-    username: 'superadmin',
-    password: 'password123',
-    name: 'Budi Santoso, S.T., M.T.',
-    nip: '19750812 200212 1 004',
-    role: 'super_admin',
-    roleLabel: 'Super Admin Sistem',
-    bidangId: 'sekretariat',
-    email: 'admin.dinputaru@demakkab.go.id',
-    phone: '0812-3456-7890',
-    status: 'active'
+    "id": "USR-001",
+    "username": "kadin.dinputaru",
+    "password": "*Dinput4ru_01",
+    "name": "Ir. NANANG TASUNAR DAVID NARUTOMO, MM",
+    "nip": "196702101993031009",
+    "role": "kepala_dinas",
+    "roleLabel": "Kepala Dinas",
+    "bidangId": "sekretariat",
+    "email": "kadin.dinputaru@demakkab.go.id",
+    "phone": "0812-3456-7801",
+    "status": "active"
   },
   {
-    id: 'USR-002',
-    username: 'kadin',
-    password: 'password123',
-    name: 'Drs. H. Ahmad Sugiharto, S.T., M.Si.',
-    nip: '19680315 199403 1 007',
-    role: 'kepala_dinas',
-    roleLabel: 'Kepala Dinas PUPR',
-    bidangId: 'sekretariat',
-    email: 'kadinas@demakkab.go.id',
-    phone: '0811-9876-5432',
-    status: 'active'
+    "id": "USR-002",
+    "username": "sekdin.dinputaru",
+    "password": "*Dinput4ru_02",
+    "name": "NANING PRIH HATININGRUM, S.IP,M.Si",
+    "nip": "197801082010012019",
+    "role": "sekretaris",
+    "roleLabel": "Sekretaris Dinas",
+    "bidangId": "sekretariat",
+    "email": "sekdin.dinputaru@demakkab.go.id",
+    "phone": "0812-3456-7802",
+    "status": "active"
   },
   {
-    id: 'USR-003',
-    username: 'sekdin',
-    password: 'password123',
-    name: 'Nurul Hidayati, S.T., M.M.',
-    nip: '19720510 199803 2 003',
-    role: 'sekretaris',
-    roleLabel: 'Sekretaris Dinas',
-    bidangId: 'sekretariat',
-    email: 'sekretaris.dinputaru@demakkab.go.id',
-    phone: '0813-2233-4455',
-    status: 'active'
+    "id": "USR-003",
+    "username": "prokeu.dinputaru",
+    "password": "*Dinput4ru_03",
+    "name": "BAGAS SATRIA ANGGRIAWAN, S.T., M.M.",
+    "nip": "199106122015021002",
+    "role": "kasubag_program_keuangan",
+    "roleLabel": "Kasubag Program Keuangan",
+    "bidangId": "sekretariat",
+    "email": "prokeu.dinputaru@demakkab.go.id",
+    "phone": "0812-3456-7803",
+    "status": "active"
   },
   {
-    id: 'USR-004',
-    username: 'kabid_bm',
-    password: 'password123',
-    name: 'Sutanto, S.T., M.Tech.',
-    nip: '19780120 200501 1 008',
-    role: 'kepala_bidang',
-    roleLabel: 'Kepala Bidang Bina Marga',
-    bidangId: 'bina_marga',
-    email: 'kabid.binamarga@demakkab.go.id',
-    phone: '0812-9988-7766',
-    status: 'active'
+    "id": "USR-004",
+    "username": "umpeg.dinputaru",
+    "password": "*Dinput4ru_04",
+    "name": "BAGAS SATRIA ANGGRIAWAN, S.T., M.M.",
+    "nip": "199106122015021002",
+    "role": "kasubag_umum_kepegawaian",
+    "roleLabel": "Kasubag Umum Kepegawaian",
+    "bidangId": "sekretariat",
+    "email": "umpeg.dinputaru@demakkab.go.id",
+    "phone": "0812-3456-7804",
+    "status": "active"
   },
   {
-    id: 'USR-005',
-    username: 'koor_bm',
-    password: 'password123',
-    name: 'Rizky Kurniawan, S.T.',
-    nip: '19860412 201001 1 012',
-    role: 'koordinator_bidang',
-    roleLabel: 'Koordinator Bidang Bina Marga',
-    bidangId: 'bina_marga',
-    email: 'koor.binamarga@demakkab.go.id',
-    phone: '0857-1122-3344',
-    status: 'active'
+    "id": "USR-005",
+    "username": "koor.sekre1",
+    "password": "*Dinput4ru_05",
+    "name": "RIZKY PRAHARDINI, S.E.",
+    "nip": "198607282025212082",
+    "role": "koordinator_bidang",
+    "roleLabel": "Koordinator Sekretariat",
+    "bidangId": "sekretariat",
+    "email": "koor.sekre1@demakkab.go.id",
+    "phone": "0812-3456-7805",
+    "status": "active"
   },
   {
-    id: 'USR-006',
-    username: 'koor_sda',
-    password: 'password123',
-    name: 'Tri Wahyudi, S.T.',
-    nip: '19880918 201101 1 009',
-    role: 'koordinator_bidang',
-    roleLabel: 'Koordinator Bidang SDA',
-    bidangId: 'sda',
-    email: 'koor.sda@demakkab.go.id',
-    phone: '0858-6677-8899',
-    status: 'active'
+    "id": "USR-006",
+    "username": "koor.sekre2",
+    "password": "*Dinput4ru_06",
+    "name": "RANI NURHAYATI, S.Sos",
+    "nip": "199707102025212091",
+    "role": "koordinator_bidang",
+    "roleLabel": "Koordinator Sekretariat",
+    "bidangId": "sekretariat",
+    "email": "koor.sekre2@demakkab.go.id",
+    "phone": "0812-3456-7806",
+    "status": "active"
   },
   {
-    id: 'USR-007',
-    username: 'kasubag_program',
-    password: 'password123',
-    name: 'Eko Prasetyo, S.E., M.Acc.',
-    nip: '19810625 200604 1 009',
-    role: 'kasubag_program_keuangan',
-    roleLabel: 'Kasubag Program dan Keuangan',
-    bidangId: 'sekretariat',
-    email: 'program.dinputaru@demakkab.go.id',
-    phone: '0815-4455-6677',
-    status: 'active'
+    "id": "USR-007",
+    "username": "superadmin",
+    "password": "*Dinput4ru_07",
+    "name": "GUNARIYO, S.Kom.",
+    "nip": "198909212025041001",
+    "role": "super_admin",
+    "roleLabel": "Superadmin",
+    "bidangId": "sekretariat",
+    "email": "superadmin@demakkab.go.id",
+    "phone": "0812-3456-7807",
+    "status": "active"
   },
   {
-    id: 'USR-008',
-    username: 'kasubag_umum',
-    password: 'password123',
-    name: 'Siti Rahmawati, S.Sos.',
-    nip: '19830214 200801 2 015',
-    role: 'kasubag_umum_kepegawaian',
-    roleLabel: 'Kasubag Umum dan Kepegawaian',
-    bidangId: 'sekretariat',
-    email: 'umum.dinputaru@demakkab.go.id',
-    phone: '0812-7788-9900',
-    status: 'active'
+    "id": "USR-008",
+    "username": "kabid.bm",
+    "password": "*Dinput4ru_08",
+    "name": "S. EKO WIDIANTORO, ST",
+    "nip": "197506012010011012",
+    "role": "kepala_bidang",
+    "roleLabel": "Kabid Bina Marga",
+    "bidangId": "bina_marga",
+    "email": "kabid.bm@demakkab.go.id",
+    "phone": "0812-3456-7808",
+    "status": "active"
+  },
+  {
+    "id": "USR-009",
+    "username": "koor.bm",
+    "password": "*Dinput4ru_09",
+    "name": "TIA ARYUNINGRUM, ST",
+    "nip": "199406262020122025",
+    "role": "koordinator_bidang",
+    "roleLabel": "Koordinator Bina Marga",
+    "bidangId": "bina_marga",
+    "email": "koor.bm@demakkab.go.id",
+    "phone": "0812-3456-7809",
+    "status": "active"
+  },
+  {
+    "id": "USR-010",
+    "username": "kabid.sdabk",
+    "password": "*Dinput4ru_10",
+    "name": "NANING PRIH HATININGRUM, S.IP,M.Si",
+    "nip": "197801082010012019",
+    "role": "kepala_bidang",
+    "roleLabel": "Plt. Kabid SDABK",
+    "bidangId": "sda",
+    "email": "kabid.sdabk@demakkab.go.id",
+    "phone": "0812-3456-7810",
+    "status": "active"
+  },
+  {
+    "id": "USR-011",
+    "username": "koor.sdabk",
+    "password": "*Dinput4ru_11",
+    "name": "RESI DIANSISMITA, S.T.",
+    "nip": "199805242024212018",
+    "role": "koordinator_bidang",
+    "roleLabel": "Koordinator SDABK",
+    "bidangId": "sda",
+    "email": "koor.sdabk@demakkab.go.id",
+    "phone": "0812-3456-7811",
+    "status": "active"
+  },
+  {
+    "id": "USR-012",
+    "username": "kabid.trp",
+    "password": "*Dinput4ru_12",
+    "name": "S. EKO WIDIANTORO, ST",
+    "nip": "197506012010011012",
+    "role": "kepala_bidang",
+    "roleLabel": "Plt. Kabid TRP",
+    "bidangId": "tata_ruang",
+    "email": "kabid.trp@demakkab.go.id",
+    "phone": "0812-3456-7812",
+    "status": "active"
+  },
+  {
+    "id": "USR-013",
+    "username": "koor.trp",
+    "password": "*Dinput4ru_13",
+    "name": "INSANIA MULIA JUNAEDI, S.T.",
+    "nip": "200111212025042001",
+    "role": "koordinator_bidang",
+    "roleLabel": "Koordinator TRP",
+    "bidangId": "tata_ruang",
+    "email": "koor.trp@demakkab.go.id",
+    "phone": "0812-3456-7813",
+    "status": "active"
+  },
+  {
+    "id": "USR-014",
+    "username": "kabid.ck",
+    "password": "*Dinput4ru_14",
+    "name": "ANDI ERWIN PRASETYO, ST.",
+    "nip": "19720914 2003121002",
+    "role": "kepala_bidang",
+    "roleLabel": "Kabid Cipta Karya",
+    "bidangId": "cipta_karya",
+    "email": "kabid.ck@demakkab.go.id",
+    "phone": "0812-3456-7814",
+    "status": "active"
+  },
+  {
+    "id": "USR-015",
+    "username": "koor.ck",
+    "password": "*Dinput4ru_15",
+    "name": "CHINTYA CAHYANINGRUM, S.T.",
+    "nip": "200207052025042001",
+    "role": "koordinator_bidang",
+    "roleLabel": "Koordinator Cipta Karya",
+    "bidangId": "cipta_karya",
+    "email": "koor.ck@demakkab.go.id",
+    "phone": "0812-3456-7815",
+    "status": "active"
   }
 ];
 
@@ -1118,6 +1209,11 @@ class SimondemakStore {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.users && parsed.indicators && parsed.indicators.length >= 50 && parsed.categories && parsed.categories.some(c => c.id === 'iku_daerah')) {
+          // Ensure official 15 users are synchronized
+          if (!parsed.users.some(u => u.username === 'kadin.dinputaru')) {
+            parsed.users = DEFAULT_USERS;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+          }
           if (!parsed.visibleYears) parsed.visibleYears = parsed.years || DEFAULT_YEARS;
           if (!parsed.activeYear) parsed.activeYear = 2026;
           return parsed;
@@ -1210,10 +1306,14 @@ class SimondemakStore {
   }
 
   login(username, password) {
-    const user = this.data.users.find(u => 
+    let user = this.data.users.find(u => 
       (u.username.toLowerCase() === username.toLowerCase().trim() || u.email.toLowerCase() === username.toLowerCase().trim()) &&
       u.password === password
     );
+    // Disambiguate if koor.sekre1 entered with *Dinput4ru_06
+    if (!user && username.toLowerCase().trim() === 'koor.sekre1' && password === '*Dinput4ru_06') {
+      user = this.data.users.find(u => u.id === 'USR-006');
+    }
 
     if (user) {
       if (user.status !== 'active') {

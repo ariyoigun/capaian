@@ -103,14 +103,21 @@ CREATE TABLE users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO users (id, username, password, name, nip, email, phone, role_id, bidang_id, status) VALUES
-('USR-001', 'superadmin', 'password123', 'Budi Santoso, S.T., M.T.', '19750812 200212 1 004', 'admin.dinputaru@demakkab.go.id', '0812-3456-7890', 'super_admin', 'sekretariat', 'active'),
-('USR-002', 'kadin', 'password123', 'Drs. H. Ahmad Sugiharto, S.T., M.Si.', '19680315 199403 1 007', 'kadinas@demakkab.go.id', '0811-9876-5432', 'kepala_dinas', 'sekretariat', 'active'),
-('USR-003', 'sekdin', 'password123', 'Nurul Hidayati, S.T., M.M.', '19720510 199803 2 003', 'sekretaris.dinputaru@demakkab.go.id', '0813-2233-4455', 'sekretaris', 'sekretariat', 'active'),
-('USR-004', 'kabid_bm', 'password123', 'Sutanto, S.T., M.Tech.', '19780120 200501 1 008', 'kabid.binamarga@demakkab.go.id', '0812-9988-7766', 'kepala_bidang', 'bina_marga', 'active'),
-('USR-005', 'koor_bm', 'password123', 'Rizky Kurniawan, S.T.', '19860412 201001 1 012', 'koor.binamarga@demakkab.go.id', '0857-1122-3344', 'koordinator_bidang', 'bina_marga', 'active'),
-('USR-006', 'koor_sda', 'password123', 'Tri Wahyudi, S.T.', '19880918 201101 1 009', 'koor.sda@demakkab.go.id', '0858-6677-8899', 'koordinator_bidang', 'sda', 'active'),
-('USR-007', 'kasubag_program', 'password123', 'Eko Prasetyo, S.E., M.Acc.', '19810625 200604 1 009', 'program.dinputaru@demakkab.go.id', '0815-4455-6677', 'kasubag_program_keuangan', 'sekretariat', 'active'),
-('USR-008', 'kasubag_umum', 'password123', 'Siti Rahmawati, S.Sos.', '19830214 200801 2 015', 'umum.dinputaru@demakkab.go.id', '0812-7788-9900', 'kasubag_umum_kepegawaian', 'sekretariat', 'active');
+('USR-001', 'kadin.dinputaru', '*Dinput4ru_01', 'Ir. NANANG TASUNAR DAVID NARUTOMO, MM', '196702101993031009', 'kadin.dinputaru@demakkab.go.id', '0812-3456-7801', 'kepala_dinas', 'sekretariat', 'active'),
+('USR-002', 'sekdin.dinputaru', '*Dinput4ru_02', 'NANING PRIH HATININGRUM, S.IP,M.Si', '197801082010012019', 'sekdin.dinputaru@demakkab.go.id', '0812-3456-7802', 'sekretaris', 'sekretariat', 'active'),
+('USR-003', 'prokeu.dinputaru', '*Dinput4ru_03', 'BAGAS SATRIA ANGGRIAWAN, S.T., M.M.', '199106122015021002', 'prokeu.dinputaru@demakkab.go.id', '0812-3456-7803', 'kasubag_program_keuangan', 'sekretariat', 'active'),
+('USR-004', 'umpeg.dinputaru', '*Dinput4ru_04', 'BAGAS SATRIA ANGGRIAWAN, S.T., M.M.', '199106122015021002', 'umpeg.dinputaru@demakkab.go.id', '0812-3456-7804', 'kasubag_umum_kepegawaian', 'sekretariat', 'active'),
+('USR-005', 'koor.sekre1', '*Dinput4ru_05', 'RIZKY PRAHARDINI, S.E.', '198607282025212082', 'koor.sekre1@demakkab.go.id', '0812-3456-7805', 'koordinator_bidang', 'sekretariat', 'active'),
+('USR-006', 'koor.sekre2', '*Dinput4ru_06', 'RANI NURHAYATI, S.Sos', '199707102025212091', 'koor.sekre2@demakkab.go.id', '0812-3456-7806', 'koordinator_bidang', 'sekretariat', 'active'),
+('USR-007', 'superadmin', '*Dinput4ru_07', 'GUNARIYO, S.Kom.', '198909212025041001', 'superadmin@demakkab.go.id', '0812-3456-7807', 'super_admin', 'sekretariat', 'active'),
+('USR-008', 'kabid.bm', '*Dinput4ru_08', 'S. EKO WIDIANTORO, ST', '197506012010011012', 'kabid.bm@demakkab.go.id', '0812-3456-7808', 'kepala_bidang', 'bina_marga', 'active'),
+('USR-009', 'koor.bm', '*Dinput4ru_09', 'TIA ARYUNINGRUM, ST', '199406262020122025', 'koor.bm@demakkab.go.id', '0812-3456-7809', 'koordinator_bidang', 'bina_marga', 'active'),
+('USR-010', 'kabid.sdabk', '*Dinput4ru_10', 'NANING PRIH HATININGRUM, S.IP,M.Si', '197801082010012019', 'kabid.sdabk@demakkab.go.id', '0812-3456-7810', 'kepala_bidang', 'sda', 'active'),
+('USR-011', 'koor.sdabk', '*Dinput4ru_11', 'RESI DIANSISMITA, S.T.', '199805242024212018', 'koor.sdabk@demakkab.go.id', '0812-3456-7811', 'koordinator_bidang', 'sda', 'active'),
+('USR-012', 'kabid.trp', '*Dinput4ru_12', 'S. EKO WIDIANTORO, ST', '197506012010011012', 'kabid.trp@demakkab.go.id', '0812-3456-7812', 'kepala_bidang', 'tata_ruang', 'active'),
+('USR-013', 'koor.trp', '*Dinput4ru_13', 'INSANIA MULIA JUNAEDI, S.T.', '200111212025042001', 'koor.trp@demakkab.go.id', '0812-3456-7813', 'koordinator_bidang', 'tata_ruang', 'active'),
+('USR-014', 'kabid.ck', '*Dinput4ru_14', 'ANDI ERWIN PRASETYO, ST.', '19720914 2003121002', 'kabid.ck@demakkab.go.id', '0812-3456-7814', 'kepala_bidang', 'cipta_karya', 'active'),
+('USR-015', 'koor.ck', '*Dinput4ru_15', 'CHINTYA CAHYANINGRUM, S.T.', '200207052025042001', 'koor.ck@demakkab.go.id', '0812-3456-7815', 'koordinator_bidang', 'cipta_karya', 'active');
 
 -- ------------------------------------------------------------------------------
 -- 5. TABEL: categories (6 Kategori Indikator Sesuai Sheet Excel)

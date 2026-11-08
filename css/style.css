@@ -4126,8 +4126,8 @@ body.theme-dark .retro-modal {
    DINPUTARU KABUPATEN DEMAK
    ============================================================================== */
 .admin-layout-wrapper {
-  display: flex !important;
-  flex-direction: row !important;
+  display: flex;
+  flex-direction: row;
   min-height: calc(100vh - 68px);
   width: 100% !important;
   background-color: var(--bg-body, #f8fafc);
@@ -5317,4 +5317,137 @@ body.theme-dark .pub-bb-title {
 body.theme-dark .pub-bankdata-card {
   background: #0d1833 !important;
   border-color: #1e3466 !important;
+}
+
+
+/* ==============================================================================
+   STRICT DISPLAY ISOLATION BETWEEN PUBLIC PORTAL & INTERNAL ADMIN PANEL
+   DINPUTARU KABUPATEN DEMAK
+   ============================================================================== */
+body.mode-public #public-portal-container {
+  display: block !important;
+}
+body.mode-public #admin-panel-container {
+  display: none !important;
+}
+
+body.mode-admin #public-portal-container {
+  display: none !important;
+}
+body.mode-admin #admin-panel-container {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+#admin-panel-container[style*="display: none"] {
+  display: none !important;
+}
+
+/* ==============================================================================
+   SEGMEN 1: 6 KOTAK KATEGORI MENYAMPING KE KANAN (1 BARIS HORIZONTAL)
+   ============================================================================== */
+.pub-category-grid-6,
+#pub-category-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+#pub-category-cards-grid > .col,
+#pub-category-cards-grid > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex: none !important;
+  display: flex !important;
+}
+
+.pub-category-box {
+  width: 100% !important;
+  background: var(--cat-bg, #eff6ff);
+  border: 2px solid var(--cat-border, #bfdbfe);
+  border-radius: 12px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.pub-cat-title-big {
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.pub-cat-fullname {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #475569;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  min-height: 38px;
+}
+
+@media (max-width: 1100px) {
+  .pub-category-grid-6,
+  #pub-category-cards-grid {
+    grid-template-columns: repeat(6, minmax(140px, 1fr)) !important;
+    overflow-x: auto !important;
+    padding-bottom: 8px !important;
+    scrollbar-width: thin;
+  }
+}
+
+/* ==============================================================================
+   SEGMEN 2: MENYAMPING KE KANAN 3 KOTAK TIAP BARIS, DAN BAWAHNYA MENGIKUTI
+   ============================================================================== */
+.pub-indicator-grid-3,
+#pub-indicator-grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+#pub-indicator-grid-container > [class*="col-"],
+#pub-indicator-grid-container > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex: none !important;
+  display: flex !important;
+}
+
+.pub-realisasi-card {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 992px) {
+  .pub-indicator-grid-3,
+  #pub-indicator-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .pub-indicator-grid-3,
+  #pub-indicator-grid-container {
+    grid-template-columns: 1fr !important;
+  }
 }

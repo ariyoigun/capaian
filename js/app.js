@@ -115,18 +115,18 @@ const App = {
     const adminNavBar = document.getElementById('admin-nav-bar');
 
     if (this.currentMode === 'public') {
-      document.body.classList.add('theme-pupr-blue');
-      document.body.classList.remove('theme-admin-white');
+      document.body.classList.add('mode-public', 'theme-pupr-blue');
+      document.body.classList.remove('mode-admin', 'theme-admin-white');
 
-      if (publicContainer) publicContainer.style.display = 'block';
-      if (adminContainer) adminContainer.style.display = 'none';
+      if (publicContainer) publicContainer.style.setProperty('display', 'block', 'important');
+      if (adminContainer) adminContainer.style.setProperty('display', 'none', 'important');
       if (adminNavBar) adminNavBar.style.display = 'none';
     } else {
-      document.body.classList.remove('theme-pupr-blue');
-      document.body.classList.add('theme-admin-white');
+      document.body.classList.remove('mode-public', 'theme-pupr-blue');
+      document.body.classList.add('mode-admin', 'theme-admin-white');
 
-      if (publicContainer) publicContainer.style.display = 'none';
-      if (adminContainer) adminContainer.style.display = 'flex';
+      if (publicContainer) publicContainer.style.setProperty('display', 'none', 'important');
+      if (adminContainer) adminContainer.style.setProperty('display', 'flex', 'important');
       if (adminNavBar) adminNavBar.style.display = 'none';
 
       this.renderSidebarProfile();
