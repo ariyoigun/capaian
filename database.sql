@@ -22,7 +22,7 @@ CREATE TABLE system_settings (
 INSERT INTO system_settings (setting_key, setting_value) VALUES
 ('appName', 'SIDAT - SATUPUTARU'),
 ('instansi', 'Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak'),
-('tagline', 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak'),
+('tagline', 'Sistem Informasi Capaian Kinerja & Satu Data DINPUTARU Kab. Demak'),
 ('logoUrl', '/img/logo-pupr.svg'),
 ('heroBadge', 'PORTAL RESMI SATU DATA & CAPAIAN KINERJA PEMKAB DEMAK'),
 ('heroTitle', 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak'),

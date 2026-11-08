@@ -4652,3 +4652,669 @@ body.theme-dark .admin-year-select {
     padding: 14px 14px 40px;
   }
 }
+
+
+/* ========================================================================= */
+/* SIDAT v4.0 - PUBLIC PORTAL NEW REDESIGN STYLES                            */
+/* ========================================================================= */
+
+/* Top Navigation Bar in Header */
+.header-main-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.header-nav-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.header-nav-btn.active {
+  background: var(--pupr-blue, #0B3C84);
+  border-color: var(--pupr-blue, #0B3C84);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(11, 60, 132, 0.25);
+}
+
+body.theme-dark .header-nav-btn {
+  background: #152243;
+  border-color: #1E3466;
+  color: #cbd5e1;
+}
+
+body.theme-dark .header-nav-btn:hover {
+  background: #1c2e59;
+  color: #ffffff;
+}
+
+body.theme-dark .header-nav-btn.active {
+  background: #2563eb;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* Section Titles & Badges */
+.pub-badge-pill-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  margin-bottom: 6px;
+}
+
+.pub-badge-pill-header.badge-pill-n1 {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+.pub-badge-pill-header.badge-pill-bankdata {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+.pub-section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.pub-section-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 0;
+}
+
+body.theme-dark .pub-section-title {
+  color: #f1f5f9;
+}
+
+body.theme-dark .pub-section-subtitle {
+  color: #94a3b8;
+}
+
+/* Segmen 1: 6 Kotak Kategori ke Samping */
+.pub-category-box {
+  background: var(--cat-bg, #eff6ff);
+  border: 2px solid var(--cat-border, #bfdbfe);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.pub-category-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.12);
+  border-color: var(--cat-color, #1d4ed8);
+}
+
+.pub-cat-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.pub-cat-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pub-cat-count-badge {
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid currentColor;
+}
+
+.pub-cat-title-big {
+  font-size: 1.55rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.pub-cat-fullname {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  min-height: 42px;
+}
+
+.pub-cat-box-footer {
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+  padding-top: 8px;
+}
+
+.pub-cat-cta-link {
+  font-size: 0.76rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body.theme-dark .pub-category-box {
+  background: #0f1c3a !important;
+  border-color: #1e3466 !important;
+}
+
+body.theme-dark .pub-category-box:hover {
+  background: #14244a !important;
+  border-color: var(--cat-color) !important;
+}
+
+body.theme-dark .pub-cat-fullname {
+  color: #cbd5e1 !important;
+}
+
+/* Toolbar Filter & Pencarian */
+.pub-filter-toolbar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+body.theme-dark .pub-filter-toolbar-card {
+  background: #0d1833 !important;
+  border-color: #1e3466 !important;
+}
+
+.pub-quick-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pub-quick-filter-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.pub-quick-filter-btn.active {
+  background: #0B3C84;
+  border-color: #0B3C84;
+  color: #ffffff;
+}
+
+.pub-quick-filter-btn .pqf-count {
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.pub-quick-filter-btn.active .pqf-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+body.theme-dark .pub-quick-filter-btn {
+  background: #14203e;
+  border-color: #1e3466;
+  color: #cbd5e1;
+}
+
+/* Segmen 2: 55 Kotak Realisasi Tahun N-1 (2025) (3 per baris) */
+.pub-realisasi-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-top: 4px solid var(--card-cat-color, #1d4ed8);
+  border-radius: 12px;
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.pub-realisasi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px -4px rgba(0, 0, 0, 0.1);
+  border-color: var(--card-cat-color, #1d4ed8);
+}
+
+.pub-rc-cat-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.pub-rc-code-badge {
+  font-size: 0.72rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.pub-rc-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+  margin-bottom: 6px;
+  min-height: 42px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pub-rc-bidang {
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.pub-rc-metric-box {
+  background: var(--card-cat-light, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.pub-rc-metric-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #475569;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.pub-rc-metric-value-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.pub-rc-metric-number {
+  font-size: 2.15rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.pub-rc-metric-unit {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pub-rc-status-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pub-rc-link-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.pub-rc-link-arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.theme-dark .pub-realisasi-card {
+  background: #0d1833 !important;
+  border-color: #1e3466 !important;
+  border-top: 4px solid var(--card-cat-color) !important;
+}
+
+body.theme-dark .pub-realisasi-card:hover {
+  background: #122144 !important;
+  border-color: var(--card-cat-color) !important;
+}
+
+body.theme-dark .pub-rc-title {
+  color: #f1f5f9 !important;
+}
+
+body.theme-dark .pub-rc-bidang {
+  color: #94a3b8 !important;
+}
+
+body.theme-dark .pub-rc-code-badge {
+  background: #14203e !important;
+  color: #94a3b8 !important;
+  border-color: #1e3466 !important;
+}
+
+body.theme-dark .pub-rc-metric-box {
+  background: #081024 !important;
+  border-color: #1e3466 !important;
+}
+
+body.theme-dark .pub-rc-metric-label {
+  color: #94a3b8 !important;
+}
+
+/* Halaman Kategori: Detail & Accordion */
+.pub-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pub-btn-back:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+body.theme-dark .pub-btn-back {
+  background: #0f1d3c;
+  border-color: #1e3466;
+  color: #f1f5f9;
+}
+
+.pub-cat-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pub-cat-tab-btn .pub-tab-badge {
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.pub-cat-tab-btn.active .pub-tab-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+body.theme-dark .pub-cat-tab-btn {
+  background: #0f1d3c;
+  border-color: #1e3466;
+  color: #cbd5e1;
+}
+
+.pub-header-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pub-accordion-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pub-accordion-item.is-expanded {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.08);
+}
+
+body.theme-dark .pub-accordion-item {
+  background: #0d1833 !important;
+  border-color: #1e3466 !important;
+}
+
+body.theme-dark .pub-accordion-item.is-expanded {
+  border-color: #3b82f6 !important;
+}
+
+.pub-accordion-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: #ffffff;
+  transition: background 0.15s ease;
+}
+
+.pub-accordion-header:hover {
+  background: #f8fafc;
+}
+
+body.theme-dark .pub-accordion-header {
+  background: #0d1833;
+}
+
+body.theme-dark .pub-accordion-header:hover {
+  background: #111f42;
+}
+
+.pub-acc-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 800;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+body.theme-dark .pub-acc-number {
+  background: #1a2a50;
+  color: #94a3b8;
+}
+
+.pub-acc-title {
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+body.theme-dark .pub-acc-title {
+  color: #f1f5f9 !important;
+}
+
+.pub-acc-chevron {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.pub-acc-chevron.rotated {
+  transform: rotate(180deg);
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+body.theme-dark .pub-acc-chevron {
+  background: #1a2a50;
+  color: #cbd5e1;
+}
+
+.pub-accordion-body {
+  padding: 20px;
+  border-top: 1px solid #e2e8f0;
+  background: #fafbfc;
+}
+
+body.theme-dark .pub-accordion-body {
+  border-top-color: #1e3466;
+  background: #081024;
+}
+
+body.theme-dark .pub-chart-section {
+  background: #0d1833 !important;
+  border-color: #1e3466 !important;
+}
+
+body.theme-dark .pub-meta-section {
+  background: #0a1329 !important;
+  border-color: #1e3466 !important;
+}
+
+/* Halaman Bank Data: 6 Kotak Bidang */
+.pub-bidang-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pub-bidang-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--bidang-color, #1d4ed8);
+  box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+.pub-bidang-box.active {
+  background: #eff6ff;
+  border: 2px solid var(--bidang-color, #1d4ed8);
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+}
+
+.pub-bb-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pub-bb-count {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.pub-bb-title {
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+body.theme-dark .pub-bidang-box {
+  background: #0d1833 !important;
+  border-color: #1e3466 !important;
+}
+
+body.theme-dark .pub-bidang-box:hover {
+  border-color: var(--bidang-color) !important;
+}
+
+body.theme-dark .pub-bidang-box.active {
+  background: #122144 !important;
+  border-color: var(--bidang-color) !important;
+}
+
+body.theme-dark .pub-bb-title {
+  color: #f1f5f9 !important;
+}
+
+body.theme-dark .pub-bankdata-card {
+  background: #0d1833 !important;
+  border-color: #1e3466 !important;
+}

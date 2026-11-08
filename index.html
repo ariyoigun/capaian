@@ -26,13 +26,22 @@
           <img id="dom-app-logo" src="/img/logo-pupr.svg" alt="Logo PUPR" class="app-logo-img">
         </div>
         <div class="brand-text">
-          <h1 id="dom-app-title">
-            SIDAT - SATUPUTARU
-            <span class="badge-header-kab font-mono">KAB. DEMAK</span>
-          </h1>
-          <p id="dom-app-tagline">DINPUTARU Kab. Demak • Sistem Informasi Capaian Kinerja & Satu Data</p>
+          <h1 id="dom-app-title">SIDAT - SATUPUTARU</h1>
+          <p id="dom-app-tagline">Sistem Informasi Capaian Kinerja & Satu Data DINPUTARU Kab. Demak</p>
         </div>
       </div>
+
+      <!-- Public Top Navigation Menu -->
+      <nav class="header-main-nav" id="header-public-nav">
+        <button class="header-nav-btn active" id="btn-pub-nav-home" onclick="PublicPortalModule.showHomeView()" title="Beranda Capaian Indikator">
+          <i data-lucide="layout-grid" class="icon-xs"></i>
+          <span>Beranda</span>
+        </button>
+        <button class="header-nav-btn" id="btn-pub-nav-bankdata" onclick="PublicPortalModule.showBankDataView()" title="Bank Data DINPUTARU Kab. Demak">
+          <i data-lucide="folder-archive" class="icon-xs"></i>
+          <span>Bank Data</span>
+        </button>
+      </nav>
 
       <!-- Header Action Items: Night Mode Toggle & Single Login / User Auth Button -->
       <div class="header-actions-group">
@@ -44,10 +53,6 @@
 
         <!-- Dynamic User Auth Slot: Login (Guest) or User Badge + Dashboard + Logout -->
         <div id="header-user-auth" class="header-user-auth-slot"></div>
-
-        <button class="retro-btn retro-btn-sm retro-btn-primary" id="btn-global-add-indicator" data-permission="input_indikator" style="display: none;">
-          <i data-lucide="plus-circle" class="icon-xs"></i> Tambah Indikator
-        </button>
       </div>
     </div>
   </header>
@@ -56,148 +61,157 @@
   <!-- 3. HALAMAN PUBLIK (PORTAL WARGA & STAKEHOLDER EKSTERNAL)               -->
   <!-- ====================================================================== -->
   <div id="public-portal-container" class="main-wrapper">
-    
-    <!-- Hero Banner Publik (Compact, Tidy & Modern PUPR Blue) -->
-    <div class="pub-hero-banner-compact">
-      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-        <div class="pub-hero-left">
-          <div class="pub-hero-badge" id="dom-hero-badge">
-            <i data-lucide="shield-check" class="icon-xs"></i> SISTEM INFORMASI CAPAIAN KINERJA & SATU DATA DINPUTARU DEMAK
-          </div>
-          <h2 class="pub-hero-title mb-1" id="dom-hero-title">Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak</h2>
-          <p class="pub-hero-desc mb-0" id="dom-hero-desc">
-            Keterbukaan informasi dan akuntabilitas kinerja penyelenggaraan infrastruktur jalan jembatan, sumber daya air, sanitasi air minum, penataan ruang, dan bina konstruksi DINPUTARU Kabupaten Demak.
-          </p>
-        </div>
 
-        <!-- 4 Inline Compact Metric Cards -->
-        <div class="pub-hero-stats-row">
-          <div class="pub-stat-pill">
-            <span class="ps-label">Total Indikator</span>
-            <strong class="ps-val font-mono" id="pub-stat-total">55</strong>
-            <span class="ps-sub">6 Kategori Indikator</span>
-          </div>
-          <div class="pub-stat-pill">
-            <span class="ps-label">Capaian Target</span>
-            <strong class="ps-val text-success font-mono" id="pub-stat-achieved">52 / 55</strong>
-            <span class="ps-sub">≥100% Target</span>
-          </div>
-          <div class="pub-stat-pill">
-            <span class="ps-label">Tahun Aktif</span>
-            <strong class="ps-val text-warning font-mono" id="pub-stat-year">2026</strong>
-            <span class="ps-sub">Penilaian</span>
-          </div>
-          <div class="pub-stat-pill">
-            <span class="ps-label">Periode Publik</span>
-            <strong class="ps-val font-mono" id="pub-stat-period">2020-2030</strong>
-            <span class="ps-sub">Multi-Tahun</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Public Main Navigation Tabs Bar (HANYA 3 TAB SESUAI PERMINTAAN USER) -->
-    <nav class="pub-main-nav">
-      <div class="pub-nav-tabs">
-        <button class="pub-nav-tab active" data-pub-tab="cards" onclick="PublicPortalModule.switchPubTab('cards')">
-          <i data-lucide="layout-grid" class="icon-xs"></i>
-          <span id="dom-pub-tab-1-text">1. Indikator & Grafik Tren</span>
-        </button>
-        <button class="pub-nav-tab" data-pub-tab="matrix" onclick="PublicPortalModule.switchPubTab('matrix')">
-          <i data-lucide="table-2" class="icon-xs"></i>
-          <span id="dom-pub-tab-2-text">2. Matriks Tabel Multi-Tahun (2020–2030)</span>
-        </button>
-        <button class="pub-nav-tab" data-pub-tab="bankdata" onclick="PublicPortalModule.switchPubTab('bankdata')">
-          <i data-lucide="folder-archive" class="icon-xs"></i>
-          <span id="dom-pub-tab-3-text">3. Bank Data DINPUTARU (BPS Demak 2025)</span>
-        </button>
-      </div>
-    </nav>
-
-    <!-- TAB 1: KARTU INDIKATOR & GRAFIK TREN (Default) -->
-    <div id="pub-tab-pane-cards" class="pub-tab-pane active">
+    <!-- 3.1 VIEW: BERANDA PUBLIK (HOME VIEW) -->
+    <div id="pub-view-home" class="pub-view-section active">
       
-      <!-- Active Indicator Highlight Card (Detail & Line Chart) -->
-      <div id="public-indicator-highlight-box">
-        <!-- Injected dynamically by PublicPortalModule -->
-      </div>
-
-      <!-- Public Control Toolbar: Category Filter Tabs & Search Bar -->
-      <div id="public-control-toolbar">
-        <!-- Injected dynamically by PublicPortalModule -->
-      </div>
-
-      <!-- Segment Sections: Dynamically rendered for all categories from Excel -->
-      <div id="public-cards-view-section">
-        <!-- Injected dynamically by PublicPortalModule.renderIndicatorSegments() -->
-      </div>
-    </div>
-
-    <!-- TAB 2: MATRIKS MULTI-TAHUN SELURUH INDIKATOR -->
-    <div id="pub-tab-pane-matrix" class="pub-tab-pane" style="display: none;">
-      <div id="public-matrix-view-section">
-        <!-- Injected by PublicPortalModule -->
-      </div>
-    </div>
-
-    <!-- TAB 3: BANK DATA PUBLIK (DATA BPS KABUPATEN DEMAK 2025) -->
-    <div id="pub-tab-pane-bankdata" class="pub-tab-pane" style="display: none;">
-      <section class="pub-segment-section" id="segment-bank-data">
-        <div class="pub-segment-header">
-          <div class="pub-segment-title-wrap">
-            <span class="pub-cat-badge-pill" style="background: #0B3C84; color: #fff;">BANK DATA BPS 2025</span>
-            <h3 class="pub-segment-title">Bank Data & Dokumen Resmi DINPUTARU Kabupaten Demak</h3>
+      <!-- SEGMEN 1: 6 KOTAK KATEGORI KE SAMPING -->
+      <section class="pub-categories-segment mb-5" id="segment-categories-overview">
+        <div class="pub-section-header mb-3">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div>
+              <span class="pub-badge-pill-header">
+                <i data-lucide="layers" class="icon-xs"></i> 6 KATEGORI INDIKATOR DINPUTARU
+              </span>
+              <h2 class="pub-section-title">Kategori Indikator Kinerja</h2>
+              <p class="pub-section-subtitle">
+                Pilih salah satu kategori indikator di bawah ini untuk melihat daftar indikator, grafik tren perkembangan capaian, dan tabel multi-tahun.
+              </p>
+            </div>
           </div>
-          <span class="pub-cat-desc-badge">Sumber: BPS Kab. Demak (Demak Dalam Angka 2025) & Bidang Teknis</span>
         </div>
 
-        <!-- Search & Filter Bar -->
-        <div class="pub-toolbar-card mb-3">
-          <!-- Bidang Filter Buttons Bar -->
-          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2 pb-2 border-bottom">
-            <div class="pub-cat-filters-grid" id="public-bd-bidang-buttons">
-              <!-- Dynamically rendered bidang filters -->
-            </div>
-            <div class="small text-muted font-mono" id="public-bank-data-info">
-              Memuat data statistik BPS Demak...
+        <!-- 6 Kotak Ke Samping (Horizontal Grid: 6 Kotak Sebaris di Layar Lebar) -->
+        <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6" id="pub-category-cards-grid">
+          <!-- Injected dynamically by PublicPortalModule.renderCategoryBoxes() -->
+        </div>
+      </section>
+
+      <!-- SEGMEN 2: 55 KOTAK REALISASI TAHUN 2025 (3 KOTAK TIAP BARIS) -->
+      <section class="pub-realisasi-segment" id="segment-realisasi-grid">
+        <div class="pub-section-header mb-3">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div>
+              <span class="pub-badge-pill-header badge-pill-n1">
+                <i data-lucide="trending-up" class="icon-xs"></i> REALISASI TAHUN 2025 (N-1)
+              </span>
+              <h2 class="pub-section-title">Capaian Realisasi 55 Indikator Kinerja (Tahun 2025)</h2>
+              <p class="pub-section-subtitle">
+                Ringkasan angka realisasi kinerja terbaru tiap indikator. Klik pada kartu indikator untuk melihat grafik tren dan evaluasi lengkap di halaman kategori.
+              </p>
             </div>
           </div>
+        </div>
 
+        <!-- Toolbar Pencarian & Filter Kategori Cepat -->
+        <div class="pub-filter-toolbar-card mb-4">
           <div class="row g-2 align-items-center">
-            <div class="col-md-8">
+            <div class="col-lg-5 col-md-6 col-12">
               <div class="pub-search-box">
                 <i data-lucide="search" class="icon-xs text-primary"></i>
-                <input type="text" id="public-bd-search" class="pub-search-input" placeholder="Cari data: panjang jalan, rumah tangga, saluran, irigasi, jembatan, rob, polder, RTRW...">
+                <input type="text" id="pub-home-search-input" class="pub-search-input" placeholder="Cari nama indikator (contoh: jalan mantap, irigasi, air minum, sanitasi, SAKIP)..." oninput="PublicPortalModule.onHomeSearchInput(this.value)">
+                <button type="button" class="btn-clear-search" id="btn-clear-home-search" style="display: none;" onclick="PublicPortalModule.clearHomeSearch()">✕</button>
               </div>
             </div>
-            <div class="col-md-4">
-              <select id="public-bd-category-filter" class="form-select form-select-sm font-bold">
+            <div class="col-lg-7 col-md-6 col-12">
+              <div class="pub-category-quick-filters d-flex flex-wrap gap-1" id="pub-home-category-filters">
+                <!-- Dynamically generated quick filters -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kontainer 55 Kotak Indikator (Grid 3 Kotak Tiap Baris: col-lg-4 col-md-6 col-12) -->
+        <div class="row g-3" id="pub-indicator-grid-container">
+          <!-- Injected dynamically by PublicPortalModule.renderIndicatorCardsGrid() -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 3.2 VIEW: HALAMAN KATEGORI INDIKATOR (CATEGORY VIEW) -->
+    <div id="pub-view-category" class="pub-view-section" style="display: none;">
+      <!-- Breadcrumb / Tombol Kembali & Switcher Kategori -->
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+        <button class="pub-btn-back" onclick="PublicPortalModule.showHomeView()">
+          <i data-lucide="arrow-left" class="icon-xs"></i>
+          <span>Kembali ke Beranda</span>
+        </button>
+        <div class="pub-category-quick-tabs d-flex flex-wrap gap-1" id="pub-cat-view-nav-tabs">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Header Kategori Aktif -->
+      <div class="pub-category-detail-header p-4 rounded-3 mb-4" id="pub-category-detail-header-card">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Daftar Indikator dengan Dropdown / Accordion Expand -->
+      <div class="pub-category-indicators-list" id="pub-category-indicators-accordion">
+        <!-- Injected dynamically by PublicPortalModule.renderCategoryIndicatorsAccordion() -->
+      </div>
+    </div>
+
+    <!-- 3.3 VIEW: HALAMAN BANK DATA PUBLIK (BANK DATA PER BIDANG) -->
+    <div id="pub-view-bankdata" class="pub-view-section" style="display: none;">
+      <div class="pub-section-header mb-3">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+          <div>
+            <span class="pub-badge-pill-header badge-pill-bankdata">
+              <i data-lucide="folder-archive" class="icon-xs"></i> BANK DATA & SATU DATA DINPUTARU
+            </span>
+            <h2 class="pub-section-title">Bank Data & Statistik Infrastruktur Kab. Demak</h2>
+            <p class="pub-section-subtitle">
+              Pilih bidang teknis di bawah ini untuk melihat kumpulan data statistik resmi BPS Demak (Demak Dalam Angka 2025) dan dokumen teknis kedinasan.
+            </p>
+          </div>
+          <button class="pub-btn-back" onclick="PublicPortalModule.showHomeView()">
+            <i data-lucide="arrow-left" class="icon-xs"></i>
+            <span>Kembali ke Beranda</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 6 Kotak Per Bidang di DINPUTARU Demak -->
+      <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 mb-4" id="pub-bankdata-bidang-grid">
+        <!-- Injected dynamically by PublicPortalModule.renderBankDataBidangBoxes() -->
+      </div>
+
+      <!-- Toolbar Pencarian & Filter Tipe Data Bank Data -->
+      <div class="pub-filter-toolbar-card mb-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-lg-7 col-md-6 col-12">
+            <div class="pub-search-box">
+              <i data-lucide="search" class="icon-xs text-primary"></i>
+              <input type="text" id="pub-bankdata-search-input" class="pub-search-input" placeholder="Cari data: panjang jalan, irigasi, air minum, sanitasi, rob, KKPR, TKK, kependudukan BPS..." oninput="PublicPortalModule.onBankDataSearchInput(this.value)">
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-6 col-12">
+            <div class="d-flex align-items-center gap-2">
+              <label class="form-label font-bold small mb-0 text-nowrap">Filter Tipe:</label>
+              <select id="pub-bankdata-cat-select" class="form-select form-select-sm font-bold" onchange="PublicPortalModule.onBankDataCategorySelect(this.value)">
                 <option value="all">Semua Tipe Data / Klasifikasi</option>
-                <option value="Statistik BPS 2025">Statistik BPS 2025</option>
-                <option value="Laporan Teknis">Laporan Teknis Bidang</option>
-                <option value="Data Spasial / GIS">Data Spasial & GIS</option>
-                <option value="Regulasi & Kebijakan">Regulasi & Legalitas</option>
+                <option value="Statistik BPS 2025">Statistik BPS Demak 2025</option>
+                <option value="Laporan Teknis">Laporan Teknis & Survei</option>
+                <option value="Data Base / Spasial">Database / Geospasial</option>
                 <option value="Laporan Akuntabilitas">Laporan Akuntabilitas (LKjIP)</option>
+                <option value="Regulasi & Kebijakan">Regulasi & Kebijakan</option>
+                <option value="Sertifikasi & Legalitas">Sertifikasi & Legalitas</option>
               </select>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Public Bank Data List -->
-        <div id="public-bank-data-list">
-          <!-- Injected by PublicPortalModule -->
-        </div>
-
-        <!-- Pagination Controls (Default 10 data, Next, Prev, Page numbers) -->
-        <div class="d-flex justify-content-center align-items-center gap-2 mt-4" id="public-bank-data-pagination">
-          <!-- Injected by PublicPortalModule -->
-        </div>
-      </section>
+      <!-- Kontainer List Kartu Bank Data (2 Kolom Layout) -->
+      <div class="row g-3" id="pub-bankdata-cards-container">
+        <!-- Injected dynamically by PublicPortalModule.renderBankDataCards() -->
+      </div>
     </div>
 
   </div>
 
-  <!-- ====================================================================== -->
   <!-- 4. HALAMAN ADMIN (PANEL APARATUR RESMI DINPUTARU DEMAK)               -->
   <!-- ====================================================================== -->
   <div id="admin-panel-container" class="admin-layout-wrapper" style="display: none;">

@@ -670,12 +670,12 @@ const SystemSettingsModule = {
     // Header brand text
     const brandTitle = document.getElementById('dom-app-title');
     if (brandTitle) {
-      brandTitle.innerHTML = `${info.appName || 'SIDAT - SATUPUTARU'} <span class="badge-header-kab font-mono">KAB. DEMAK</span>`;
+      brandTitle.textContent = info.appName || 'SIDAT - SATUPUTARU';
     }
 
     const brandSub = document.getElementById('dom-app-tagline');
     if (brandSub) {
-      brandSub.textContent = `${info.instansi || 'DINPUTARU Kab. Demak'} • ${info.tagline || 'Sistem Informasi Capaian Kinerja & Satu Data'}`;
+      brandSub.textContent = info.tagline || 'Sistem Informasi Capaian Kinerja & Satu Data DINPUTARU Kab. Demak';
     }
 
     // Public hero texts
