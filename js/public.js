@@ -14,9 +14,9 @@ const PUBLIC_CATEGORIES = [
     id: 'iku_daerah',
     code: 'IKU D',
     name: 'Indikator Kinerja Utama Daerah',
-    color: '#1d4ed8', // Royal Blue PUPR
+    color: '#1e40af', // Deep Royal Blue PUPR Solid
     colorLight: '#eff6ff',
-    border: '#3b82f6',
+    border: '#1e3a8a',
     icon: 'award',
     desc: 'Indikator makro strategis prioritas pembangunan Pemerintah Kabupaten Demak yang diampu DINPUTARU'
   },
@@ -24,9 +24,9 @@ const PUBLIC_CATEGORIES = [
     id: 'ikd',
     code: 'IKD',
     name: 'Indikator Kinerja Daerah',
-    color: '#d97706', // Amber Gold
+    color: '#b45309', // Rich Amber Bronze Solid
     colorLight: '#fffbeb',
-    border: '#f59e0b',
+    border: '#92400e',
     icon: 'activity',
     desc: 'Indikator penyelenggaraan urusan ke-PU-an dan penataan ruang daerah (RPJMD Kabupaten Demak)'
   },
@@ -34,9 +34,9 @@ const PUBLIC_CATEGORIES = [
     id: 'iku_pd',
     code: 'IKU PD',
     name: 'Indikator Kinerja Utama PD',
-    color: '#059669', // Emerald Hijau
+    color: '#047857', // Deep Emerald Green Solid
     colorLight: '#ecfdf5',
-    border: '#10b981',
+    border: '#065f46',
     icon: 'building-2',
     desc: 'Perjanjian kinerja strategis Kepala DINPUTARU Kabupaten Demak dalam Renstra 2021-2026'
   },
@@ -44,9 +44,9 @@ const PUBLIC_CATEGORIES = [
     id: 'tujuan_sasaran',
     code: 'Tujuan Sasaran',
     name: 'Indikator Tujuan Sasaran',
-    color: '#ea580c', // Oranye Merah Coral
+    color: '#c2410c', // Rich Terracotta Coral Solid
     colorLight: '#fff7ed',
-    border: '#f97316',
+    border: '#9a3412',
     icon: 'target',
     desc: 'Indikator capaian tujuan dan sasaran strategis Renstra DINPUTARU Kabupaten Demak'
   },
@@ -54,9 +54,9 @@ const PUBLIC_CATEGORIES = [
     id: 'program',
     code: 'Program',
     name: 'Indikator Program',
-    color: '#7c3aed', // Ungu Violet
+    color: '#6d28d9', // Deep Violet Purple Solid
     colorLight: '#f5f3ff',
-    border: '#8b5cf6',
+    border: '#5b21b6',
     icon: 'layers',
     desc: 'Indikator hasil (outcome) program prioritas bidang-bidang teknis DINPUTARU Kabupaten Demak'
   },
@@ -64,9 +64,9 @@ const PUBLIC_CATEGORIES = [
     id: 'ikk',
     code: 'IKK',
     name: 'Indikator Kinerja Kunci',
-    color: '#0284c7', // Sky Blue Cyan
+    color: '#0369a1', // Deep Ocean Blue Cyan Solid (IKK Terakhir)
     colorLight: '#f0f9ff',
-    border: '#0ea5e9',
+    border: '#075985',
     icon: 'key',
     desc: 'Indikator Evaluasi Penyelenggaraan Pemerintahan Daerah (LPPD) bidang Pekerjaan Umum dan Penataan Ruang'
   }
@@ -356,7 +356,7 @@ const PublicPortalModule = {
     const bidangList = window.store.getBidang();
 
     // Filter by search & category
-    const filtered = indicators.filter(ind => {
+    let filtered = indicators.filter(ind => {
       if (this.homeCategoryFilter !== 'all' && ind.categoryId !== this.homeCategoryFilter) {
         return false;
       }
@@ -368,6 +368,31 @@ const PublicPortalModule = {
         if (!matchName && !matchCode && !matchDef && !matchBid) return false;
       }
       return true;
+    });
+
+    // URUTAN INDIKATOR PERSIS SAMA DENGAN SEGMEN 1 (IKU D -> IKD -> IKU PD -> Tujuan Sasaran -> Program -> IKK terakhir)
+    const categorySortOrder = {
+      'iku_daerah': 1,
+      'ikd': 2,
+      'iku_pd': 3,
+      'tujuan_sasaran': 4,
+      'program': 5,
+      'ikk': 6
+    };
+
+    filtered.sort((a, b) => {
+      const orderA = categorySortOrder[a.categoryId] || 99;
+      const orderB = categorySortOrder[b.categoryId] || 99;
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+      // Urutkan nomor urut di dalam kategori yang sama
+      const numA = parseInt((a.code || '').replace(/\D/g, '') || '0', 10);
+      const numB = parseInt((b.code || '').replace(/\D/g, '') || '0', 10);
+      if (numA !== numB) {
+        return numA - numB;
+      }
+      return (a.code || '').localeCompare(b.code || '');
     });
 
     if (filtered.length === 0) {
@@ -587,14 +612,14 @@ const PublicPortalModule = {
 
         return `
           <tr class="${isCurrent ? 'table-warning-subtle font-bold' : ''}">
-            <td class="font-mono text-center ${isCurrent ? 'text-primary' : ''}">
+            <td class="text-center ${isCurrent ? 'text-primary' : ''}">
               ${yr} ${isCurrent ? '<span class="badge bg-primary text-white" style="font-size:0.65rem;">N-1</span>' : ''}
             </td>
-            <td class="font-mono text-end">${rec.target !== null && rec.target !== undefined ? rec.target : '-'} ${ind.unit}</td>
-            <td class="font-mono text-end font-bold ${isCurrent ? 'text-primary' : ''}">
+            <td class="text-end">${rec.target !== null && rec.target !== undefined ? rec.target : '-'} ${ind.unit}</td>
+            <td class="text-end font-bold ${isCurrent ? 'text-primary' : ''}">
               ${rec.realisasi !== null && rec.realisasi !== undefined ? rec.realisasi : '-'} ${ind.unit}
             </td>
-            <td class="font-mono text-center">
+            <td class="text-center">
               <span class="pub-pct-badge ${st.class}">${pct}%</span>
             </td>
             <td>
@@ -688,27 +713,27 @@ const PublicPortalModule = {
               </div>
             </div>
 
-            <!-- 3. DETAIL DEFINISI OPERASIONAL & FORMULASI TEKNIS -->
+            <!-- 3. DETAIL DEFINISI OPERASIONAL & FORMULASI TEKNIS (STANDAR UKURAN & 1 FONT SAMA) -->
             <div class="pub-meta-section p-3 rounded-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
-              <h6 class="font-bold text-dark mb-2">
+              <h6 class="font-bold text-dark mb-3 d-flex align-items-center gap-2" style="font-size: 0.95rem;">
                 <i data-lucide="info" class="icon-xs text-primary"></i> Parameter Teknis & Metodologi Perhitungan
               </h6>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <div class="small font-bold text-muted text-uppercase mb-1" style="font-size:0.7rem;">Definisi Operasional:</div>
-                  <p class="small text-dark mb-0" style="line-height:1.5;">${ind.definition || 'Tercantum dalam dokumen Renstra DINPUTARU Kabupaten Demak.'}</p>
+                  <div class="pub-meta-label">Definisi Operasional:</div>
+                  <div class="pub-meta-desc">${ind.definition || 'Tercantum dalam dokumen Renstra DINPUTARU Kabupaten Demak.'}</div>
                 </div>
                 <div class="col-md-6">
-                  <div class="small font-bold text-muted text-uppercase mb-1" style="font-size:0.7rem;">Formulasi / Rumus Matematis:</div>
-                  <div class="p-2 bg-white rounded border font-mono small text-dark mb-0">${ind.formula || 'Realisasi / Target x 100%'}</div>
+                  <div class="pub-meta-label">Formulasi / Rumus Matematis:</div>
+                  <div class="pub-meta-desc">${ind.formula || 'Realisasi / Target x 100%'}</div>
                 </div>
                 <div class="col-md-6">
-                  <div class="small font-bold text-muted text-uppercase mb-1" style="font-size:0.7rem;">Sumber Data Resmi:</div>
-                  <p class="small text-dark mb-0 font-bold">${ind.source || 'Bidang Teknis DINPUTARU Kab. Demak'}</p>
+                  <div class="pub-meta-label">Sumber Data Resmi:</div>
+                  <div class="pub-meta-desc">${ind.source || 'Bidang Teknis DINPUTARU Kab. Demak'}</div>
                 </div>
                 <div class="col-md-6">
-                  <div class="small font-bold text-muted text-uppercase mb-1" style="font-size:0.7rem;">Seksi Penanggung Jawab:</div>
-                  <p class="small text-dark mb-0 font-bold">${ind.seksiPelaksana || ind.wewenangBidang || 'DINPUTARU Demak'}</p>
+                  <div class="pub-meta-label">Seksi Penanggung Jawab:</div>
+                  <div class="pub-meta-desc">${ind.seksiPelaksana || ind.wewenangBidang || 'DINPUTARU Demak'}</div>
                 </div>
               </div>
             </div>
@@ -971,86 +996,64 @@ const PublicPortalModule = {
       const isBps = doc.category === 'Statistik BPS 2025';
 
       return `
-        <div class="col-lg-6 col-md-6 col-12">
-          <div class="pub-bankdata-card p-3 rounded-3 bg-white border h-100 d-flex flex-column">
+        <div class="pub-bankdata-table-item">
+          <div class="pub-bankdata-table-card">
             
-            <!-- Baris 1: Kategori & Bidang Badge -->
-            <div class="d-flex align-items-center justify-content-between gap-2 mb-2 pb-2 border-bottom">
-              <div class="d-flex align-items-center gap-1 flex-wrap">
-                <span class="badge font-mono ${isBps ? 'bg-amber text-dark font-bold' : 'bg-primary text-white'}" style="font-size:0.7rem;">
-                  ${doc.category}
+            <!-- Header Kartu: Judul Dokumen / Dataset & Kategori -->
+            <div class="pub-bdt-card-header">
+              <div class="d-flex align-items-center justify-content-between gap-2 mb-2 flex-wrap">
+                <span class="badge ${isBps ? 'bg-amber text-dark font-bold' : 'bg-primary text-white'}">
+                  <i data-lucide="database" class="icon-xs"></i> ${doc.category}
                 </span>
-                <span class="badge bg-light text-dark border" style="font-size:0.7rem;">
-                  <i data-lucide="building-2" class="icon-xs"></i> ${bidang.name}
+                <span class="badge bg-secondary text-white">
+                  <i data-lucide="calendar" class="icon-xs"></i> Tahun ${doc.year}
                 </span>
               </div>
-              <span class="badge bg-dark text-white font-mono" style="font-size:0.7rem;">
-                Tahun ${doc.year}
-              </span>
+              <h5 class="pub-bdt-card-title" onclick="App.openDocumentPreview('${doc.id}')" title="Klik untuk pratinjau dokumen">
+                ${doc.title}
+              </h5>
             </div>
 
-            <!-- Baris 2: Judul Dokumen -->
-            <h5 class="font-bold text-dark mb-3" style="font-size:0.98rem; line-height: 1.4; cursor: pointer;" onclick="App.openDocumentPreview('${doc.id}')">
-              ${doc.title}
-            </h5>
+            <!-- Tabel Data 2-Kolom Terstruktur & Rapi (2 Tabel per Baris Layout) -->
+            <table class="table table-sm pub-bdt-table mb-0">
+              <tbody>
+                <tr class="bdt-row-highlight">
+                  <th scope="row" style="width: 38%;">Indikator / Data Kunci</th>
+                  <td>
+                    <div class="bdt-metric-value">${doc.metricValue || '-'}</div>
+                    <div class="bdt-metric-label">${doc.metricLabel || 'Nilai Capaian / Data Statistik'}</div>
+                  </td>
+                </tr>
+                ${doc.statSummary ? `
+                <tr>
+                  <th scope="row">Rincian Data</th>
+                  <td class="bdt-cell-text">${doc.statSummary}</td>
+                </tr>` : ''}
+                <tr>
+                  <th scope="row">Bidang Pengampu</th>
+                  <td class="bdt-cell-text font-bold text-dark">${bidang.name}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sumber Resmi</th>
+                  <td class="bdt-cell-text">${doc.source || 'BPS Kab. Demak'}</td>
+                </tr>
+                ${doc.documentNumber ? `
+                <tr>
+                  <th scope="row">Nomor Dokumen</th>
+                  <td class="bdt-cell-text">${doc.documentNumber}</td>
+                </tr>` : ''}
+                <tr>
+                  <th scope="row">Deskripsi / Uraian</th>
+                  <td class="bdt-cell-text text-muted">${doc.desc || '-'}</td>
+                </tr>
+              </tbody>
+            </table>
 
-            <!-- Baris 3: Badan Data (2 Kolom Interior: Metrik Kiri vs Uraian Kanan) -->
-            <div class="row g-2 mb-3 flex-grow-1">
-              
-              <!-- Kolom Kiri: Angka Metrik Kunci & Statistik BPS 2025 -->
-              <div class="col-sm-6">
-                <div class="p-3 rounded h-100 d-flex flex-column justify-content-center" style="background: #f8fafc; border: 1px solid #e2e8f0;">
-                  <span class="text-muted font-bold text-uppercase d-block" style="font-size: 0.68rem; letter-spacing: 0.04em;">
-                    ${doc.metricLabel || 'Angka / Data Kunci'}
-                  </span>
-                  <div class="font-bold text-primary my-1 font-mono" style="font-size: 1.25rem;">
-                    ${doc.metricValue || '-'}
-                  </div>
-                  ${doc.statSummary ? `
-                    <p class="small text-muted mb-0 mt-1" style="font-size: 0.75rem; line-height: 1.35;">
-                      ${doc.statSummary}
-                    </p>
-                  ` : ''}
-                </div>
-              </div>
-
-              <!-- Kolom Kanan: Sumber Resmi & Uraian Dokumen -->
-              <div class="col-sm-6">
-                <div class="p-2 rounded h-100 d-flex flex-column justify-content-between" style="background: #ffffff; border: 1px solid #f1f5f9;">
-                  <div>
-                    <span class="text-muted small d-block font-bold" style="font-size: 0.68rem;">SUMBER RESMI:</span>
-                    <span class="small font-bold text-dark d-block mb-1" style="font-size: 0.78rem;">
-                      ${doc.source || 'BPS Kab. Demak'}
-                    </span>
-                    ${doc.documentNumber ? `
-                      <span class="badge bg-light text-muted border font-mono small d-inline-block mb-1" style="font-size: 0.68rem;">
-                        No: ${doc.documentNumber}
-                      </span>
-                    ` : ''}
-                    <p class="small text-muted mb-1 text-truncate-2" style="font-size: 0.74rem; line-height: 1.35;">
-                      ${doc.desc || 'Dokumen rujukan perencanaan dan capaian kinerja DINPUTARU Demak.'}
-                    </p>
-                  </div>
-
-                  ${(doc.tags && doc.tags.length > 0) ? `
-                    <div class="d-flex flex-wrap gap-1 mt-1">
-                      ${doc.tags.slice(0, 3).map(t => `<span class="badge bg-light text-dark border font-mono" style="font-size: 0.65rem;">#${t}</span>`).join('')}
-                    </div>
-                  ` : ''}
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Baris 4: Footer Aksi -->
-            <div class="d-flex align-items-center justify-content-between pt-2 border-top">
-              <span class="small text-muted font-mono" style="font-size: 0.72rem;">
-                Format: <strong>${doc.fileType || 'PDF'}</strong> (${doc.fileSize || '2.0 MB'})
-              </span>
-              <button class="btn btn-sm btn-outline-primary py-1 px-3 d-flex align-items-center gap-1 font-bold" 
-                      onclick="App.openDocumentPreview('${doc.id}')" style="font-size: 0.78rem;">
-                <i data-lucide="eye" class="icon-xs"></i>
-                <span>Lihat Data</span>
+            <!-- Footer Tombol Pratinjau Dokumen -->
+            <div class="pub-bdt-card-footer">
+              <button class="btn btn-sm btn-outline-primary w-100 d-flex align-items-center justify-content-center gap-1 font-bold" onclick="App.openDocumentPreview('${doc.id}')">
+                <i data-lucide="file-text" class="icon-xs"></i>
+                <span>Pratinjau Dokumen & Data Lengkap</span>
               </button>
             </div>
 
