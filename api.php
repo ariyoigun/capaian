@@ -1,6 +1,6 @@
 <?php
 /**
- * SIDAT - SATUPUTARU - PHP Backend Bridge for Hostinger Apache/LiteSpeed Hosting
+ * SIDAT - SATU PUTARU - PHP Backend Bridge for Hostinger Apache/LiteSpeed Hosting
  * Dinas Pekerjaan Umum dan Penataan Ruang Kab. Demak
  * Database: u490770675_sidata | User: u490770675_sidatadmin
  */

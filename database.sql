@@ -1,5 +1,5 @@
 -- ==============================================================================
--- DATABASE: SIDAT - SATUPUTARU (Sistem Informasi Capaian Kinerja & Satu Data)
+-- DATABASE: SIDAT - SATU PUTARU (Sistem Informasi Capaian Kinerja & Satu Data)
 -- DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU) KABUPATEN DEMAK
 -- Ekspor Lengkap Siap Import untuk Hostinger MySQL (cPanel / hPanel / phpMyAdmin)
 -- Versi: 3.0 (Tema Biru PUPR, 6 Kategori Excel, 55 Indikator, Bank Data BPS 2025)
@@ -20,7 +20,7 @@ CREATE TABLE system_settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO system_settings (setting_key, setting_value) VALUES
-('appName', 'SIDAT - SATUPUTARU'),
+('appName', 'SIDAT - SATU PUTARU'),
 ('instansi', 'Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak'),
 ('tagline', 'Sistem Informasi Capaian Kinerja & Satu Data DINPUTARU Kab. Demak'),
 ('logoUrl', '/img/logo-pupr.svg'),
@@ -925,5 +925,5 @@ INSERT INTO variables (id, code, name, category, unit, values_json) VALUES
 
 SET FOREIGN_KEY_CHECKS = 1;
 -- ==============================================================================
--- AKHIR FILE EKSPOR HOSTINGER MYSQL (SIDAT - SATUPUTARU KAB. DEMAK)
+-- AKHIR FILE EKSPOR HOSTINGER MYSQL (SIDAT - SATU PUTARU KAB. DEMAK)
 -- ==============================================================================

@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Authentication, Session & Math CAPTCHA Controller
+ * SIDAT - SATU PUTARU - Authentication, Session & Math CAPTCHA Controller
  * Halaman & Modal Login Resmi Kedinasan DINPUTARU Kab. Demak
  * Dengan CAPTCHA Perhitungan Sederhana (+, -, ×, ÷), Akun Teks Bersih, dan Tampilan Center
  */

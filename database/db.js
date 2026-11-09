@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Database Connector Module
+ * SIDAT - SATU PUTARU - Database Connector Module
  * Mendukung PostgreSQL, MySQL / MariaDB, dan Fallback JSON File
  * 
  * Pengaturan melalui Environment Variable (.env):

@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Public Portal Module (v4.0)
+ * SIDAT - SATU PUTARU - Public Portal Module (v4.0)
  * Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak
  * 
  * Struktur Halaman Publik:

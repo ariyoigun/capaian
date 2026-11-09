@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Bank Data & Document Archive Module (v3.2)
+ * SIDAT - SATU PUTARU - Bank Data & Document Archive Module (v3.2)
  * Dinas Pekerjaan Umum dan Penataan Ruang Kab. Demak
  * Tampilan 2 Kolom dengan Detail Metrik BPS Demak 2025 & Edit Lengkap
  */

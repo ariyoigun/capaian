@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Database Manager v4.0
+ * SIDAT - SATU PUTARU - Database Manager v4.0
  * Mendukung Dual Mode: MySQL Hostinger & JSON File Engine
  * Dinas Pekerjaan Umum dan Penataan Ruang Kab. Demak
  */

@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Store & State Management v2
+ * SIDAT - SATU PUTARU - Store & State Management v2
  * Dinas Pekerjaan Umum dan Penataan Ruang Kab. Demak
  */
 
@@ -4982,6 +4982,16 @@ class SimondemakStore {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.users && parsed.indicators && parsed.indicators.length >= 50 && parsed.categories && parsed.categories.some(c => c.id === 'iku_daerah')) {
+          // Auto migrate appName from SATUPUTARU to SATU PUTARU
+          if (parsed.systemInfo) {
+            if (parsed.systemInfo.appName && parsed.systemInfo.appName.includes('SATUPUTARU')) {
+              parsed.systemInfo.appName = parsed.systemInfo.appName.replace(/SATUPUTARU/g, 'SATU PUTARU');
+            }
+            if (parsed.systemInfo.welcomeTitle && parsed.systemInfo.welcomeTitle.includes('SATUPUTARU')) {
+              parsed.systemInfo.welcomeTitle = parsed.systemInfo.welcomeTitle.replace(/SATUPUTARU/g, 'SATU PUTARU');
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+          }
           // Ensure official 15 users are synchronized
           if (!parsed.users.some(u => u.username === 'kadin.dinputaru')) {
             parsed.users = DEFAULT_USERS;
@@ -5015,13 +5025,13 @@ class SimondemakStore {
       documents: DEFAULT_DOCUMENTS,
       systemInfo: {
         logoUrl: '/img/logo-pupr.svg',
-        appName: 'SIDAT - SATUPUTARU',
+        appName: 'SIDAT - SATU PUTARU',
         instansi: 'Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak',
         tagline: 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak',
         heroBadge: 'PORTAL SATU DATA & CAPAIAN KINERJA PEMKAB DEMAK',
         heroTitle: 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak',
         heroSubtitle: 'Akses informasi capaian kinerja indikator pembangunan dan bank data infrastruktur DINPUTARU Kabupaten Demak secara transparan, akuntabel, dan terintegrasi.',
-        welcomeTitle: 'Selamat Datang di SIDAT - SATUPUTARU',
+        welcomeTitle: 'Selamat Datang di SIDAT - SATU PUTARU',
         welcomeText: 'Portal resmi pemantauan capaian kinerja indikator daerah, IKU, program, dan bank data DINPUTARU Kabupaten Demak.',
         officeAddress: 'Jalan Kyai Jebat No. 892 Demak, Jawa Tengah 59511',
         contactPhone: '(0291) 685123',

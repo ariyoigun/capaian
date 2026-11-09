@@ -1,11 +1,11 @@
 # PANDUAN LENGKAP KONEKSI DATABASE & DEPLOYMENT HOSTINGER
-## SISTEM INFORMASI CAPAIAN KINERJA & SATU DATA (SIDAT - SATUPUTARU)
+## SISTEM INFORMASI CAPAIAN KINERJA & SATU DATA (SIDAT - SATU PUTARU)
 **Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak**
 **Domain Terpasang:** `https://sidat.satuputarudemak.id`
 
 ---
 
-Panduan ini disusun secara rinci langkah demi langkah (*step-by-step*) khusus untuk menghubungkan web aplikasi **SIDAT - SATUPUTARU** yang sudah tersinkronisasi dari GitHub ke domain **`sidat.satuputarudemak.id`** dengan database **MySQL di Hostinger**.
+Panduan ini disusun secara rinci langkah demi langkah (*step-by-step*) khusus untuk menghubungkan web aplikasi **SIDAT - SATU PUTARU** yang sudah tersinkronisasi dari GitHub ke domain **`sidat.satuputarudemak.id`** dengan database **MySQL di Hostinger**.
 
 ---
 
@@ -85,7 +85,7 @@ Aplikasi telah dilengkapi berkas database SQL lengkap yang siap diimpor ke MySQL
 
 ## LANGKAH 3: MENGHUBUNGKAN SIDAT DENGAN DATABASE MYSQL
 
-Aplikasi SIDAT - SATUPUTARU telah dilengkapi fitur **Dual-Engine Auto-Detect**. Anda dapat memasukkan kredensial database dengan salah satu dari 3 cara berikut:
+Aplikasi SIDAT - SATU PUTARU telah dilengkapi fitur **Dual-Engine Auto-Detect**. Anda dapat memasukkan kredensial database dengan salah satu dari 3 cara berikut:
 
 ### OPSI A: Mengatur dari Panel Admin Web (Paling Mudah)
 1. Buka browser dan akses: **`https://sidat.satuputarudemak.id`**
@@ -236,4 +236,4 @@ Untuk memastikan sistem Anda berjalan sempurna 100%:
    * Buka menu **Koneksi Database MySQL**: badge menunjukkan status **MySQL Hostinger Terhubung**.
 
 ---
-*Dokumen ini diterbitkan oleh DINPUTARU Kabupaten Demak untuk kelancaran operasional SIDAT - SATUPUTARU.*
+*Dokumen ini diterbitkan oleh DINPUTARU Kabupaten Demak untuk kelancaran operasional SIDAT - SATU PUTARU.*

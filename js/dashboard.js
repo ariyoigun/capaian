@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Dashboard & Line Chart Module
+ * SIDAT - SATU PUTARU - Dashboard & Line Chart Module
  * Interactive line chart to monitor Target vs Realisasi & % Capaian
  */
 

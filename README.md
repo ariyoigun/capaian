@@ -1,7 +1,7 @@
-# SIDAT - SATUPUTARU - Sistem Informasi Capaian Kinerja DINPUTARU
+# SIDAT - SATU PUTARU - Sistem Informasi Capaian Kinerja DINPUTARU
 ### Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak
 
-**SIDAT - SATUPUTARU** adalah aplikasi web monitoring target & capaian kinerja indikator infrastruktur ke-PU-an di lingkungan Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Demak. Sistem ini telah dirombak dengan arsitektur **Front End (Portal Publik Akses Terbuka)** dan **Back End (Panel Administrator & Aparatur Kedinasan)**.
+**SIDAT - SATU PUTARU** adalah aplikasi web monitoring target & capaian kinerja indikator infrastruktur ke-PU-an di lingkungan Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Demak. Sistem ini telah dirombak dengan arsitektur **Front End (Portal Publik Akses Terbuka)** dan **Back End (Panel Administrator & Aparatur Kedinasan)**.
 
 ---
 

@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Laporan & Cetak Dokumen Kedinasan (DINPUTARU Kab. Demak)
+ * SIDAT - SATU PUTARU - Laporan & Cetak Dokumen Kedinasan (DINPUTARU Kab. Demak)
  * Mendukung Akses Publik & Panel Internal
  * Format 1: Cetak Evaluasi Per Indikator Dari Tahun ke Tahun (Multi-Tahun)
  * Format 2: Rekapitulasi Kinerja Seluruh Indikator di Tahun Tertentu (Tahunan)
@@ -161,7 +161,7 @@ const LaporanModule = {
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Cetak Dokumen Resmi - ${info.appName || 'SIDAT - SATUPUTARU'}</title>
+  <title>Cetak Dokumen Resmi - ${info.appName || 'SIDAT - SATU PUTARU'}</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
     @page { size: A4 portrait; margin: 10mm 12mm 12mm 12mm; }

@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Master Data Module
+ * SIDAT - SATU PUTARU - Master Data Module
  * Manages foundational calculation variables, indicator categories, bidang, years & roles
  */
 

@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Tree View System
+ * SIDAT - SATU PUTARU - Tree View System
  * Hierarchical tree browser with expandable details
  */
 

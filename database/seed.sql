@@ -1,5 +1,5 @@
 -- ==============================================================================
--- SIDAT - SATUPUTARU (Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak)
+-- SIDAT - SATU PUTARU (Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak)
 -- DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU) KABUPATEN DEMAK
 -- SQL Seed Data (Data Lengkap 6 Kategori, 55 Indikator, Periode 2020-2030)
 -- Sesuai Hasil Pengolahan Excel Resmi & Renstra DINPUTARU Kabupaten Demak

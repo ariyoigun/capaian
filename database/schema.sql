@@ -1,5 +1,5 @@
 -- ==============================================================================
--- SIDAT - SATUPUTARU (Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak)
+-- SIDAT - SATU PUTARU (Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak)
 -- DINAS PEKERJAAN UMUM DAN PENATAAN RUANG (DINPUTARU) KABUPATEN DEMAK
 -- SQL Schema Definition (Kompatibel dengan MySQL 8.0+, MariaDB 10.5+, & PostgreSQL)
 -- ==============================================================================

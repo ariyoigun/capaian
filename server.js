@@ -727,7 +727,7 @@ const server = http.createServer(async (req, res) => {
 if (require.main === module) {
   server.listen(PORT, '0.0.0.0', () => {
     console.log(`=======================================================`);
-    console.log(` SIDAT - SATUPUTARU - DINPUTARU KABUPATEN DEMAK (v3.0)`);
+    console.log(` SIDAT - SATU PUTARU - DINPUTARU KABUPATEN DEMAK (v3.0)`);
     console.log(` Front End Publik & Back End Panel Admin`);
     console.log(` Server running at: http://localhost:${PORT}`);
     console.log(`=======================================================`);

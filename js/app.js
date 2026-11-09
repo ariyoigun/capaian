@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Main Application Controller v2
+ * SIDAT - SATU PUTARU - Main Application Controller v2
  * Mengelola Routing Portal Publik vs Panel Admin, Navigasi Tab, Modals, Toasts, dan Lifecycle
  */
 

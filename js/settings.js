@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - System Settings & Text Customizer
+ * SIDAT - SATU PUTARU - System Settings & Text Customizer
  * Mengelola SEMUA tampilan teks di sistem (Portal Publik Front End & Panel Admin Back End)
  * Khusus Super Admin
  */
@@ -40,7 +40,7 @@ const SystemSettingsModule = {
             <i data-lucide="shield-alert" class="icon-md"></i>
           </div>
           <h4>Akses Terbatas</h4>
-          <p class="text-muted">Hanya Super Admin yang berwenang mengatur teks dan konfigurasi sistem SIDAT - SATUPUTARU.</p>
+          <p class="text-muted">Hanya Super Admin yang berwenang mengatur teks dan konfigurasi sistem SIDAT - SATU PUTARU.</p>
         </div>
       `;
       if (window.lucide) window.lucide.createIcons();
@@ -123,7 +123,7 @@ const SystemSettingsModule = {
 
               <div class="mb-3">
                 <label class="form-label font-bold small">Nama Singkat Aplikasi / Sistem:</label>
-                <input type="text" id="set-appName" class="form-control font-bold" value="${info.appName || 'SIDAT - SATUPUTARU'}">
+                <input type="text" id="set-appName" class="form-control font-bold" value="${info.appName || 'SIDAT - SATU PUTARU'}">
                 <span class="small text-muted" style="font-size: 0.75rem;">Ditampilkan pada header, logo, judul peramban, dan kop dokumen.</span>
               </div>
 
@@ -441,7 +441,7 @@ const SystemSettingsModule = {
 
     const newSettings = {
       logoUrl,
-      appName: appName || 'SIDAT - SATUPUTARU',
+      appName: appName || 'SIDAT - SATU PUTARU',
       instansi: instansi || 'Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak',
       tagline: tagline || 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak',
       footerText: footerText || '© 2026 DINPUTARU Kabupaten Demak. Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak.',
@@ -615,9 +615,9 @@ const SystemSettingsModule = {
 
   resetDefaultTexts() {
     if (!window.store.canManageUsers()) return;
-    if (confirm('Kembalikan semua teks sistem ke format standar bawaan SIDAT - SATUPUTARU?')) {
+    if (confirm('Kembalikan semua teks sistem ke format standar bawaan SIDAT - SATU PUTARU?')) {
       const defaultInfo = {
-        appName: 'SIDAT - SATUPUTARU',
+        appName: 'SIDAT - SATU PUTARU',
         instansi: 'Dinas Pekerjaan Umum dan Penataan Ruang (DINPUTARU) Kabupaten Demak',
         tagline: 'Sistem Informasi Capaian Kinerja & Satu Data Kab. Demak',
         heroBadge: 'PORTAL RESMI SATU DATA & CAPAIAN KINERJA PEMKAB DEMAK',
@@ -659,7 +659,7 @@ const SystemSettingsModule = {
   applyTextsToDOM(info) {
     if (!info) return;
 
-    document.title = `${info.appName || 'SIDAT - SATUPUTARU'} - ${info.instansi || 'DINPUTARU Demak'}`;
+    document.title = `${info.appName || 'SIDAT - SATU PUTARU'} - ${info.instansi || 'DINPUTARU Demak'}`;
 
     // Apply Logo
     const logoImg = document.getElementById('dom-app-logo');
@@ -670,7 +670,7 @@ const SystemSettingsModule = {
     // Header brand text
     const brandTitle = document.getElementById('dom-app-title');
     if (brandTitle) {
-      brandTitle.textContent = info.appName || 'SIDAT - SATUPUTARU';
+      brandTitle.textContent = info.appName || 'SIDAT - SATU PUTARU';
     }
 
     const brandSub = document.getElementById('dom-app-tagline');

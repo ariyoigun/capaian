@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - User Management Module (Super Admin Only)
+ * SIDAT - SATU PUTARU - User Management Module (Super Admin Only)
  * Tambah, edit, hapus, simpan user dengan 7 role kedinasan
  */
 

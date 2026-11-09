@@ -1,5 +1,5 @@
 /**
- * SIDAT - SATUPUTARU - Master Data Indikator Module
+ * SIDAT - SATU PUTARU - Master Data Indikator Module
  * Mengelola Master Indikator Kinerja (IKU, IKD, IKP, IKK),
  * Wewenang Bidang, Formulasi, Definisi Operasional, dan Target/Realisasi Awal.
  */
